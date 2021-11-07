@@ -22,12 +22,39 @@
         </div>
       </div>
     </div>
-    <!--<span class="choose-packet">აირჩიე პაკეტი</span>
-    <b-form-radio-group :options="options">
-      <template v-slot:default>
-        <span></span>
-      </template>
-    </b-form-radio-group>-->
+    <div class="insurance-package">
+      <p class="package-text">აირჩიე პაკეტი</p>
+      <b-form-radio-group v-model="checked" class="mt-5">
+        <b-form-radio v-for="item in options" class="ml-4" :key="item.value" :value="item.value">
+          <p class="mb-0 ml-3 radio-button-label" :class="{'active-radio-button': checked === item.value}">
+            {{ item.text }}
+          </p>
+        </b-form-radio>
+      </b-form-radio-group>
+    </div>
+    <div class="d-flex justify-content-center results">
+      <b-button class="results-button">
+        <span class="results-text">შედეგების ნახვა</span>
+      </b-button>
+    </div>
+    <div class="d-flex contact">
+      <span class="contact-text">დაგვიკავშირდი</span>
+      <span class="connect-stroke"/>
+      <div class="d-flex contact-icons float-right">
+        <a class="icons" :href="`mailto:${EMAIL}`">
+          <img src="/assets/icons/email_icon.svg" alt="">
+        </a>
+        <a class="icons ml-5" :href="`tel:${NUMBER}`">
+          <img src="/assets/icons/phone_icon.svg" alt="">
+        </a>
+        <a class="icons ml-5" :href="`https://wa.me/${NUMBER}`" target='_blank'>
+          <img src="/assets/icons/whatsapp_icon.svg" alt="">
+        </a>
+        <a class="icons ml-5" :href="`https://www.m.me/${MESSENGER_URL}`" target='_blank'>
+          <img class="messenger-icon" src="/assets/icons/messenger_icon.svg" alt="">
+        </a>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -36,11 +63,15 @@ export default {
   name: "HomePage",
   data() {
     return {
+      MESSENGER_URL: process.env.MESSENGER_URL,
+      NUMBER: process.env.NUMBER,
+      EMAIL: process.env.EMAIL,
       options: [
         {value: 'min', text: 'მინიმალური'},
         {value: 'basic', text: 'საბაზისო'},
         {value: 'improved', text: 'გაუმჯობესებული'},
       ],
+      checked: 'min',
       isActive: {
         life: true,
         health: false,
@@ -167,70 +198,142 @@ export default {
       }
     }
   }
-}
 
-//  .choose-packet {
-//    position: absolute;
-//    width: 113px;
-//    height: 16px;
-//    left: 663px;
-//    top: 628px;
-//
-//    font-family: Helvetica;
-//    font-style: normal;
-//    font-weight: bold;
-//    font-size: 14px;
-//    line-height: 16px;
-//    /* identical to box height */
-//
-//    text-align: center;
-//    text-transform: uppercase;
-//
-//    /* White */
-//
-//    color: #FFFFFF;
-//  }
-//
-//  /deep/ .custom-control-label {
-//    position: absolute;
-//    width: 93px;
-//    height: 28px;
-//    left: 694px;
-//    top: 670px;
-//
-//    font-family: Helvetica;
-//    font-style: normal;
-//    font-weight: normal;
-//    font-size: 20px;
-//    line-height: 137.9%;
-//    /* identical to box height, or 28px */
-//
-//
-//    color: #FFFFFF;
-//
-//    opacity: 0.7;
-//  }
+  .insurance-package {
+    margin-top: 48px;
 
-/*@media screen and (max-width: 1000px) {
-  .home-page {
-    overflow: hidden !important;
-
-    .background-image {
-      width: 100%;
+    .package-text {
+      font-family: Helvetica;
+      font-style: normal;
+      font-weight: bold;
+      font-size: 14px;
+      line-height: 16px;
+      text-align: center;
+      text-transform: uppercase;
+      color: #FFFFFF;
+      margin: 0;
     }
 
-    .main-title {
-      font-size: 40px;
-      line-height: 64px;
+    .radio-button-label {
+      font-family: Helvetica;
+      font-style: normal;
+      font-weight: normal;
+      font-size: 20px;
+      line-height: 137.9%;
+      color: #FFFFFF;
+      margin-right: 15px;
+      opacity: 0.7;
     }
 
-    .klaster-logo {
-      position: absolute;
-      width: 107.25px;
-      height: 53px;
-      left: 153px;
-      top: 58px;
+    .active-radio-button {
+      font-weight: bold !important;
+      opacity: unset !important;
+    }
+
+    /deep/ .custom-radio .custom-control-label::before {
+      width: 24px;
+      height: 24px;
+      background: #1E1647;
+      opacity: 0.3;
+      backdrop-filter: blur(4px);
+      border-radius: 50px;
+    }
+
+    /deep/ .custom-radio .custom-control-input:checked ~ .custom-control-label::after {
+      width: 9px;
+      height: 9px;
+      top: 9px;
+      left: -16px;
+      background: #0AE29F;
+      border-radius: 50px;
     }
   }
-}*/
+
+  .results {
+    margin-top: 5rem;
+
+    .results-button {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      padding: 18px 40px;
+      position: static;
+      width: 229px;
+      height: 54px;
+      background: #0AE29F;
+      border-radius: 16px;
+      flex: none;
+      order: 0;
+      flex-grow: 0;
+      margin: 0 16px;
+      border: unset;
+    }
+
+    .results-button:focus {
+      background: #0AE29F;
+      box-shadow: unset;
+    }
+
+    .results-text {
+      font-family: Helvetica;
+      font-style: normal;
+      font-weight: bold;
+      font-size: 16px;
+      line-height: 18px;
+      text-transform: uppercase;
+      color: #045C41;
+      flex: none;
+      order: 0;
+      flex-grow: 0;
+      margin: 0px 10px;
+    }
+  }
+
+  .contact {
+    margin-top: 5rem;
+
+    .contact-text {
+      position: absolute;
+      left: 116px;
+      width: 137px;
+      font-family: Helvetica;
+      font-style: normal;
+      font-weight: bold;
+      font-size: 14px;
+      line-height: 160%;
+      letter-spacing: 0.12em;
+      color: #FFFFFF;
+      opacity: 0.8;
+    }
+
+    .connect-stroke {
+      position: absolute;
+      width: 755px;
+      left: 283px;
+      border: 0.5px solid #FFFFFF;
+      margin-top: 14px;
+    }
+
+    .contact-icons {
+      position: absolute;
+      left: 1070px;
+
+      .icons {
+        width: 34px;
+        height: 34px;
+        background: rgba(255, 255, 255, 0.2);
+        backdrop-filter: blur(4px);
+        border-radius: 50px;
+
+        .messenger-icon {
+          position: absolute;
+          top: 8px;
+          right: 7px;
+          opacity: 0.8;
+        }
+      }
+    }
+  }
+}
 </style>
