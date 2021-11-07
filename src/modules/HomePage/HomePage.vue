@@ -130,6 +130,7 @@ export default {
       },
       providers: [
         {
+          id: 1,
           img_url: '/assets/providers/tbc.png',
           isActive: true,
           logo_url: 'assets/providers/tbc_logo.png',
@@ -139,6 +140,7 @@ export default {
           link: 'tbcinsurance.ge'
         },
         {
+          id: 2,
           img_url: '/assets/providers/irao.png',
           isActive: false,
           logo_url: '',
@@ -148,6 +150,7 @@ export default {
           link: ''
         },
         {
+          id: 3,
           img_url: '/assets/providers/ardi.png',
           isActive: false,
           logo_url: '',
@@ -157,6 +160,7 @@ export default {
           link: ''
         },
         {
+          id: 4,
           img_url: '/assets/providers/gpi.png',
           isActive: false,
           logo_url: '',
@@ -180,7 +184,15 @@ export default {
       }
     },
     setActiveProvider(item) {
-      this.activeProvider = {...item}
+      this.providers.map(list => {
+        if (list.id === item.id) {
+          list.isActive = true
+          this.activeProvider = {...list}
+        } else {
+          list.isActive = false
+        }
+        return list
+      })
     },
   },
   mounted() {
