@@ -1,58 +1,83 @@
 <template>
-  <div class="main-page">
-    <img src="/assets/klaster_logo.svg" alt="" class="klaster-logo">
-    <div class="head-content">
-      <h1 class="main-title">შეამცირე შენი ბიზნესის ხარჯი</h1>
-      <p class="main-description">პლატფორმა საერთო ინტერესების გარშემო გაერთიანებისთვის</p>
-    </div>
-    <div class="insurance">
-      <p class="insurance-title">აირჩიე დაზღვევა</p>
-      <div class="d-flex justify-content-center insurance-buttons">
-        <div class="d-flex align-items-center" :class="{'active-rectangle': isActive.life}">
-          <b-button class="insurance-option-button" :class="{'active-button': isActive.life}" size="sm"
-                    @click="onButtonClick('life')">
-            <span class="button-text" :class="{'active-text': isActive.life}">სიცოცხლის</span>
-          </b-button>
+  <div>
+    <div class="main-page">
+      <object data="assets/klaster_logo.svg" type="image/svg+xml"/>
+      <div class="head-content">
+        <h1 class="main-title">შეამცირე შენი ბიზნესის ხარჯი</h1>
+        <p class="main-description">პლატფორმა საერთო ინტერესების გარშემო გაერთიანებისთვის</p>
+      </div>
+      <div class="insurance">
+        <p class="insurance-title">აირჩიე დაზღვევა</p>
+        <div class="d-flex justify-content-center insurance-buttons">
+          <div class="d-flex align-items-center" :class="{'active-rectangle': isActive.life}">
+            <b-button class="insurance-option-button" :class="{'active-button': isActive.life}" size="sm"
+                      @click="onButtonClick('life')">
+              <span class="button-text" :class="{'active-text': isActive.life}">სიცოცხლის</span>
+            </b-button>
+          </div>
+          <div class="d-flex align-items-center ml-4" :class="{'active-rectangle': isActive.health}">
+            <b-button class="insurance-option-button" :class="{'active-button': isActive.health}" size="sm"
+                      @click="onButtonClick('health')">
+              <span class="button-text" :class="{'active-text': isActive.health}">ჯანმრთელობის</span>
+            </b-button>
+          </div>
         </div>
-        <div class="d-flex align-items-center ml-4" :class="{'active-rectangle': isActive.health}">
-          <b-button class="insurance-option-button" :class="{'active-button': isActive.health}" size="sm"
-                    @click="onButtonClick('health')">
-            <span class="button-text" :class="{'active-text': isActive.health}">ჯანმრთელობის</span>
-          </b-button>
+      </div>
+      <div class="insurance-package">
+        <p class="package-text">აირჩიე პაკეტი</p>
+        <b-form-radio-group v-model="checked" class="mt-5">
+          <b-form-radio v-for="item in options" class="ml-4" :key="item.value" :value="item.value">
+            <p class="mb-0 ml-3 radio-button-label" :class="{'active-radio-button': checked === item.value}">
+              {{ item.text }}
+            </p>
+          </b-form-radio>
+        </b-form-radio-group>
+      </div>
+      <div class="d-flex justify-content-center results">
+        <b-button class="results-button">
+          <span class="results-text">შედეგების ნახვა</span>
+        </b-button>
+      </div>
+      <div class="d-flex contact">
+        <span class="contact-text">დაგვიკავშირდი</span>
+        <span class="connect-stroke"/>
+        <div class="d-flex contact-icons float-right">
+          <a class="icons" :href="`mailto:${EMAIL}`">
+            <img src="/assets/icons/email_icon.svg" alt="">
+          </a>
+          <a class="icons ml-5" :href="`tel:${NUMBER}`">
+            <img src="/assets/icons/phone_icon.svg" alt="">
+          </a>
+          <a class="icons ml-5" :href="`https://wa.me/${NUMBER}`" target='_blank'>
+            <img src="/assets/icons/whatsapp_icon.svg" alt="">
+          </a>
+          <a class="icons ml-5" :href="`https://www.m.me/${MESSENGER_URL}`" target='_blank'>
+            <img class="messenger-icon" src="/assets/icons/messenger_icon.svg" alt="">
+          </a>
         </div>
       </div>
     </div>
-    <div class="insurance-package">
-      <p class="package-text">აირჩიე პაკეტი</p>
-      <b-form-radio-group v-model="checked" class="mt-5">
-        <b-form-radio v-for="item in options" class="ml-4" :key="item.value" :value="item.value">
-          <p class="mb-0 ml-3 radio-button-label" :class="{'active-radio-button': checked === item.value}">
-            {{ item.text }}
-          </p>
-        </b-form-radio>
-      </b-form-radio-group>
-    </div>
-    <div class="d-flex justify-content-center results">
-      <b-button class="results-button">
-        <span class="results-text">შედეგების ნახვა</span>
-      </b-button>
-    </div>
-    <div class="d-flex contact">
-      <span class="contact-text">დაგვიკავშირდი</span>
-      <span class="connect-stroke"/>
-      <div class="d-flex contact-icons float-right">
-        <a class="icons" :href="`mailto:${EMAIL}`">
-          <img src="/assets/icons/email_icon.svg" alt="">
-        </a>
-        <a class="icons ml-5" :href="`tel:${NUMBER}`">
-          <img src="/assets/icons/phone_icon.svg" alt="">
-        </a>
-        <a class="icons ml-5" :href="`https://wa.me/${NUMBER}`" target='_blank'>
-          <img src="/assets/icons/whatsapp_icon.svg" alt="">
-        </a>
-        <a class="icons ml-5" :href="`https://www.m.me/${MESSENGER_URL}`" target='_blank'>
-          <img class="messenger-icon" src="/assets/icons/messenger_icon.svg" alt="">
-        </a>
+    <div class="main-page-level-2">
+      <div class="d-flex cluster">
+        <span class="cluster-stroke"/>
+        <p class="cluster-title ml-3 mb-0">როგორ მუშაობს კლასტერი?</p>
+      </div>
+      <div class="d-flex cluster-list">
+        <div class="wrap-lists">
+          <object data="assets/list_backgraund_1.svg" type="image/svg+xml"/>
+          <span class="list-numbers">1</span>
+          <p class="list-texts">მოგვაწოდე ინფორმაცია შენი საჭიროების შესახებ</p>
+        </div>
+        <div class="wrap-lists ml-4">
+          <object data="assets/list_backgraund_2.svg" type="image/svg+xml"/>
+          <span class="list-numbers">2</span>
+          <p class="list-texts">მოხდება მსგავსი საჭიროებების კონსოლიდაცია</p>
+        </div>
+        <div class="wrap-lists ml-4">
+          <object data="assets/list_backgraund_3.svg" type="image/svg+xml"/>
+          <span class="list-numbers">3</span>
+          <p class="list-texts">მიიღე პროდუქტი ან სერვისი საუკეთესო ფასად</p>
+        </div>
       </div>
     </div>
   </div>
@@ -63,9 +88,9 @@ export default {
   name: "HomePage",
   data() {
     return {
-      MESSENGER_URL: process.env.MESSENGER_URL,
-      NUMBER: process.env.NUMBER,
-      EMAIL: process.env.EMAIL,
+      MESSENGER_URL: 'process.env.MESSENGER_URL',
+      NUMBER: 'process.env.NUMBER',
+      EMAIL: 'process.env.EMAIL',
       options: [
         {value: 'min', text: 'მინიმალური'},
         {value: 'basic', text: 'საბაზისო'},
@@ -332,6 +357,68 @@ export default {
           right: 7px;
           opacity: 0.8;
         }
+      }
+    }
+  }
+}
+
+.main-page-level-2 {
+  position: absolute;
+  margin-top: 8rem;
+  left: 116px;
+
+  .cluster {
+
+    .cluster-stroke {
+      width: 2px;
+      height: 17px;
+      background: #6335E9;
+      border: 1px solid #6335E9;
+      box-sizing: border-box;
+    }
+
+    .cluster-title {
+      font-family: Helvetica;
+      font-style: normal;
+      font-weight: bold;
+      font-size: 24px;
+      line-height: 176.4%;
+      color: #1E1647;
+      margin-top: -13px;
+    }
+  }
+
+  .cluster-list {
+    margin-top: 5rem;
+
+    .wrap-lists {
+      position: relative;
+      margin-top: 1rem;
+
+      .list-numbers {
+        position: absolute;
+        left: 40px;
+        top: 109px;
+        font-family: Montserrat;
+        font-style: normal;
+        font-weight: 900;
+        font-size: 40px;
+        line-height: 49px;
+        text-transform: uppercase;
+        color: #FFFFFF;
+      }
+
+      .list-texts {
+        position: absolute;
+        left: 40px;
+        top: 200px;
+        font-family: Helvetica;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 32px;
+        line-height: 180%;
+        color: #FFFFFF;
+        margin: 0;
       }
     }
   }
