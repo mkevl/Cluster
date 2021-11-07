@@ -137,6 +137,41 @@
         <div class="video"></div>
       </div>
     </div>
+    <div class="main-page-level-5">
+      <object data="/assets/background_image_2.svg" type="image/svg+xml"/>
+      <div class="d-flex benefits">
+        <span class="benefits-stroke"/>
+        <p class="benefits-title ml-3 mb-0">სარგებელი ყველა მონაწილეს</p>
+      </div>
+      <div class="d-flex request-response-boxes mt-5">
+        <div class="request" :class="{'active-box': activeBox.request}" @click="onBoxCLick('request')">
+          <h1 class="box-title" :class="{'active-box-title': activeBox.request}">მოთხოვნა</h1>
+          <div v-if="activeBox.request">
+            <p class="active-box-list mb-0 mt-5">
+              &bull; ისარგებლე მსხვილი ბიზნესისთვის დამახასიათებელი უპირატესობებით <br/>
+              &bull; შეამცირე ხარჯები <br/>
+              &bull; დაზოგე დრო და ადამიანური რესურსი <br/>
+              &bull; ინდივიდუალურად მორგებული შესყიდვების პროცესი
+            </p>
+            <b-button class="box-contact-button" @click="onConnectClick">
+              <span class="box-button-text">დაგვიკავშირდი</span>
+            </b-button>
+          </div>
+        </div>
+        <div class="response" :class="{'active-box': activeBox.response}" @click="onBoxCLick('response')">
+          <h1 class="box-title" :class="{'active-box-title': activeBox.response}">მიწოდება</h1>
+          <div v-if="activeBox.response">
+            <p class="active-box-list mb-0 mt-5">
+              &bull; იპოვე შენი პროდუქტის მომხმარებლები ნულოვანი დანახარჯით <br/>
+              &bull; გააფორმე მსხვილი გაყიდვები
+            </p>
+            <b-button class="box-contact-button" @click="onConnectClick">
+              <span class="box-button-text">დაგვიკავშირდი</span>
+            </b-button>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -201,6 +236,10 @@ export default {
         },
       ],
       activeProvider: {},
+      activeBox: {
+        request: true,
+        response: false,
+      },
     }
   },
   methods: {
@@ -211,6 +250,15 @@ export default {
       } else {
         this.isActive.life = false
         this.isActive.health = true
+      }
+    },
+    onBoxCLick(type) {
+      if (type === 'request') {
+        this.activeBox.request = true
+        this.activeBox.response = false
+      } else {
+        this.activeBox.request = false
+        this.activeBox.response = true
       }
     },
     setActiveProvider(item) {
@@ -488,7 +536,7 @@ export default {
     position: relative;
     margin-top: 8rem;
     left: 116px;
-    height: 1000px;
+    height: 1024px;
 
     .cluster {
 
@@ -728,6 +776,120 @@ export default {
         position: absolute;
         top: 155px;
         right: 0;
+      }
+    }
+  }
+
+  .main-page-level-5 {
+    position: relative;
+    height: 1024px;
+    background: linear-gradient(136.35deg, #2C1D7A -16.03%, #1E1647 75.59%);
+
+    .benefits {
+      position: absolute;
+      left: 140px;
+      top: 140px;
+
+      .benefits-stroke {
+        width: 2px;
+        height: 17px;
+        background: #FFFFFF;
+      }
+
+      .benefits-title {
+        font-family: Helvetica;
+        font-style: normal;
+        font-weight: bold;
+        font-size: 24px;
+        line-height: 176.4%;
+        color: #FFFFFF;
+        margin-top: -13px;
+      }
+    }
+
+    .request-response-boxes {
+      position: absolute;
+      top: 257px;
+
+      .request {
+        width: 272px;
+        height: 545px;
+        background: #1E1647;
+        border-radius: 40px;
+        margin-left: 127px;
+      }
+
+      .response {
+        width: 272px;
+        height: 545px;
+        background: #1E1647;
+        border-radius: 40px;
+        margin-left: 144px;
+      }
+
+      .active-box {
+        border: 1px solid #0AE29F;
+        box-sizing: border-box;
+        width: 792px;
+      }
+
+      .box-title {
+        font-family: Helvetica;
+        font-style: normal;
+        font-weight: bold;
+        font-size: 40px;
+        line-height: 160%;
+        color: #FFFFFF;
+        margin-left: 40px;
+        margin-top: 104px;
+      }
+
+      .active-box-title {
+        color: #0AE29F;
+        margin-left: 72px;
+      }
+
+      .active-box-list {
+        width: 655px;
+        height: 187px;
+        font-family: Helvetica;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 18px;
+        line-height: 170%;
+        color: #FFFFFF;
+        opacity: 0.8;
+        margin-left: 72px;
+      }
+
+      .box-contact-button {
+        margin-left: 76px;
+        margin-bottom: 73px;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        padding: 0;
+        position: absolute;
+        width: 221px;
+        height: 54px;
+        background: #0AE29F;
+        filter: drop-shadow(0px 20px 40px rgba(10, 226, 159, 0.2));
+        border-radius: 16px;
+
+        .box-button-text {
+          font-family: Helvetica;
+          font-style: normal;
+          font-weight: bold;
+          font-size: 16px;
+          line-height: 18px;
+          text-transform: uppercase;
+          color: #095A66;
+          flex: none;
+          order: 0;
+          flex-grow: 0;
+          margin: 0px 10px;
+        }
       }
     }
   }
