@@ -58,25 +58,29 @@
       </div>
     </div>
     <div v-if="showResultsModal" class="results-modal">
-      <div class="results-modal-class">
-        <div class="d-flex close-modal" @click="hideResultsModal">
-          <img src="/assets/close_button.png" alt="">
-          <span class="ml-2">დახურვა</span>
+      <div class="background-layers">
+        <div class="modal-first-layer">
+          <div class="d-flex close-modal" @click="hideResultsModal">
+            <img src="/assets/close_button.png" alt="">
+            <span class="ml-2">დახურვა</span>
+          </div>
         </div>
+        <div class="modal-second-layer"/>
+        <div class="modal-third-layer"/>
       </div>
-      <div class="first-layer"/>
-      <div class="second-layer"/>
-      <div class="d-flex">
-        <p class="header-one mb-0">ჯანმრთელობის დაზღვევა</p>
-        <p class="header-two mb-0">- გაუმჯობესებული პაკეტი</p>
-      </div>
-      <div class="d-flex end-of-month-box">
-        <img src="/assets/tmp_time_calculation.png" alt="">
-        <span class="box-description">
-          Cluster is made to optimize your expenses,
-          whether you are a physical entity or running a business of any size.
-          Paying less in stuff and services
-        </span>
+      <div class="results-modal-content">
+        <div class="d-flex modal-headers">
+          <p class="header-one mb-0">ჯანმრთელობის დაზღვევა</p>
+          <p class="header-two mb-0">- გაუმჯობესებული პაკეტი</p>
+        </div>
+        <div class="d-flex month-calculation-box">
+          <img src="/assets/tmp_time_calculation.png" alt="">
+          <span class="box-description">
+           Cluster is made to optimize your expenses,
+           whether you are a physical entity or running a business of any size.
+           Paying less in stuff and services
+         </span>
+        </div>
       </div>
     </div>
     <div v-else>
@@ -264,7 +268,7 @@ export default {
         request: true,
         response: false,
       },
-      showResultsModal: true,
+      showResultsModal: false,
     }
   },
   computed: {
@@ -324,110 +328,113 @@ export default {
 }
 
 .results-modal {
-  overflow: hidden;
-
-  .results-modal-class {
-    position: absolute;
-    width: 1440px;
-    height: 1024px;
-    background: #1E1647;
-    opacity: 0.9;
-    left: -1px;
-    top: -5px;
-    backdrop-filter: blur(4px);
-
-    .close-modal {
-      cursor: pointer;
+  .background-layers {
+    .modal-first-layer {
       position: absolute;
-      width: 72px;
-      height: 18px;
-      left: 1244px;
-      top: 53px;
-      font-family: Helvetica;
-      font-style: normal;
-      font-weight: bold;
-      font-size: 16px;
-      line-height: 18px;
-      color: #FFFFFF;
+      width: 100%;
+      height: 100%;
+      background: #1E1647;
+      opacity: 0.9;
+      top: 0;
+      backdrop-filter: blur(4px);
+
+      .close-modal {
+        cursor: pointer;
+        position: absolute;
+        width: 72px;
+        height: 18px;
+        right: 124px;
+        top: 53px;
+        font-family: Helvetica;
+        font-style: normal;
+        font-weight: bold;
+        font-size: 16px;
+        line-height: 18px;
+        color: #FFFFFF;
+      }
+    }
+
+    .modal-second-layer {
+      position: absolute;
+      width: 1270px;
+      height: 926px;
+      left: 85px;
+      top: 96px;
+      background: #1E1647;
+      backdrop-filter: blur(4px);
+      border-radius: 100px 100px 0 0;
+    }
+
+    .modal-third-layer {
+      position: absolute;
+      width: 1231px;
+      height: 927px;
+      left: 85px;
+      top: 96px;
+      background: linear-gradient(107.26deg, #2B198A -0.48%, rgba(35, 26, 83, 0) 35.91%);
+      opacity: 0.8;
+      border-radius: 100px 100px 0 0;
     }
   }
 
-  .first-layer {
-    position: absolute;
-    width: 1270px;
-    height: 926px;
-    left: 85px;
-    top: 96px;
-    background: #1E1647;
-    backdrop-filter: blur(4px);
-    border-radius: 100px 100px 0 0;
-  }
+  .results-modal-content {
+    .modal-headers {
+      .header-one {
+        position: absolute;
+        height: 26px;
+        left: 164px;
+        top: 158px;
+        font-family: Helvetica;
+        font-style: normal;
+        font-weight: bold;
+        font-size: 24px;
+        line-height: 28px;
+        color: #D7CAFD;
+      }
 
-  .second-layer {
-    position: absolute;
-    width: 1231px;
-    height: 975px;
-    left: 85px;
-    top: 96px;
-    background: linear-gradient(107.26deg, #2B198A -0.48%, rgba(35, 26, 83, 0) 35.91%);
-    opacity: 0.8;
-    border-radius: 100px;
-  }
-
-  .header-one {
-    position: absolute;
-    height: 26px;
-    left: 164px;
-    top: 158px;
-    font-family: Helvetica;
-    font-style: normal;
-    font-weight: bold;
-    font-size: 24px;
-    line-height: 28px;
-    color: #D7CAFD;
-  }
-
-  .header-two {
-    position: absolute;
-    height: 26px;
-    left: 475px;
-    top: 163px;
-    font-family: Helvetica;
-    font-style: normal;
-    font-weight: normal;
-    font-size: 18px;
-    line-height: 21px;
-    color: #D7CAFD;
-  }
-
-  .end-of-month-box {
-    position: absolute;
-    width: 791px;
-    height: 372px;
-    left: 138px;
-    top: 220px;
-    background: #231A53;
-    opacity: 0.8;
-    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.04);
-    border-radius: 50px;
-
-    .computed-number {
-      width: 364.89px;
-      height: 364.17px;
-
+      .header-two {
+        position: absolute;
+        height: 26px;
+        left: 475px;
+        top: 163px;
+        font-family: Helvetica;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 18px;
+        line-height: 21px;
+        color: #D7CAFD;
+      }
     }
 
-    .box-description {
+    .month-calculation-box {
       position: absolute;
-      width: 311px;
-      height: 104px;
-      font-family: Montserrat;
-      font-style: normal;
-      font-weight: 500;
-      font-size: 16px;
-      line-height: 160%;
-      color: #D7C9FE;
-      margin-left: 10px;
+      width: 791px;
+      height: 372px;
+      left: 138px;
+      top: 220px;
+      background: #231A53;
+      opacity: 0.8;
+      box-shadow: 0 8px 12px rgba(0, 0, 0, 0.04);
+      border-radius: 50px;
+
+      .computed-number {
+        width: 364.89px;
+        height: 364.17px;
+
+      }
+
+      .box-description {
+        position: absolute;
+        width: 311px;
+        height: 104px;
+        font-family: Montserrat;
+        font-style: normal;
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 160%;
+        color: #D7C9FE;
+        margin-left: 10px;
+      }
     }
   }
 }
