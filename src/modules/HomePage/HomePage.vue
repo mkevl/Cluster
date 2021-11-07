@@ -9,12 +9,14 @@
       <p class="insurance-title">აირჩიე დაზღვევა</p>
       <div class="d-flex justify-content-center insurance-buttons">
         <div class="d-flex align-items-center" :class="{'active-rectangle': isActive.life}">
-          <b-button class="insurance-option-button" :class="{'active-button': isActive.life}" size="sm">
+          <b-button class="insurance-option-button" :class="{'active-button': isActive.life}" size="sm"
+                    @click="onButtonClick('life')">
             <span class="button-text" :class="{'active-text': isActive.life}">სიცოცხლის</span>
           </b-button>
         </div>
-        <div class="d-flex align-items-center ml-5" :class="{'active-rectangle': isActive.health}">
-          <b-button class="insurance-option-button" :class="{'active-button': isActive.health}" size="sm">
+        <div class="d-flex align-items-center ml-4" :class="{'active-rectangle': isActive.health}">
+          <b-button class="insurance-option-button" :class="{'active-button': isActive.health}" size="sm"
+                    @click="onButtonClick('health')">
             <span class="button-text" :class="{'active-text': isActive.health}">ჯანმრთელობის</span>
           </b-button>
         </div>
@@ -45,6 +47,17 @@ export default {
       },
     }
   },
+  methods: {
+    onButtonClick(type) {
+      if (type === 'life') {
+        this.isActive.life = true
+        this.isActive.health = false
+      } else {
+        this.isActive.life = false
+        this.isActive.health = true
+      }
+    }
+  }
 }
 </script>
 
