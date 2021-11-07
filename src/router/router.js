@@ -11,12 +11,12 @@ const router = new VueRouter({
   routes: [
     {
       path: '/',
-      redirect: '/home',
+      redirect: '/',
       component: DefaultLayout,
       meta: {guest: true},
       children: [
         {
-          path: '/home',
+          path: '/',
           name: 'home',
           component: HomePage,
         }

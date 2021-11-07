@@ -1,5 +1,5 @@
 <template>
-  <div class="main-page">
+  <div class="main-page" :style="getPageHeight">
     <div class="main-page-level-1">
       <object data="assets/klaster_logo.svg" type="image/svg+xml"/>
       <div class="head-content">
@@ -34,7 +34,7 @@
         </b-form-radio-group>
       </div>
       <div class="d-flex justify-content-center results">
-        <b-button class="results-button">
+        <b-button class="results-button" @click="onResultsCLick">
           <span class="results-text">შედეგების ნახვა</span>
         </b-button>
       </div>
@@ -57,117 +57,141 @@
         </div>
       </div>
     </div>
-    <div class="main-page-level-2">
-      <div class="d-flex cluster">
-        <span class="cluster-stroke"/>
-        <p class="cluster-title ml-3 mb-0">როგორ მუშაობს კლასტერი?</p>
+    <div v-if="showResultsModal" class="results-modal">
+      <div class="results-modal-class">
+        <div class="d-flex close-modal" @click="hideResultsModal">
+          <img src="/assets/close_button.png" alt="">
+          <span class="ml-2">დახურვა</span>
+        </div>
       </div>
-      <div class="d-flex cluster-list">
-        <div class="wrap-lists">
-          <object data="assets/list_backgraund_1.svg" type="image/svg+xml"/>
-          <span class="list-numbers">1</span>
-          <p class="list-texts">მოგვაწოდე ინფორმაცია შენი საჭიროების შესახებ</p>
-        </div>
-        <div class="wrap-lists ml-4">
-          <object data="assets/list_backgraund_2.svg" type="image/svg+xml"/>
-          <span class="list-numbers">2</span>
-          <p class="list-texts">მოხდება მსგავსი საჭიროებების კონსოლიდაცია</p>
-        </div>
-        <div class="wrap-lists ml-4">
-          <object data="assets/list_backgraund_3.svg" type="image/svg+xml"/>
-          <span class="list-numbers">3</span>
-          <p class="list-texts">მიიღე პროდუქტი ან სერვისი საუკეთესო ფასად</p>
-        </div>
+      <div class="first-layer"/>
+      <div class="second-layer"/>
+      <div class="d-flex">
+        <p class="header-one mb-0">ჯანმრთელობის დაზღვევა</p>
+        <p class="header-two mb-0">- გაუმჯობესებული პაკეტი</p>
+      </div>
+      <div class="d-flex end-of-month-box">
+        <img src="/assets/tmp_time_calculation.png" alt="">
+        <span class="box-description">
+          Cluster is made to optimize your expenses,
+          whether you are a physical entity or running a business of any size.
+          Paying less in stuff and services
+        </span>
       </div>
     </div>
-    <div class="main-page-level-3">
-      <div class="d-flex providers">
-        <span class="provider-stroke"/>
-        <p class="provider-title ml-3 mb-0">პარტნიორი სადაზღვეო კომპანიები</p>
-      </div>
-      <div class="d-flex justify-content-between">
-        <ul class="providers-list">
-          <li v-for="(item, index) in providers" :key="index" class="providers-list-item"
-              :class="{'active-provider-item': item.isActive}" @click="setActiveProvider(item)">
-            <img :src="item.img_url" alt=""/>
-          </li>
-        </ul>
-        <div class="provider-info">
-          <img :src="activeProvider.logo_url" alt=""/>
-          <h1 class="provider-info-title mt-4 ml-2">{{ activeProvider.title }}</h1>
-          <p class="provider-info-description ml-2 mb-0 mt-4">{{ activeProvider.description }}</p>
-          <div class="d-flex mt-5">
-            <object data="/assets/providers/call_icon.svg" type="image/svg+xml"/>
-            <a class="provider-info-contact ml-2" :href="`tel:${activeProvider.tel}`">{{ activeProvider.tel }}</a>
+    <div v-else>
+      <div class="main-page-level-2">
+        <div class="d-flex cluster">
+          <span class="cluster-stroke"/>
+          <p class="cluster-title ml-3 mb-0">როგორ მუშაობს კლასტერი?</p>
+        </div>
+        <div class="d-flex cluster-list">
+          <div class="wrap-lists">
+            <object data="assets/list_backgraund_1.svg" type="image/svg+xml"/>
+            <span class="list-numbers">1</span>
+            <p class="list-texts">მოგვაწოდე ინფორმაცია შენი საჭიროების შესახებ</p>
           </div>
-          <div class="d-flex mt-3">
-            <object data="/assets/providers/browser_icon.svg" type="image/svg+xml"/>
-            <a class="provider-info-contact ml-2" :href="activeProvider.link">{{ activeProvider.link }}</a>
+          <div class="wrap-lists ml-4">
+            <object data="assets/list_backgraund_2.svg" type="image/svg+xml"/>
+            <span class="list-numbers">2</span>
+            <p class="list-texts">მოხდება მსგავსი საჭიროებების კონსოლიდაცია</p>
+          </div>
+          <div class="wrap-lists ml-4">
+            <object data="assets/list_backgraund_3.svg" type="image/svg+xml"/>
+            <span class="list-numbers">3</span>
+            <p class="list-texts">მიიღე პროდუქტი ან სერვისი საუკეთესო ფასად</p>
           </div>
         </div>
       </div>
-    </div>
-    <div class="main-page-level-4">
-      <div class="d-flex more-information">
-        <div class="about">
-          <div class="d-flex info">
-            <span class="info-stroke"/>
-            <p class="info-title ml-3 mb-0">მეტი ინფორმაცია</p>
-          </div>
-          <p class="info-description">
-            კლასტერის კორპორაციული ხედვაა, გაააზრებინოს მსოფლიოს მასშტაბით, ადამიანებსა და ბიზნესებს მათი ერთიანობის
-            სარფიანობა და გონივრულობა.
-          </p>
-          <div class="d-flex more-info-icons">
-            <a class="info-icons" :href="`mailto:${EMAIL}`">
-              <img src="/assets/icons/email_green_icon.svg" alt="">
-            </a>
-            <a class="info-icons ml-5" :href="`https://wa.me/${NUMBER}`" target='_blank'>
-              <img src="/assets/icons/whatsapp_green_icon.svg" alt="">
-            </a>
-            <a class="info-icons ml-5" :href="`https://www.m.me/${MESSENGER_URL}`" target='_blank'>
-              <img class="info-messenger-icon" src="/assets/icons/messenger_green_icon.svg" alt="">
-            </a>
-          </div>
-          <b-button class="info-contact-button" @click="onConnectClick">
-            <span class="info-button-text">დაგვიკავშირდი</span>
-          </b-button>
-          <img class="info-video" src="assets/tmp_video.png" alt="">
+      <div class="main-page-level-3">
+        <div class="d-flex providers">
+          <span class="provider-stroke"/>
+          <p class="provider-title ml-3 mb-0">პარტნიორი სადაზღვეო კომპანიები</p>
         </div>
-        <div class="video"></div>
+        <div class="d-flex justify-content-between">
+          <ul class="providers-list">
+            <li v-for="(item, index) in providers" :key="index" class="providers-list-item"
+                :class="{'active-provider-item': item.isActive}" @click="setActiveProvider(item)">
+              <img :src="item.img_url" alt=""/>
+            </li>
+          </ul>
+          <div class="provider-info">
+            <img :src="activeProvider.logo_url" alt=""/>
+            <h1 class="provider-info-title mt-4 ml-2">{{ activeProvider.title }}</h1>
+            <p class="provider-info-description ml-2 mb-0 mt-4">{{ activeProvider.description }}</p>
+            <div class="d-flex mt-5">
+              <object data="/assets/providers/call_icon.svg" type="image/svg+xml"/>
+              <a class="provider-info-contact ml-2" :href="`tel:${activeProvider.tel}`">{{ activeProvider.tel }}</a>
+            </div>
+            <div class="d-flex mt-3">
+              <object data="/assets/providers/browser_icon.svg" type="image/svg+xml"/>
+              <a class="provider-info-contact ml-2" :href="activeProvider.link">{{ activeProvider.link }}</a>
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
-    <div class="main-page-level-5">
-      <object data="/assets/background_image_2.svg" type="image/svg+xml"/>
-      <div class="d-flex benefits">
-        <span class="benefits-stroke"/>
-        <p class="benefits-title ml-3 mb-0">სარგებელი ყველა მონაწილეს</p>
-      </div>
-      <div class="d-flex request-response-boxes mt-5">
-        <div class="request" :class="{'active-box': activeBox.request}" @click="onBoxCLick('request')">
-          <h1 class="box-title" :class="{'active-box-title': activeBox.request}">მოთხოვნა</h1>
-          <div v-if="activeBox.request">
-            <p class="active-box-list mb-0 mt-5">
-              &bull; ისარგებლე მსხვილი ბიზნესისთვის დამახასიათებელი უპირატესობებით <br/>
-              &bull; შეამცირე ხარჯები <br/>
-              &bull; დაზოგე დრო და ადამიანური რესურსი <br/>
-              &bull; ინდივიდუალურად მორგებული შესყიდვების პროცესი
+      <div class="main-page-level-4">
+        <div class="d-flex more-information">
+          <div class="about">
+            <div class="d-flex info">
+              <span class="info-stroke"/>
+              <p class="info-title ml-3 mb-0">მეტი ინფორმაცია</p>
+            </div>
+            <p class="info-description">
+              კლასტერის კორპორაციული ხედვაა, გაააზრებინოს მსოფლიოს მასშტაბით, ადამიანებსა და ბიზნესებს მათი ერთიანობის
+              სარფიანობა და გონივრულობა.
             </p>
-            <b-button class="box-contact-button" @click="onConnectClick">
-              <span class="box-button-text">დაგვიკავშირდი</span>
+            <div class="d-flex more-info-icons">
+              <a class="info-icons" :href="`mailto:${EMAIL}`">
+                <img src="/assets/icons/email_green_icon.svg" alt="">
+              </a>
+              <a class="info-icons ml-5" :href="`https://wa.me/${NUMBER}`" target='_blank'>
+                <img src="/assets/icons/whatsapp_green_icon.svg" alt="">
+              </a>
+              <a class="info-icons ml-5" :href="`https://www.m.me/${MESSENGER_URL}`" target='_blank'>
+                <img class="info-messenger-icon" src="/assets/icons/messenger_green_icon.svg" alt="">
+              </a>
+            </div>
+            <b-button class="info-contact-button" @click="onConnectClick">
+              <span class="info-button-text">დაგვიკავშირდი</span>
             </b-button>
+            <img class="info-video" src="assets/tmp_video.png" alt="">
           </div>
+          <div class="video"></div>
         </div>
-        <div class="response" :class="{'active-box': activeBox.response}" @click="onBoxCLick('response')">
-          <h1 class="box-title" :class="{'active-box-title': activeBox.response}">მიწოდება</h1>
-          <div v-if="activeBox.response">
-            <p class="active-box-list mb-0 mt-5">
-              &bull; იპოვე შენი პროდუქტის მომხმარებლები ნულოვანი დანახარჯით <br/>
-              &bull; გააფორმე მსხვილი გაყიდვები
-            </p>
-            <b-button class="box-contact-button" @click="onConnectClick">
-              <span class="box-button-text">დაგვიკავშირდი</span>
-            </b-button>
+      </div>
+      <div class="main-page-level-5">
+        <object data="/assets/background_image_2.svg" type="image/svg+xml"/>
+        <div class="d-flex benefits">
+          <span class="benefits-stroke"/>
+          <p class="benefits-title ml-3 mb-0">სარგებელი ყველა მონაწილეს</p>
+        </div>
+        <div class="d-flex request-response-boxes mt-5">
+          <div class="request" :class="{'active-box': activeBox.request}" @click="onBoxCLick('request')">
+            <h1 class="box-title" :class="{'active-box-title': activeBox.request}">მოთხოვნა</h1>
+            <div v-if="activeBox.request">
+              <p class="active-box-list mb-0 mt-5">
+                &bull; ისარგებლე მსხვილი ბიზნესისთვის დამახასიათებელი უპირატესობებით <br/>
+                &bull; შეამცირე ხარჯები <br/>
+                &bull; დაზოგე დრო და ადამიანური რესურსი <br/>
+                &bull; ინდივიდუალურად მორგებული შესყიდვების პროცესი
+              </p>
+              <b-button class="box-contact-button" @click="onConnectClick">
+                <span class="box-button-text">დაგვიკავშირდი</span>
+              </b-button>
+            </div>
+          </div>
+          <div class="response" :class="{'active-box': activeBox.response}" @click="onBoxCLick('response')">
+            <h1 class="box-title" :class="{'active-box-title': activeBox.response}">მიწოდება</h1>
+            <div v-if="activeBox.response">
+              <p class="active-box-list mb-0 mt-5">
+                &bull; იპოვე შენი პროდუქტის მომხმარებლები ნულოვანი დანახარჯით <br/>
+                &bull; გააფორმე მსხვილი გაყიდვები
+              </p>
+              <b-button class="box-contact-button" @click="onConnectClick">
+                <span class="box-button-text">დაგვიკავშირდი</span>
+              </b-button>
+            </div>
           </div>
         </div>
       </div>
@@ -240,6 +264,12 @@ export default {
         request: true,
         response: false,
       },
+      showResultsModal: true,
+    }
+  },
+  computed: {
+    getPageHeight() {
+      return this.showResultsModal ? {} : {height: '6932px'}
     }
   },
   methods: {
@@ -275,6 +305,12 @@ export default {
     onConnectClick() {
 
     },
+    onResultsCLick() {
+      this.showResultsModal = true;
+    },
+    hideResultsModal() {
+      this.showResultsModal = false;
+    },
   },
   mounted() {
     this.activeProvider = {...this.providers[0]}
@@ -285,6 +321,115 @@ export default {
 <style lang="scss" scoped>
 /deep/ ul {
   list-style-type: none;
+}
+
+.results-modal {
+  overflow: hidden;
+
+  .results-modal-class {
+    position: absolute;
+    width: 1440px;
+    height: 1024px;
+    background: #1E1647;
+    opacity: 0.9;
+    left: -1px;
+    top: -5px;
+    backdrop-filter: blur(4px);
+
+    .close-modal {
+      cursor: pointer;
+      position: absolute;
+      width: 72px;
+      height: 18px;
+      left: 1244px;
+      top: 53px;
+      font-family: Helvetica;
+      font-style: normal;
+      font-weight: bold;
+      font-size: 16px;
+      line-height: 18px;
+      color: #FFFFFF;
+    }
+  }
+
+  .first-layer {
+    position: absolute;
+    width: 1270px;
+    height: 926px;
+    left: 85px;
+    top: 96px;
+    background: #1E1647;
+    backdrop-filter: blur(4px);
+    border-radius: 100px 100px 0 0;
+  }
+
+  .second-layer {
+    position: absolute;
+    width: 1231px;
+    height: 975px;
+    left: 85px;
+    top: 96px;
+    background: linear-gradient(107.26deg, #2B198A -0.48%, rgba(35, 26, 83, 0) 35.91%);
+    opacity: 0.8;
+    border-radius: 100px;
+  }
+
+  .header-one {
+    position: absolute;
+    height: 26px;
+    left: 164px;
+    top: 158px;
+    font-family: Helvetica;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 24px;
+    line-height: 28px;
+    color: #D7CAFD;
+  }
+
+  .header-two {
+    position: absolute;
+    height: 26px;
+    left: 475px;
+    top: 163px;
+    font-family: Helvetica;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 21px;
+    color: #D7CAFD;
+  }
+
+  .end-of-month-box {
+    position: absolute;
+    width: 791px;
+    height: 372px;
+    left: 138px;
+    top: 220px;
+    background: #231A53;
+    opacity: 0.8;
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.04);
+    border-radius: 50px;
+
+    .computed-number {
+      width: 364.89px;
+      height: 364.17px;
+
+    }
+
+    .box-description {
+      position: absolute;
+      width: 311px;
+      height: 104px;
+      font-family: Montserrat;
+      font-style: normal;
+      font-weight: 500;
+      font-size: 16px;
+      line-height: 160%;
+      color: #D7C9FE;
+      margin-left: 10px;
+    }
+  }
 }
 
 .main-page {
@@ -481,7 +626,7 @@ export default {
         flex: none;
         order: 0;
         flex-grow: 0;
-        margin: 0px 10px;
+        margin: 0 10px;
       }
     }
 
@@ -683,7 +828,7 @@ export default {
       left: 93px;
       top: 196.5px;
       background: linear-gradient(139.74deg, #2C1D7A 5.01%, #1E1647 77.08%);
-      border-radius: 200px 0px 0px 40px;
+      border-radius: 200px 0 0 40px;
 
       .info {
         position: absolute;
@@ -754,7 +899,7 @@ export default {
         left: 108px;
         top: 490px;
         background: #0AE29F;
-        filter: drop-shadow(0px 20px 40px rgba(10, 226, 159, 0.2));
+        filter: drop-shadow(0 20px 40px rgba(10, 226, 159, 0.2));
         border-radius: 16px;
 
         .info-button-text {
@@ -768,7 +913,7 @@ export default {
           flex: none;
           order: 0;
           flex-grow: 0;
-          margin: 0px 10px;
+          margin: 0 10px;
         }
       }
 
@@ -874,7 +1019,7 @@ export default {
         width: 221px;
         height: 54px;
         background: #0AE29F;
-        filter: drop-shadow(0px 20px 40px rgba(10, 226, 159, 0.2));
+        filter: drop-shadow(0 20px 40px rgba(10, 226, 159, 0.2));
         border-radius: 16px;
 
         .box-button-text {
@@ -888,7 +1033,7 @@ export default {
           flex: none;
           order: 0;
           flex-grow: 0;
-          margin: 0px 10px;
+          margin: 0 10px;
         }
       }
     }

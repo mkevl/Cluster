@@ -15,7 +15,6 @@ export default {
 .home-page {
   position: relative;
   width: 1440px;
-  height: 6932px;
   background: #FFFFFF;
 }
 </style>
