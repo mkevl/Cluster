@@ -778,6 +778,7 @@ export default {
       }
 
       .providers-list-item {
+        cursor: pointer;
         mix-blend-mode: luminosity;
       }
 
