@@ -113,21 +113,24 @@
           <p class="provider-title ml-3 mb-0">პარტნიორი სადაზღვეო კომპანიები</p>
         </div>
         <div class="d-flex justify-content-between">
-          <ul class="providers-list">
-            <li v-for="(item, index) in providers" :key="index" class="providers-list-item"
-                :class="{'active-provider-item': item.isActive}" @click="setActiveProvider(item)">
-              <img :src="item.img_url" alt=""/>
-            </li>
-          </ul>
+          <div>
+            <ul class="providers-list">
+              <li v-for="(item, index) in providers" :key="index" class="providers-list-item"
+                  :class="{'active-provider-item': item.isActive}" @click="setActiveProvider(item)">
+                <img :src="item.img_url" alt=""/>
+              </li>
+            </ul>
+            <img class="provider-scroll" src="/assets/scroll_vector.svg" alt=""/>
+          </div>
           <div class="provider-info">
             <img :src="activeProvider.logo_url" alt=""/>
             <h1 class="provider-info-title mt-4 ml-2">{{ activeProvider.title }}</h1>
             <p class="provider-info-description ml-2 mb-0 mt-4">{{ activeProvider.description }}</p>
-            <div class="d-flex mt-5">
+            <div v-if="activeProvider.tel" class="d-flex mt-5">
               <object data="/assets/providers/call_icon.svg" type="image/svg+xml"/>
               <a class="provider-info-contact ml-2" :href="`tel:${activeProvider.tel}`">{{ activeProvider.tel }}</a>
             </div>
-            <div class="d-flex mt-3">
+            <div v-if="activeProvider.link" class="d-flex mt-3">
               <object data="/assets/providers/browser_icon.svg" type="image/svg+xml"/>
               <a class="provider-info-contact ml-2" :href="activeProvider.link">{{ activeProvider.link }}</a>
             </div>
@@ -262,6 +265,16 @@ export default {
           tel: '',
           link: ''
         },
+        {
+          id: 5,
+          img_url: '/assets/providers/alfa.png',
+          isActive: false,
+          logo_url: '',
+          title: '',
+          description: '',
+          tel: '',
+          link: ''
+        },
       ],
       activeProvider: {},
       activeBox: {
@@ -323,6 +336,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import url('https://fonts.googleapis.com/css2?family=Montserrat');
+@import url('https://fonts.googleapis.com/css2?family=Helvetica');
+
 /deep/ ul {
   list-style-type: none;
 }
@@ -772,12 +788,18 @@ export default {
       }
     }
 
+    .provider-scroll {
+      margin-left: 64px;
+      cursor: pointer;
+    }
+
     .providers-list {
       :first-child {
         margin-top: 20px;
       }
 
       .providers-list-item {
+        //opacity: 0.5%;
         cursor: pointer;
         mix-blend-mode: luminosity;
       }
