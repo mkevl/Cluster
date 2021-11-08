@@ -1,260 +1,197 @@
 <template>
-  <div class="main-page" :style="getPageHeight">
-    <div class="main-page-level-1">
-      <object data="assets/klaster_logo.svg" type="image/svg+xml"/>
-      <div class="head-content">
-        <h1 class="main-title">შეამცირე შენი ბიზნესის ხარჯი</h1>
-        <p class="main-description">პლატფორმა საერთო ინტერესების გარშემო გაერთიანებისთვის</p>
-      </div>
-      <div class="insurance">
-        <p class="insurance-title">აირჩიე დაზღვევა</p>
-        <div class="d-flex justify-content-center insurance-buttons">
-          <div class="d-flex align-items-center" :class="{'active-rectangle': isActive.life}">
-            <b-button class="insurance-option-button" :class="{'active-button': isActive.life}" size="sm"
-                      @click="onSelectButtonClick('life')">
-              <span class="button-text" :class="{'active-text': isActive.life}">სიცოცხლის</span>
-            </b-button>
-          </div>
-          <div class="d-flex align-items-center ml-4" :class="{'active-rectangle': isActive.health}">
-            <b-button class="insurance-option-button" :class="{'active-button': isActive.health}" size="sm"
-                      @click="onSelectButtonClick('health')">
-              <span class="button-text" :class="{'active-text': isActive.health}">ჯანმრთელობის</span>
-            </b-button>
-          </div>
-        </div>
-      </div>
-      <div class="insurance-package">
-        <p class="package-text">აირჩიე პაკეტი</p>
-        <b-form-radio-group v-model="checked" class="mt-5">
-          <b-form-radio v-for="item in options" class="ml-4" :key="item.value" :value="item.value">
-            <p class="mb-0 ml-3 radio-button-label" :class="{'active-radio-button': checked === item.value}">
-              {{ item.text }}
-            </p>
-          </b-form-radio>
-        </b-form-radio-group>
-      </div>
-      <div class="d-flex justify-content-center results">
-        <b-button class="results-button" @click="onResultsCLick">
-          <span class="results-text">შედეგების ნახვა</span>
-        </b-button>
-      </div>
-      <div class="d-flex contact">
-        <span class="contact-text">დაგვიკავშირდი</span>
-        <span class="connect-stroke"/>
-        <div class="d-flex contact-icons float-right">
-          <a class="icons" :href="`mailto:${EMAIL}`">
-            <img src="/assets/icons/email_icon.svg" alt="">
-          </a>
-          <a class="icons ml-5" :href="`tel:${NUMBER}`">
-            <img src="/assets/icons/phone_icon.svg" alt="">
-          </a>
-          <a class="icons ml-5" :href="`https://wa.me/${NUMBER}`" target='_blank'>
-            <img src="/assets/icons/whatsapp_icon.svg" alt="">
-          </a>
-          <a class="icons ml-5" :href="`https://www.m.me/${MESSENGER_URL}`" target='_blank'>
-            <img class="messenger-icon" src="/assets/icons/messenger_icon.svg" alt="">
-          </a>
-        </div>
-      </div>
-    </div>
-    <div v-if="showResultsModal" class="results-modal">
-      <div class="background-layers">
-        <div class="modal-first-layer">
-          <div class="d-flex close-modal" @click="hideResultsModal">
-            <img src="/assets/close_button.png" alt="">
-            <span class="ml-2">დახურვა</span>
-          </div>
-        </div>
-        <div class="modal-second-layer"/>
-        <div class="modal-third-layer"/>
-      </div>
-      <div class="results-modal-content">
-        <div class="d-flex modal-headers">
-          <p class="header-one mb-0">ჯანმრთელობის დაზღვევა</p>
-          <p class="header-two mb-0">- გაუმჯობესებული პაკეტი</p>
-        </div>
-        <div class="row month-calculation-box">
-          <div class="col-6">
-            <object data="/assets/time_background.svg" type="image/svg+xml"/>
-            <div class="time-calculation-container">
-              <span class="left-text">დარჩა</span>
-              <span class="day-number-text mt-3">{{ getDays }}</span>
-              <span class="day-text">დღე</span>
-            </div>
-          </div>
-          <div class="col-6">
-              <span class="box-description">
-                Cluster is made to optimize your expenses,
-                whether you are a physical entity or running a business of any size.
-                Paying less in stuff and services
-            </span>
-            <b-button class="modal-contact-button" @click="onConnectClick">
-              <span class="modal-button-text">დაგვიკავშირდი</span>
-            </b-button>
-          </div>
-        </div>
-        <!--<div>
-          <span>კლასტერი რიცხვებში</span>
-          <div class="row">
-            <div class="col-6">
-              <div class="clusters-box"></div>
-              <div class="clusters-text"></div>
-              <div class="clusters-quantity">
-                <span>კომპანია</span>
+  <div class="main-page">
+    <first-section :phone-number="NUMBER" :email="EMAIL" @on-see-results-click="onResultsCLick"/>
+    <!--    <div v-if="showResultsModal" class="results-modal">
+          <div class="background-layers">
+            <div class="modal-first-layer">
+              <div class="d-flex close-modal" @click="hideResultsModal">
+                <img src="/assets/close_button.png" alt="">
+                <span class="ml-2">დახურვა</span>
               </div>
             </div>
-            <div class="col-6">
-              <div class="clusters-box"></div>
-              <div class="clusters-text"></div>
-              <div class="clusters-quantity">
-                <span>ადამიანი</span>
+            <div class="modal-second-layer"/>
+            <div class="modal-third-layer"/>
+          </div>
+          <div class="results-modal-content">
+            <div class="d-flex modal-headers">
+              <p class="header-one mb-0">ჯანმრთელობის დაზღვევა</p>
+              <p class="header-two mb-0">- გაუმჯობესებული პაკეტი</p>
+            </div>
+            <div class="row month-calculation-box">
+              <div class="col-6">
+                <object data="/assets/time_background.svg" type="image/svg+xml"/>
+                <div class="time-calculation-container">
+                  <span class="left-text">დარჩა</span>
+                  <span class="day-number-text mt-3">{{ getDays }}</span>
+                  <span class="day-text">დღე</span>
+                </div>
+              </div>
+              <div class="col-6">
+                  <span class="box-description">
+                    Cluster is made to optimize your expenses,
+                    whether you are a physical entity or running a business of any size.
+                    Paying less in stuff and services
+                </span>
+                <b-button class="modal-contact-button" @click="onConnectClick">
+                  <span class="modal-button-text">დაგვიკავშირდი</span>
+                </b-button>
+              </div>
+            </div>
+            &lt;!&ndash;<div>
+              <span>კლასტერი რიცხვებში</span>
+              <div class="row">
+                <div class="col-6">
+                  <div class="clusters-box"></div>
+                  <div class="clusters-text"></div>
+                  <div class="clusters-quantity">
+                    <span>კომპანია</span>
+                  </div>
+                </div>
+                <div class="col-6">
+                  <div class="clusters-box"></div>
+                  <div class="clusters-text"></div>
+                  <div class="clusters-quantity">
+                    <span>ადამიანი</span>
+                  </div>
+                </div>
+              </div>
+            </div>&ndash;&gt;
+          </div>
+        </div>
+        <div v-else>
+          <div class="main-page-level-2">
+            <div class="d-flex cluster">
+              <span class="cluster-stroke"/>
+              <p class="cluster-title ml-3 mb-0">როგორ მუშაობს კლასტერი?</p>
+            </div>
+            <div class="d-flex cluster-list">
+              <div class="wrap-lists">
+                <object data="assets/list_backgraund_1.svg" type="image/svg+xml"/>
+                <span class="list-numbers">1</span>
+                <p class="list-texts">მოგვაწოდე ინფორმაცია შენი საჭიროების შესახებ</p>
+              </div>
+              <div class="wrap-lists ml-4">
+                <object data="assets/list_backgraund_2.svg" type="image/svg+xml"/>
+                <span class="list-numbers">2</span>
+                <p class="list-texts">მოხდება მსგავსი საჭიროებების კონსოლიდაცია</p>
+              </div>
+              <div class="wrap-lists ml-4">
+                <object data="assets/list_backgraund_3.svg" type="image/svg+xml"/>
+                <span class="list-numbers">3</span>
+                <p class="list-texts">მიიღე პროდუქტი ან სერვისი საუკეთესო ფასად</p>
+              </div>
+            </div>
+          </div>
+          <div class="main-page-level-3">
+            <div class="d-flex providers">
+              <span class="provider-stroke"/>
+              <p class="provider-title ml-3 mb-0">პარტნიორი სადაზღვეო კომპანიები</p>
+            </div>
+            <div class="d-flex justify-content-between">
+              <div>
+                <ul class="providers-list">
+                  <li v-for="(item, index) in providers" :key="index" class="providers-list-item"
+                      :class="{'active-provider-item': item.isActive}" @click="setActiveProvider(item)">
+                    <img :src="item.img_url" alt=""/>
+                  </li>
+                </ul>
+                <img class="provider-scroll" src="/assets/scroll_vector.svg" alt=""/>
+              </div>
+              <div class="provider-info">
+                <img :src="activeProvider.logo_url" alt=""/>
+                <h1 class="provider-info-title mt-4 ml-2">{{ activeProvider.title }}</h1>
+                <p class="provider-info-description ml-2 mb-0 mt-4">{{ activeProvider.description }}</p>
+                <div v-if="activeProvider.tel" class="d-flex mt-5">
+                  <object data="/assets/providers/call_icon.svg" type="image/svg+xml"/>
+                  <a class="provider-info-contact ml-2" :href="`tel:${activeProvider.tel}`">{{ activeProvider.tel }}</a>
+                </div>
+                <div v-if="activeProvider.link" class="d-flex mt-3">
+                  <object data="/assets/providers/browser_icon.svg" type="image/svg+xml"/>
+                  <a class="provider-info-contact ml-2" :href="activeProvider.link">{{ activeProvider.link }}</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="main-page-level-4">
+            <div class="d-flex more-information">
+              <div class="about">
+                <div class="d-flex info">
+                  <span class="info-stroke"/>
+                  <p class="info-title ml-3 mb-0">მეტი ინფორმაცია</p>
+                </div>
+                <p class="info-description">
+                  კლასტერის კორპორაციული ხედვაა, გაააზრებინოს მსოფლიოს მასშტაბით, ადამიანებსა და ბიზნესებს მათი ერთიანობის
+                  სარფიანობა და გონივრულობა.
+                </p>
+                <div class="d-flex more-info-icons">
+                  <a class="info-icons" :href="`mailto:${EMAIL}`">
+                    <img src="/assets/icons/email_green_icon.svg" alt="">
+                  </a>
+                  <a class="info-icons ml-5" :href="`https://wa.me/${NUMBER}`" target='_blank'>
+                    <img src="/assets/icons/whatsapp_green_icon.svg" alt="">
+                  </a>
+                  <a class="info-icons ml-5" :href="`https://www.m.me/${MESSENGER_URL}`" target='_blank'>
+                    <img class="info-messenger-icon" src="/assets/icons/messenger_green_icon.svg" alt="">
+                  </a>
+                </div>
+                <b-button class="info-contact-button" @click="onConnectClick">
+                  <span class="info-button-text">დაგვიკავშირდი</span>
+                </b-button>
+                <img class="info-video" src="assets/tmp_video.png" alt="">
+              </div>
+              <div class="video"></div>
+            </div>
+          </div>
+          <div class="main-page-level-5">
+            <object data="/assets/background_image_2.svg" type="image/svg+xml"/>
+            <div class="d-flex benefits">
+              <span class="benefits-stroke"/>
+              <p class="benefits-title ml-3 mb-0">სარგებელი ყველა მონაწილეს</p>
+            </div>
+            <div class="d-flex request-response-boxes mt-5">
+              <div class="request" :class="{'active-box': activeBox.request}" @click="onBoxCLick('request')">
+                <h1 class="box-title" :class="{'active-box-title': activeBox.request}">მოთხოვნა</h1>
+                <div v-if="activeBox.request">
+                  <p class="active-box-list mb-0 mt-5">
+                    &bull; ისარგებლე მსხვილი ბიზნესისთვის დამახასიათებელი უპირატესობებით <br/>
+                    &bull; შეამცირე ხარჯები <br/>
+                    &bull; დაზოგე დრო და ადამიანური რესურსი <br/>
+                    &bull; ინდივიდუალურად მორგებული შესყიდვების პროცესი
+                  </p>
+                  <b-button class="box-contact-button" @click="onConnectClick">
+                    <span class="box-button-text">დაგვიკავშირდი</span>
+                  </b-button>
+                </div>
+              </div>
+              <div class="response" :class="{'active-box': activeBox.response}" @click="onBoxCLick('response')">
+                <h1 class="box-title" :class="{'active-box-title': activeBox.response}">მიწოდება</h1>
+                <div v-if="activeBox.response">
+                  <p class="active-box-list mb-0 mt-5">
+                    &bull; იპოვე შენი პროდუქტის მომხმარებლები ნულოვანი დანახარჯით <br/>
+                    &bull; გააფორმე მსხვილი გაყიდვები
+                  </p>
+                  <b-button class="box-contact-button" @click="onConnectClick">
+                    <span class="box-button-text">დაგვიკავშირდი</span>
+                  </b-button>
+                </div>
               </div>
             </div>
           </div>
         </div>-->
-      </div>
-    </div>
-    <div v-else>
-      <div class="main-page-level-2">
-        <div class="d-flex cluster">
-          <span class="cluster-stroke"/>
-          <p class="cluster-title ml-3 mb-0">როგორ მუშაობს კლასტერი?</p>
-        </div>
-        <div class="d-flex cluster-list">
-          <div class="wrap-lists">
-            <object data="assets/list_backgraund_1.svg" type="image/svg+xml"/>
-            <span class="list-numbers">1</span>
-            <p class="list-texts">მოგვაწოდე ინფორმაცია შენი საჭიროების შესახებ</p>
-          </div>
-          <div class="wrap-lists ml-4">
-            <object data="assets/list_backgraund_2.svg" type="image/svg+xml"/>
-            <span class="list-numbers">2</span>
-            <p class="list-texts">მოხდება მსგავსი საჭიროებების კონსოლიდაცია</p>
-          </div>
-          <div class="wrap-lists ml-4">
-            <object data="assets/list_backgraund_3.svg" type="image/svg+xml"/>
-            <span class="list-numbers">3</span>
-            <p class="list-texts">მიიღე პროდუქტი ან სერვისი საუკეთესო ფასად</p>
-          </div>
-        </div>
-      </div>
-      <div class="main-page-level-3">
-        <div class="d-flex providers">
-          <span class="provider-stroke"/>
-          <p class="provider-title ml-3 mb-0">პარტნიორი სადაზღვეო კომპანიები</p>
-        </div>
-        <div class="d-flex justify-content-between">
-          <div>
-            <ul class="providers-list">
-              <li v-for="(item, index) in providers" :key="index" class="providers-list-item"
-                  :class="{'active-provider-item': item.isActive}" @click="setActiveProvider(item)">
-                <img :src="item.img_url" alt=""/>
-              </li>
-            </ul>
-            <img class="provider-scroll" src="/assets/scroll_vector.svg" alt=""/>
-          </div>
-          <div class="provider-info">
-            <img :src="activeProvider.logo_url" alt=""/>
-            <h1 class="provider-info-title mt-4 ml-2">{{ activeProvider.title }}</h1>
-            <p class="provider-info-description ml-2 mb-0 mt-4">{{ activeProvider.description }}</p>
-            <div v-if="activeProvider.tel" class="d-flex mt-5">
-              <object data="/assets/providers/call_icon.svg" type="image/svg+xml"/>
-              <a class="provider-info-contact ml-2" :href="`tel:${activeProvider.tel}`">{{ activeProvider.tel }}</a>
-            </div>
-            <div v-if="activeProvider.link" class="d-flex mt-3">
-              <object data="/assets/providers/browser_icon.svg" type="image/svg+xml"/>
-              <a class="provider-info-contact ml-2" :href="activeProvider.link">{{ activeProvider.link }}</a>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="main-page-level-4">
-        <div class="d-flex more-information">
-          <div class="about">
-            <div class="d-flex info">
-              <span class="info-stroke"/>
-              <p class="info-title ml-3 mb-0">მეტი ინფორმაცია</p>
-            </div>
-            <p class="info-description">
-              კლასტერის კორპორაციული ხედვაა, გაააზრებინოს მსოფლიოს მასშტაბით, ადამიანებსა და ბიზნესებს მათი ერთიანობის
-              სარფიანობა და გონივრულობა.
-            </p>
-            <div class="d-flex more-info-icons">
-              <a class="info-icons" :href="`mailto:${EMAIL}`">
-                <img src="/assets/icons/email_green_icon.svg" alt="">
-              </a>
-              <a class="info-icons ml-5" :href="`https://wa.me/${NUMBER}`" target='_blank'>
-                <img src="/assets/icons/whatsapp_green_icon.svg" alt="">
-              </a>
-              <a class="info-icons ml-5" :href="`https://www.m.me/${MESSENGER_URL}`" target='_blank'>
-                <img class="info-messenger-icon" src="/assets/icons/messenger_green_icon.svg" alt="">
-              </a>
-            </div>
-            <b-button class="info-contact-button" @click="onConnectClick">
-              <span class="info-button-text">დაგვიკავშირდი</span>
-            </b-button>
-            <img class="info-video" src="assets/tmp_video.png" alt="">
-          </div>
-          <div class="video"></div>
-        </div>
-      </div>
-      <div class="main-page-level-5">
-        <object data="/assets/background_image_2.svg" type="image/svg+xml"/>
-        <div class="d-flex benefits">
-          <span class="benefits-stroke"/>
-          <p class="benefits-title ml-3 mb-0">სარგებელი ყველა მონაწილეს</p>
-        </div>
-        <div class="d-flex request-response-boxes mt-5">
-          <div class="request" :class="{'active-box': activeBox.request}" @click="onBoxCLick('request')">
-            <h1 class="box-title" :class="{'active-box-title': activeBox.request}">მოთხოვნა</h1>
-            <div v-if="activeBox.request">
-              <p class="active-box-list mb-0 mt-5">
-                &bull; ისარგებლე მსხვილი ბიზნესისთვის დამახასიათებელი უპირატესობებით <br/>
-                &bull; შეამცირე ხარჯები <br/>
-                &bull; დაზოგე დრო და ადამიანური რესურსი <br/>
-                &bull; ინდივიდუალურად მორგებული შესყიდვების პროცესი
-              </p>
-              <b-button class="box-contact-button" @click="onConnectClick">
-                <span class="box-button-text">დაგვიკავშირდი</span>
-              </b-button>
-            </div>
-          </div>
-          <div class="response" :class="{'active-box': activeBox.response}" @click="onBoxCLick('response')">
-            <h1 class="box-title" :class="{'active-box-title': activeBox.response}">მიწოდება</h1>
-            <div v-if="activeBox.response">
-              <p class="active-box-list mb-0 mt-5">
-                &bull; იპოვე შენი პროდუქტის მომხმარებლები ნულოვანი დანახარჯით <br/>
-                &bull; გააფორმე მსხვილი გაყიდვები
-              </p>
-              <b-button class="box-contact-button" @click="onConnectClick">
-                <span class="box-button-text">დაგვიკავშირდი</span>
-              </b-button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
   </div>
 </template>
 
 <script>
+import FirstSection from "./FirstSection";
+
 export default {
   name: "HomePage",
+  components: {FirstSection},
   data() {
     return {
       MESSENGER_URL: 'process.env.MESSENGER_URL',
       NUMBER: 'process.env.NUMBER',
       EMAIL: 'process.env.EMAIL',
-      options: [
-        {value: 'min', text: 'მინიმალური'},
-        {value: 'basic', text: 'საბაზისო'},
-        {value: 'improved', text: 'გაუმჯობესებული'},
-      ],
-      checked: 'min',
-      isActive: {
-        life: true,
-        health: false,
-      },
       providers: [
         {
           id: 1,
@@ -312,13 +249,13 @@ export default {
         request: true,
         response: false,
       },
-      showResultsModal: true,
+      showResultsModal: false,
     }
   },
   computed: {
-    getPageHeight() {
-      return this.showResultsModal ? {} : {height: '6932px'}
-    },
+    /*getPageHeight() {
+      return this.showResultsModal ? {} : {height: '100%'}
+    },*/
     getDays() {
       const date = new Date(), y = date.getFullYear(), m = date.getMonth(), currentDay = date.getDate();
       const monthLastDay = new Date(y, m + 1, 0).getDate();
@@ -326,15 +263,6 @@ export default {
     },
   },
   methods: {
-    onSelectButtonClick(type) {
-      if (type === 'life') {
-        this.isActive.life = true
-        this.isActive.health = false
-      } else {
-        this.isActive.life = false
-        this.isActive.health = true
-      }
-    },
     onBoxCLick(type) {
       if (type === 'request') {
         this.activeBox.request = true
@@ -358,7 +286,7 @@ export default {
     onConnectClick() {
 
     },
-    onResultsCLick() {
+    onResultsCLick(insurance, selectedPackage) {
       this.showResultsModal = true;
     },
     hideResultsModal() {
@@ -569,250 +497,6 @@ export default {
 }
 
 .main-page {
-
-  .main-page-level-1 {
-    position: absolute;
-    top: 57px;
-    text-align: center;
-    width: 100%;
-
-    .klaster-logo {
-      width: 172px;
-      height: 85px;
-    }
-
-    .head-content {
-      margin-top: 6rem;
-    }
-
-    .main-title {
-      font-family: Helvetica;
-      font-style: normal;
-      font-weight: bold;
-      font-size: 72px;
-      line-height: 83px;
-      text-align: center;
-      color: #FFFFFF;
-      margin: 0;
-    }
-
-    .main-description {
-      font-family: Helvetica;
-      font-style: normal;
-      font-weight: normal;
-      font-size: 20px;
-      line-height: 160%;
-      text-align: center;
-      color: #FFFFFF;
-      margin: 20px 0 0 0;
-    }
-
-    .insurance {
-      margin-top: 68px;
-
-      .insurance-title {
-        font-family: Helvetica;
-        font-style: normal;
-        font-weight: bold;
-        font-size: 14px;
-        line-height: 16px;
-        text-align: center;
-        text-transform: uppercase;
-        color: #FFFFFF;
-        margin: 0;
-      }
-
-      .insurance-buttons {
-        margin-top: 30px;
-
-        .insurance-option-button {
-          display: flex;
-          flex-direction: row;
-          align-items: flex-start;
-          padding: 11px 36px;
-          background: rgba(30, 22, 71, 0.16);
-          backdrop-filter: blur(4px);
-          border-radius: 50px;
-          border: unset;
-
-          .button-text {
-            position: static;
-            height: 28px;
-            font-family: Helvetica;
-            font-style: normal;
-            font-weight: normal;
-            font-size: 20px;
-            line-height: 137.9%;
-            text-align: center;
-            color: rgba(255, 255, 255, 0.7);
-            flex: none;
-            order: 0;
-            flex-grow: 0;
-          }
-        }
-
-        .insurance-option-button:focus {
-          background: rgba(30, 22, 71, 0.3);
-          box-shadow: unset;
-        }
-
-        .active-rectangle {
-          height: 66px;
-          border: 1px solid #0AE29F;
-          box-sizing: border-box;
-          border-radius: 59px;
-          padding: 0 10px;
-        }
-
-        .active-button {
-          background: rgba(30, 22, 71, 0.3) !important;
-        }
-
-        .active-text {
-          font-weight: bold !important;
-          color: #FFFFFF !important;
-        }
-      }
-    }
-
-    .insurance-package {
-      margin-top: 48px;
-
-      .package-text {
-        font-family: Helvetica;
-        font-style: normal;
-        font-weight: bold;
-        font-size: 14px;
-        line-height: 16px;
-        text-align: center;
-        text-transform: uppercase;
-        color: #FFFFFF;
-        margin: 0;
-      }
-
-      .radio-button-label {
-        font-family: Helvetica;
-        font-style: normal;
-        font-weight: normal;
-        font-size: 20px;
-        line-height: 137.9%;
-        color: #FFFFFF;
-        margin-right: 15px;
-        opacity: 0.7;
-      }
-
-      .active-radio-button {
-        font-weight: bold !important;
-        opacity: unset !important;
-      }
-
-      /deep/ .custom-radio .custom-control-label::before {
-        width: 24px;
-        height: 24px;
-        background: #1E1647;
-        opacity: 0.3;
-        backdrop-filter: blur(4px);
-        border-radius: 50px;
-      }
-
-      /deep/ .custom-radio .custom-control-input:checked ~ .custom-control-label::after {
-        width: 9px;
-        height: 9px;
-        top: 9px;
-        left: -16px;
-        background: #0AE29F;
-        border-radius: 50px;
-      }
-    }
-
-    .results {
-      margin-top: 5rem;
-
-      .results-button {
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-        align-items: center;
-        padding: 18px 40px;
-        position: static;
-        width: 229px;
-        height: 54px;
-        background: #0AE29F;
-        border-radius: 16px;
-        flex: none;
-        order: 0;
-        flex-grow: 0;
-        margin: 0 16px;
-        border: unset;
-      }
-
-      .results-button:focus {
-        background: #0AE29F;
-        box-shadow: unset;
-      }
-
-      .results-text {
-        font-family: Helvetica;
-        font-style: normal;
-        font-weight: bold;
-        font-size: 16px;
-        line-height: 18px;
-        text-transform: uppercase;
-        color: #045C41;
-        flex: none;
-        order: 0;
-        flex-grow: 0;
-        margin: 0 10px;
-      }
-    }
-
-    .contact {
-      margin-top: 5rem;
-
-      .contact-text {
-        position: absolute;
-        left: 116px;
-        width: 137px;
-        font-family: Helvetica;
-        font-style: normal;
-        font-weight: bold;
-        font-size: 14px;
-        line-height: 160%;
-        letter-spacing: 0.12em;
-        color: #FFFFFF;
-        opacity: 0.8;
-      }
-
-      .connect-stroke {
-        position: absolute;
-        width: 755px;
-        left: 283px;
-        border: 0.5px solid #FFFFFF;
-        margin-top: 14px;
-      }
-
-      .contact-icons {
-        position: absolute;
-        left: 1070px;
-
-        .icons {
-          width: 34px;
-          height: 34px;
-          background: rgba(255, 255, 255, 0.2);
-          backdrop-filter: blur(4px);
-          border-radius: 50px;
-
-          .messenger-icon {
-            position: absolute;
-            top: 8px;
-            right: 7px;
-            opacity: 0.8;
-          }
-        }
-      }
-    }
-  }
-
   .main-page-level-2 {
     position: relative;
     margin-top: 8rem;

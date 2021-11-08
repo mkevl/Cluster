@@ -1,6 +1,6 @@
 <template>
   <div class="home-page">
-    <img src="/assets/background_image_1.jpg" alt="">
+    <img src="/assets/background_image_1.jpg" alt="" class="main-image">
     <router-view/>
   </div>
 </template>
@@ -13,8 +13,19 @@ export default {
 
 <style lang="scss" scoped>
 .home-page {
-  position: relative;
-  width: 1440px;
+  overflow: hidden;
   background: #FFFFFF;
+}
+
+.main-image {
+  height: 1024px;
+  width: 100%;
+}
+
+@media all and (max-width: 480px) {
+  .main-image {
+    width: 672px;
+    height: 896px;
+  }
 }
 </style>
