@@ -93,6 +93,25 @@
             </b-button>
           </div>
         </div>
+        <!--<div>
+          <span>კლასტერი რიცხვებში</span>
+          <div class="row">
+            <div class="col-6">
+              <div class="clusters-box"></div>
+              <div class="clusters-text"></div>
+              <div class="clusters-quantity">
+                <span>კომპანია</span>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="clusters-box"></div>
+              <div class="clusters-text"></div>
+              <div class="clusters-quantity">
+                <span>ადამიანი</span>
+              </div>
+            </div>
+          </div>
+        </div>-->
       </div>
     </div>
     <div v-else>
