@@ -73,13 +73,25 @@
           <p class="header-one mb-0">ჯანმრთელობის დაზღვევა</p>
           <p class="header-two mb-0">- გაუმჯობესებული პაკეტი</p>
         </div>
-        <div class="d-flex month-calculation-box">
-          <img src="/assets/tmp_time_calculation.png" alt="">
-          <span class="box-description">
-           Cluster is made to optimize your expenses,
-           whether you are a physical entity or running a business of any size.
-           Paying less in stuff and services
-         </span>
+        <div class="row month-calculation-box">
+          <div class="col-6">
+            <object data="/assets/time_background.svg" type="image/svg+xml"/>
+            <div class="time-calculation-container">
+              <span class="left-text">დარჩა</span>
+              <span class="day-number-text mt-3">{{ getDays }}</span>
+              <span class="day-text">დღე</span>
+            </div>
+          </div>
+          <div class="col-6">
+              <span class="box-description">
+                Cluster is made to optimize your expenses,
+                whether you are a physical entity or running a business of any size.
+                Paying less in stuff and services
+            </span>
+            <b-button class="modal-contact-button" @click="onConnectClick">
+              <span class="modal-button-text">დაგვიკავშირდი</span>
+            </b-button>
+          </div>
         </div>
       </div>
     </div>
@@ -281,13 +293,18 @@ export default {
         request: true,
         response: false,
       },
-      showResultsModal: false,
+      showResultsModal: true,
     }
   },
   computed: {
     getPageHeight() {
       return this.showResultsModal ? {} : {height: '6932px'}
-    }
+    },
+    getDays() {
+      const date = new Date(), y = date.getFullYear(), m = date.getMonth(), currentDay = date.getDate();
+      const monthLastDay = new Date(y, m + 1, 0).getDate();
+      return monthLastDay - currentDay;
+    },
   },
   methods: {
     onSelectButtonClick(type) {
@@ -439,10 +456,58 @@ export default {
 
       }
 
+      .time-calculation-container {
+        position: absolute;
+        width: 53px;
+        height: 134px;
+        left: 170px;
+        bottom: 120px;
+
+        .left-text {
+          position: absolute;
+          width: 51px;
+          height: 18px;
+          font-family: Helvetica;
+          font-style: normal;
+          font-weight: normal;
+          font-size: 16px;
+          line-height: 18px;
+          text-align: center;
+          color: #D7C9FE;
+        }
+
+        .day-number-text {
+          position: absolute;
+          width: 53px;
+          height: 19px;
+          font-family: Montserrat;
+          font-style: normal;
+          font-weight: 800;
+          font-size: 60px;
+          line-height: 160%;
+          text-align: center;
+          color: #0AE29F;
+        }
+
+        .day-text {
+          position: absolute;
+          width: 53px;
+          top: 88px;
+          font-family: Montserrat;
+          font-style: normal;
+          font-weight: 800;
+          font-size: 24px;
+          line-height: 160%;
+          text-align: center;
+          color: #0AE29F;
+        }
+      }
+
       .box-description {
         position: absolute;
         width: 311px;
         height: 104px;
+        top: 47px;
         font-family: Montserrat;
         font-style: normal;
         font-weight: 500;
@@ -450,6 +515,35 @@ export default {
         line-height: 160%;
         color: #D7C9FE;
         margin-left: 10px;
+      }
+    }
+
+    .modal-contact-button {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      padding: 0;
+      position: absolute;
+      width: 221px;
+      height: 54px;
+      top: 272px;
+      background: #0AE29F;
+      filter: drop-shadow(0px 20px 40px rgba(10, 226, 159, 0.2));
+      border-radius: 16px;
+
+      .modal-button-text {
+        font-family: Helvetica;
+        font-style: normal;
+        font-weight: bold;
+        font-size: 16px;
+        line-height: 18px;
+        text-transform: uppercase;
+        color: #095A66;
+        flex: none;
+        order: 0;
+        flex-grow: 0;
+        margin: 0px 10px;
       }
     }
   }
