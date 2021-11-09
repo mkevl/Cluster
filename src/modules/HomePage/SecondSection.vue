@@ -2,49 +2,60 @@
   <div class="main-page-second-section">
     <span class="cluster-stroke"/>
     <p class="cluster-title">როგორ მუშაობს კლასტერი?</p>
-    <div class="row cluster-list">
-      <div class="col-4 wrap-lists">
-        <div class="flip-card">
-          <div class="flip-card-inner">
-            <div class="flip-card-front">
-              <object class="cluster-front-card" data="assets/list_backgraund_1.svg" type="image/svg+xml"/>
-              <span class="list-numbers">1</span>
-              <p class="list-texts">მოგვაწოდე ინფორმაცია შენი საჭიროების შესახებ</p>
-            </div>
-            <div class="flip-card-back">
-              <!--        <span class="list-numbers">1</span>-->
-              <!--        <p class="list-texts">მოგვაწოდე ინფორმაცია შენი საჭიროების შესახებ</p>-->
-            </div>
+    <div class="d-flex justify-content-between cluster-list">
+      <div class="flip-card">
+        <div class="flip-card-inner">
+          <div class="flip-card-front">
+            <object class="cluster-card" data="assets/list_backgraund_1.svg" type="image/svg+xml"/>
+            <span class="list-numbers">1</span>
+            <p class="list-texts">მოგვაწოდე ინფორმაცია <br/><b>შენი საჭიროების შესახებ</b></p>
+          </div>
+          <div class="flip-card-back">
+            <span class="list-back-numbers">1</span>
+            <p class="list-back-texts">შენთვის მოსახერხებელი გზით მოგვაწოდე ინფორმაცია სასურველი პროდუქტის და საჭირო
+              ოდენობის შესახებ</p>
+            <contact-button class="contact-button"/>
           </div>
         </div>
       </div>
-      <div class="col-4 wrap-lists">
-        <div class="flip-card">
-          <div class="flip-card-inner">
-            <div class="flip-card-front">
-              <object class="cluster-front-card" data="assets/list_backgraund_2.svg" type="image/svg+xml"/>
-              <!--        <span class="list-numbers">2</span>-->
-              <!--        <p class="list-texts">მოხდება მსგავსი საჭიროებების კონსოლიდაცია</p>-->
-            </div>
-            <div class="flip-card-back">
-              <!--        <span class="list-numbers">1</span>-->
-              <!--        <p class="list-texts">მოგვაწოდე ინფორმაცია შენი საჭიროების შესახებ</p>-->
-            </div>
+      <div class="flip-card">
+        <div class="flip-card-inner">
+          <div class="flip-card-front">
+            <object class="cluster-card" data="assets/list_backgraund_2.svg" type="image/svg+xml"/>
+            <span class="list-numbers">2</span>
+            <p class="list-texts">მოხდება მსგავსი საჭიროებების <br/> <b>კონსოლიდაცია</b></p>
+          </div>
+          <div class="flip-card-back">
+            <span class="list-back-numbers">2</span>
+            <p class="list-back-texts">ჩვენ დავამუშავებთ მოწოდებულ ინფორმაციას, თქვენს მოთხოვნას გავაერთიანებთ სხვა
+              ანალოგიურთან და მოვიძიებთ შესაბამისი პროდუქტის ან სერვისის </p>
           </div>
         </div>
       </div>
-      <div class="col-4 wrap-lists">
-        <object class="cluster-front-card" data="assets/list_backgraund_3.svg" type="image/svg+xml"/>
-        <!--        <span class="list-numbers">3</span>-->
-        <!--        <p class="list-texts">მიიღე პროდუქტი ან სერვისი საუკეთესო ფასად</p>-->
+      <div class="flip-card">
+        <div class="flip-card-inner">
+          <div class="flip-card-front">
+            <object class="cluster-card" data="assets/list_backgraund_3.svg" type="image/svg+xml"/>
+            <span class="list-numbers">3</span>
+            <p class="list-texts">მიიღე პროდუქტი ან სერვისი <br/><b>საუკეთესო ფასად</b></p>
+          </div>
+          <div class="flip-card-back">
+            <span class="list-back-numbers">3</span>
+            <p class="list-back-texts">კონსოლიდაციის ხარჯზე, მიმწოდებლები კლასტერის მონაწილე კომპანიებს შესთავაზებენ
+              მაქსიმალურად დაბალ ფასს</p>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import ContactButton from "./ContactButton";
+
 export default {
-  name: "SecondSection"
+  name: "SecondSection",
+  components: {ContactButton}
 }
 </script>
 
@@ -74,6 +85,7 @@ export default {
   font-size: 24px;
   line-height: 176.4%;
   color: #1E1647;
+  width: 494px;
   margin: -28px 0 0 13px
 }
 
@@ -87,6 +99,8 @@ export default {
   .cluster-title {
     height: 37px;
     font-size: 20px;
+    width: 479px;
+    margin-top: -24px;
   }
 }
 
@@ -94,25 +108,21 @@ export default {
   margin-top: 40px;
 }
 
-.wrap-lists {
-  position: relative;
-}
-
-.cluster-front-card {
-  width: 100%;
-  height: 100%;
-}
-
 .flip-card {
-  width: 100%;
-  height: 100%;
+  width: 376px;
+  height: 564px;
+  cursor: pointer;
+}
+
+.flip-card:hover .flip-card-inner {
+  transform: rotateY(-180deg);
 }
 
 .flip-card-inner {
   position: relative;
   width: 100%;
   height: 100%;
-  transition: transform 0.6s;
+  transition: transform 0.75s;
   transform-style: preserve-3d;
 }
 
@@ -130,15 +140,13 @@ export default {
   transform: rotateY(-180deg);
 }
 
-.flip-card:hover .flip-card-inner {
-  transform: rotateY(-180deg);
-}
-
 .list-numbers {
   position: absolute;
+  width: 17px;
+  height: 49px;
   left: 40px;
-  top: 109px;
-  font-family: Montserrat;
+  top: 99px;
+  font-family: Montserrat, sans-serif;
   font-style: normal;
   font-weight: 900;
   font-size: 40px;
@@ -147,16 +155,54 @@ export default {
   color: #FFFFFF;
 }
 
+.list-back-numbers {
+  position: absolute;
+  width: 17px;
+  height: 49px;
+  left: 40px;
+  top: 99px;
+  font-family: Montserrat, sans-serif;
+  font-style: normal;
+  font-weight: 900;
+  font-size: 40px;
+  line-height: 49px;
+  text-transform: uppercase;
+  color: #ADB5BD;
+}
+
 .list-texts {
   position: absolute;
   left: 40px;
-  top: 200px;
-  font-family: Helvetica;
+  top: 161px;
+  margin: 40px 0 0 0;
+  font-family: Helvetica, sans-serif;
   font-style: normal;
   font-weight: normal;
   font-size: 32px;
   line-height: 180%;
   color: #FFFFFF;
-  margin: 0;
+  width: 290px;
+  height: 158px;
+}
+
+.list-back-texts {
+  position: absolute;
+  width: 305px;
+  height: 187px;
+  left: 40px;
+  top: 161px;
+  margin: 40px 0 0 0;
+  font-family: Helvetica, sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 20px;
+  line-height: 180%;
+  color: #495057;
+}
+
+.contact-button {
+  position: absolute;
+  left: 30px;
+  top: 431px;
 }
 </style>
