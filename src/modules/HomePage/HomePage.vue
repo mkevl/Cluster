@@ -61,37 +61,8 @@
     <div>
       <second-section/>
       <third-section/>
-      <!--<div class="main-page-level-4">
-        <div class="d-flex more-information">
-          <div class="about">
-            <div class="d-flex info">
-              <span class="info-stroke"/>
-              <p class="info-title ml-3 mb-0">მეტი ინფორმაცია</p>
-            </div>
-            <p class="info-description">
-              კლასტერის კორპორაციული ხედვაა, გაააზრებინოს მსოფლიოს მასშტაბით, ადამიანებსა და ბიზნესებს მათი ერთიანობის
-              სარფიანობა და გონივრულობა.
-            </p>
-            <div class="d-flex more-info-icons">
-              <a class="info-icons" :href="`mailto:${EMAIL}`">
-                <img src="/assets/icons/email_green_icon.svg" alt="">
-              </a>
-              <a class="info-icons ml-5" :href="`https://wa.me/${NUMBER}`" target='_blank'>
-                <img src="/assets/icons/whatsapp_green_icon.svg" alt="">
-              </a>
-              <a class="info-icons ml-5" :href="`https://www.m.me/${MESSENGER_URL}`" target='_blank'>
-                <img class="info-messenger-icon" src="/assets/icons/messenger_green_icon.svg" alt="">
-              </a>
-            </div>
-            <b-button class="info-contact-button" @click="onConnectClick">
-              <span class="info-button-text">დაგვიკავშირდი</span>
-            </b-button>
-            <img class="info-video" src="assets/tmp_video.png" alt="">
-          </div>
-          <div class="video"></div>
-        </div>
-      </div>
-      <div class="main-page-level-5">
+      <fourth-section/>
+      <!--<div class="main-page-level-5">
         <object data="/assets/background_image_2.svg" type="image/svg+xml"/>
         <div class="d-flex benefits">
           <span class="benefits-stroke"/>
@@ -134,10 +105,11 @@
 import FirstSection from "./FirstSection";
 import SecondSection from "./SecondSection";
 import ThirdSection from "./ThirdSection";
+import FourthSection from "./FourthSection";
 
 export default {
   name: "HomePage",
-  components: {ThirdSection, SecondSection, FirstSection},
+  components: {FourthSection, ThirdSection, SecondSection, FirstSection},
   data() {
     return {
       MESSENGER_URL: 'process.env.MESSENGER_URL',
@@ -169,9 +141,6 @@ export default {
         this.activeBox.request = false
         this.activeBox.response = true
       }
-    },
-    onConnectClick() {
-
     },
     onResultsCLick(insurance, selectedPackage) {
       this.showResultsModal = true;
@@ -381,115 +350,6 @@ export default {
 }
 
 .main-page {
-  .main-page-level-4 {
-    position: relative;
-    height: 1024px;
-    background: #F8F9FA;
-
-    .more-information {
-      position: absolute;
-      width: 1347px;
-      height: 631px;
-      left: 93px;
-      top: 196.5px;
-      background: linear-gradient(139.74deg, #2C1D7A 5.01%, #1E1647 77.08%);
-      border-radius: 200px 0 0 40px;
-
-      .info {
-        position: absolute;
-        left: 108px;
-        top: 155px;
-
-        .info-stroke {
-          width: 2px;
-          height: 17px;
-          background: #FFFFFF;
-        }
-
-        .info-title {
-          font-family: Helvetica;
-          font-style: normal;
-          font-weight: bold;
-          font-size: 24px;
-          line-height: 176.4%;
-          color: #FFFFFF;
-          margin-top: -13px;
-        }
-      }
-
-      .info-description {
-        position: absolute;
-        width: 448px;
-        height: 159px;
-        left: 108px;
-        top: 213px;
-        font-family: Helvetica;
-        font-style: normal;
-        font-weight: normal;
-        font-size: 18px;
-        line-height: 170%;
-        color: #FFFFFF;
-      }
-
-      .more-info-icons {
-        position: absolute;
-        left: 108px;
-        top: 402px;
-
-        .info-icons {
-          width: 34px;
-          height: 34px;
-          background: rgba(10, 226, 159, 0.2);
-          backdrop-filter: blur(4px);
-          border-radius: 50px;
-
-          .info-messenger-icon {
-            position: absolute;
-            top: 8px;
-            right: 7px;
-            opacity: 0.8;
-          }
-        }
-      }
-
-      .info-contact-button {
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-        align-items: center;
-        padding: 0;
-        position: absolute;
-        width: 221px;
-        height: 54px;
-        left: 108px;
-        top: 490px;
-        background: #0AE29F;
-        filter: drop-shadow(0 20px 40px rgba(10, 226, 159, 0.2));
-        border-radius: 16px;
-
-        .info-button-text {
-          font-family: Helvetica;
-          font-style: normal;
-          font-weight: bold;
-          font-size: 16px;
-          line-height: 18px;
-          text-transform: uppercase;
-          color: #095A66;
-          flex: none;
-          order: 0;
-          flex-grow: 0;
-          margin: 0 10px;
-        }
-      }
-
-      .info-video {
-        position: absolute;
-        top: 155px;
-        right: 0;
-      }
-    }
-  }
-
   .main-page-level-5 {
     position: relative;
     height: 1024px;
