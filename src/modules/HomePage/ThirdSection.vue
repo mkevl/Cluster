@@ -2,7 +2,7 @@
   <div class="main-page-third-section">
     <span class="provider-stroke"/>
     <p class="provider-title">პარტნიორი სადაზღვეო კომპანიები</p>
-    <div>
+    <div :class="getProviderClass">
       <div class="provider-container">
         <ul class="providers-list">
           <li v-for="(item, index) in providers" :key="index" class="providers-list-item"
@@ -23,7 +23,7 @@
           </div>
           <div v-if="activeProvider.link" class="d-flex">
             <object class="contact-icon" data="/assets/providers/browser_icon.svg" type="image/svg+xml"/>
-            <a class="provider-info-contact" :href="activeProvider.link">{{ activeProvider.link }}</a>
+            <a class="provider-info-contact" :href="activeProvider.link" target="_blank">{{ activeProvider.link }}</a>
           </div>
         </div>
       </div>
@@ -89,7 +89,13 @@ export default {
         },
       ],
       activeProvider: {},
+      windowWidth: window.innerWidth,
     }
+  },
+  computed: {
+    getProviderClass() {
+      return this.windowWidth <= 480 ? '' : 'd-flex justify-content-between'
+    },
   },
   methods: {
     setActiveProvider(item) {
@@ -106,7 +112,10 @@ export default {
   },
   mounted() {
     this.activeProvider = {...this.providers[0]}
-  }
+    window.addEventListener('resize', () => {
+      this.windowWidth = window.innerWidth
+    })
+  },
 }
 </script>
 

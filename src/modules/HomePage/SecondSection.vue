@@ -69,13 +69,13 @@ export default {
   },
   computed: {
     getFirstCard() {
-      return this.windowWidth < 480 ? 'assets/list_backgraund_md_1.svg' : 'assets/list_backgraund_1.svg'
+      return this.windowWidth <= 480 ? 'assets/list_backgraund_md_1.svg' : 'assets/list_backgraund_1.svg'
     },
     getSecondCard() {
-      return this.windowWidth < 480 ? 'assets/list_backgraund_md_2.svg' : 'assets/list_backgraund_2.svg'
+      return this.windowWidth <= 480 ? 'assets/list_backgraund_md_2.svg' : 'assets/list_backgraund_2.svg'
     },
     getThirdCard() {
-      return this.windowWidth < 480 ? 'assets/list_backgraund_md_3.svg' : 'assets/list_backgraund_3.svg'
+      return this.windowWidth <= 480 ? 'assets/list_backgraund_md_3.svg' : 'assets/list_backgraund_3.svg'
     },
   },
   mounted() {
