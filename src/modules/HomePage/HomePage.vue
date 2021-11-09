@@ -61,7 +61,7 @@
     <div>
       <second-section/>
       <third-section/>
-      <fourth-section/>
+      <fourth-section :phone-number="NUMBER" :email="EMAIL"/>
       <fifth-section/>
     </div>
   </div>
