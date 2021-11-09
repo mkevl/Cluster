@@ -29,25 +29,23 @@
       </span>
       <contact-button class="modal-contact-button"/>
     </div>
-    <!--        <div>
-              <span>კლასტერი რიცხვებში</span>
-              <div class="row">
-                <div class="col-6">
-                  <div class="clusters-box"></div>
-                  <div class="clusters-text"></div>
-                  <div class="clusters-quantity">
-                    <span>კომპანია</span>
-                  </div>
-                </div>
-                <div class="col-6">
-                  <div class="clusters-box"></div>
-                  <div class="clusters-text"></div>
-                  <div class="clusters-quantity">
-                    <span>ადამიანი</span>
-                  </div>
-                </div>
-              </div>
-            </div>-->
+    <p class="cluster-in-number">კლასტერი რიცხვებში</p>
+    <ul class="clusters">
+      <li class="clusters-box">
+        <p class="clusters-text">კომპანიების რაოდენობა კლასტერში</p>
+        <div class="d-flex align-items-center clusters-quantity">
+          <p class="mr-3">{{ data.companyNum }}</p>
+          <p class="clusters-quantity-text">კომპანია</p>
+        </div>
+      </li>
+      <li class="clusters-box">
+        <p class="clusters-text">ადამიანების რაოდენობა კლასტერში</p>
+        <div class="d-flex align-items-center clusters-quantity">
+          <p class="mr-3">{{ data.peopleNum }}</p>
+          <p class="clusters-quantity-text">ადამიანი</p>
+        </div>
+      </li>
+    </ul>
   </div>
 </template>
 
@@ -62,6 +60,10 @@ export default {
   data() {
     return {
       windowWidth: window.innerWidth,
+      data: {
+        peopleNum: 6254,
+        companyNum: 123,
+      }
     }
   },
   computed: {
@@ -88,6 +90,18 @@ export default {
 <style lang="scss" scoped>
 @import url('https://fonts.googleapis.com/css2?family=Montserrat');
 @import url('https://fonts.googleapis.com/css2?family=Helvetica');
+
+/deep/ ul {
+  display: flex;
+  align-items: stretch;
+  margin: 0;
+  padding: 0;
+
+  > li {
+    display: block;
+    list-style-type: none;
+  }
+}
 
 .modal-first-layer {
   position: absolute;
@@ -332,6 +346,104 @@ export default {
 
   .modal-contact-button {
     margin-top: 165px;
+  }
+}
+
+.cluster-in-number {
+  position: absolute;
+  width: 214px;
+  height: 26px;
+  left: 174.15px;
+  top: 650px;
+  font-family: Helvetica, sans-serif;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 14px;
+  line-height: 16px;
+  color: #D7CAFD;
+}
+
+@media all and (max-width: 480px) {
+  .cluster-in-number {
+    display: none;
+  }
+}
+
+.clusters {
+  position: absolute;
+  left: 138px;
+  top: 684px;
+  width: 100%;
+}
+
+.clusters-box {
+  width: 380px;
+  height: 240px;
+  background: #231A53;
+  opacity: 0.8;
+  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.04);
+  border-radius: 50px;
+  margin-right: 37.96px;
+}
+
+@media all and (max-width: 480px) {
+  .clusters {
+    left: 20px;
+    top: 968px;
+    display: block !important;
+  }
+
+  .clusters-box {
+    width: 90%;
+    height: 207px;
+    margin-right: unset;
+    margin-bottom: 57px;
+  }
+}
+
+.clusters-text {
+  position: absolute;
+  width: 303px;
+  height: 26px;
+  font-family: Helvetica, sans-serif;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 14px;
+  line-height: 16px;
+  color: #D7CAFD;
+  margin: 42px 0 0 36.15px;
+}
+
+.clusters-quantity {
+  position: absolute;
+  width: 289.83px;
+  height: 65px;
+  font-family: Helvetica, sans-serif;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 40px;
+  line-height: 46px;
+  color: #EAE2FF;
+  margin: 120px 0 0 36.44px;
+}
+
+.clusters-quantity-text {
+  line-height: 36.8px;
+  font-size: 32px;
+  font-weight: 400;
+}
+
+@media all and (max-width: 480px) {
+  .clusters-text {
+    margin: 36px 0 0 20px;
+    width: 299px;
+    height: 26px;
+  }
+
+  .clusters-quantity {
+    width: 275.34px;
+    height: 65px;
+    margin: 114px 0 0 20.42px;
   }
 }
 </style>

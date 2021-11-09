@@ -397,8 +397,8 @@ export default {
 }
 
 .results-button:focus {
-  background: #0AE29F;
-  box-shadow: unset;
+  background: #0AE29F !important;
+  box-shadow: unset !important;
 }
 
 @media all and (max-width: 480px) {
