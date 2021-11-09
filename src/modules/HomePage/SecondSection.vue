@@ -106,7 +106,7 @@ export default {
 
 .main-page-second-section {
   position: relative;
-  margin: 140px 116px 0 116px;
+  padding: 140px 116px 0 116px;
   height: 1024px;
 }
 
@@ -127,15 +127,14 @@ export default {
   line-height: 176.4%;
   color: #1E1647;
   width: 494px;
-  margin: -28px 0 0 13px
+  margin: -28px 0 0 13px;
 }
 
 @media all and (max-width: 480px) {
   .main-page-second-section {
-    margin-top: 110px;
-    margin-left: 24px;
-    margin-right: 0;
+    padding: 110px 0 0 24px;
     height: 593px;
+    background: #F8F9FA;
   }
 
   .cluster-title {
