@@ -4,13 +4,15 @@
     <p class="provider-title">პარტნიორი სადაზღვეო კომპანიები</p>
     <div :class="getProviderClass">
       <div class="provider-container">
-        <ul class="providers-list">
+        <img v-if="isScrolled" class="provider-top-scroll" src="/assets/scroll_vector.svg" alt=""
+             @click="scrollUp()"/>
+        <ul class="providers-list" ref="list-scroll" :style="getProviderScrollStyle">
           <li v-for="(item, index) in providers" :key="index" class="providers-list-item"
               :class="{'active-provider-item': item.isActive}" @click="setActiveProvider(item)">
             <img class="provider-image" :src="item.img_url" alt=""/>
           </li>
         </ul>
-        <img class="provider-scroll" src="/assets/scroll_vector.svg" alt=""/>
+        <img class="provider-scroll" src="/assets/scroll_vector.svg" alt="" @click="scrollDown()"/>
       </div>
       <div class="provider-info">
         <img :src="activeProvider.logo_url" alt=""/>
@@ -90,11 +92,15 @@ export default {
       ],
       activeProvider: {},
       windowWidth: window.innerWidth,
+      isScrolled: false,
     }
   },
   computed: {
     getProviderClass() {
       return this.windowWidth <= 480 ? '' : 'd-flex justify-content-between'
+    },
+    getProviderScrollStyle() {
+      return this.windowWidth <= 480 || this.isScrolled ? {} : {paddingTop: '33px'}
     },
   },
   methods: {
@@ -109,6 +115,13 @@ export default {
         return list
       })
     },
+    scrollDown() {
+      this.$refs["list-scroll"].scrollTop += 150
+      this.isScrolled = !!this.$refs["list-scroll"].scrollTop
+    },
+    scrollUp() {
+      this.$refs["list-scroll"].scrollTop -= 150
+    }
   },
   mounted() {
     this.activeProvider = {...this.providers[0]}
@@ -156,7 +169,7 @@ export default {
 @media all and (max-width: 480px) {
   .main-page-third-section {
     padding: 72px 0 0 24px;
-    height: 1024px;
+    height: 800px;
   }
 
   .provider-title {
@@ -173,15 +186,19 @@ export default {
   padding: 0 !important;
 }
 
+.provider-top-scroll {
+  margin-left: 49px;
+  margin-top: 33px;
+  cursor: pointer;
+  padding: 0 !important;
+  transform: rotateX(180deg);
+}
+
 .providers-list {
   padding: 0 0 0 16px;
   margin: 0;
   overflow: auto;
   width: 100%;
-
-  :first-child {
-    padding-top: 33px;
-  }
 }
 
 .providers-list-item {
@@ -201,6 +218,10 @@ export default {
 
 @media all and (max-width: 480px) {
   .provider-scroll {
+    display: none;
+  }
+
+  .provider-top-scroll {
     display: none;
   }
 
