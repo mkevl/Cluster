@@ -106,7 +106,7 @@ export default {
 .modal-first-layer {
   position: absolute;
   width: 100%;
-  height: 100%;
+  height: 1024px;
   background: #1E1647;
   opacity: 0.9;
   top: 0;
@@ -115,7 +115,7 @@ export default {
 
 .modal-second-layer {
   position: absolute;
-  width: 92%;
+  width: 90%;
   height: 926px;
   left: 85px;
   top: 96px;
@@ -373,7 +373,6 @@ export default {
   position: absolute;
   left: 138px;
   top: 684px;
-  width: 100%;
 }
 
 .clusters-box {
@@ -391,6 +390,7 @@ export default {
     left: 20px;
     top: 968px;
     display: block !important;
+    width: 100%;
   }
 
   .clusters-box {
@@ -445,5 +445,19 @@ export default {
     height: 65px;
     margin: 114px 0 0 20.42px;
   }
+}
+
+.proposed-text {
+  position: absolute;
+  width: 303px;
+  height: 25.43px;
+  left: 981px;
+  top: 195.1px;
+  font-family: Helvetica, sans-serif;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 14px;
+  line-height: 16px;
+  color: #D7CAFD;
 }
 </style>
