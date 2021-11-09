@@ -10,9 +10,7 @@ export default {
   props: {
     textStyle: {
       type: Object,
-      default: Object => {
-
-      },
+      default: Object => {},
     },
   },
   methods: {
