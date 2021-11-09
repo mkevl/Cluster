@@ -1,0 +1,2 @@
+export const SHOW_RESULTS_MODAL = 'results/SHOW_RESULTS_MODAL'
+export const HIDE_RESULTS_MODAL = 'results/HIDE_RESULTS_MODAL'

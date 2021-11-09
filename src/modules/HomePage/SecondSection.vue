@@ -15,7 +15,7 @@
               <span class="list-back-numbers">1</span>
               <p class="list-back-texts">შენთვის მოსახერხებელი გზით მოგვაწოდე ინფორმაცია სასურველი პროდუქტის და საჭირო
                 ოდენობის შესახებ</p>
-              <contact-button class="contact-button"/>
+              <contact-button class="contact-button" :text-style="textStyle"/>
             </div>
           </div>
         </div>
@@ -65,6 +65,7 @@ export default {
   data() {
     return {
       windowWidth: window.innerWidth,
+      textStyle: {color: '#045C41'}
     }
   },
   computed: {

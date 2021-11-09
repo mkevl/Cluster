@@ -54,7 +54,7 @@ export default {
   font-size: 16px;
   line-height: 18px;
   text-transform: uppercase;
-  color: #045C41;
+  color: #095A66;
   margin: 0 10px;
 }
 </style>

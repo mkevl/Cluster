@@ -15,7 +15,7 @@
             <li>დაზოგე დრო და ადამიანური რესურსი</li>
             <li>ინდივიდუალურად მორგებული შესყიდვების პროცესი</li>
           </ul>
-          <contact-button v-if="!isSmallScreen" class="box-contact-button" :text-style="textStyle"/>
+          <contact-button v-if="!isSmallScreen" class="box-contact-button"/>
         </div>
       </div>
       <div class="response" :class="{'active-box': isActiveResponse}" @click="onBoxCLick('response')">
@@ -25,10 +25,10 @@
             <li> იპოვე შენი პროდუქტის მომხმარებლები ნულოვანი დანახარჯით</li>
             <li>გააფორმე მსხვილი გაყიდვები</li>
           </ul>
-          <contact-button v-if="!isSmallScreen" class="box-contact-button" :text-style="textStyle"/>
+          <contact-button v-if="!isSmallScreen" class="box-contact-button"/>
         </div>
       </div>
-      <contact-button v-if="isSmallScreen" class="box-contact-button-sm" :text-style="textStyle"/>
+      <contact-button v-if="isSmallScreen" class="box-contact-button-sm"/>
     </div>
   </div>
 </template>
@@ -46,7 +46,6 @@ export default {
         response: false,
       },
       windowWidth: window.innerWidth,
-      textStyle: {color: '#095A66'},
     }
   },
   computed: {
@@ -218,7 +217,7 @@ export default {
   }
 
   .active-box {
-    width: 338px;
+    width: 100%;
   }
 
   .active-box-title {

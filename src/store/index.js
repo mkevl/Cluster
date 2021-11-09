@@ -1,5 +1,6 @@
 import Vuex from "vuex";
 import Vue from 'vue';
+import results from './results/index'
 
 Vue.use(Vuex);
 
@@ -9,12 +10,10 @@ export default new Vuex.Store({
     menuHidden: false,
     _menuItems: {},
   },
-  getters: {
-  },
-  actions: {
-  },
-  mutations: {
-  },
+  getters: {},
+  actions: {},
+  mutations: {},
   modules: {
+    results,
   }
 });

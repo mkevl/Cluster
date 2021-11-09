@@ -1,0 +1,337 @@
+<template>
+  <div class="results-modal">
+    <div class="modal-first-layer"/>
+    <div class="modal-second-layer"/>
+    <div class="modal-third-layer"/>
+    <div v-if="isSmallScreen" class="home-icon" @click="hideResultsModal">
+      <img src="assets/icons/home_icon.svg" alt="">
+    </div>
+    <div v-else class="d-flex close-modal" @click="hideResultsModal">
+      <img src="/assets/close_button.png" alt="">
+      <span class="ml-2">დახურვა</span>
+    </div>
+    <p class="header-one mb-0">ჯანმრთელობის დაზღვევა</p>
+    <p class="header-two mb-0">- გაუმჯობესებული პაკეტი</p>
+    <div class="month-calculation-box"/>
+    <div class="day-box">
+      <object class="time-background" data="/assets/time_background.svg" type="image/svg+xml"/>
+      <div class="time-calculation-container">
+        <span class="left-text">დარჩა</span>
+        <span class="day-number-text mt-3">{{ getDays }}</span>
+        <span class="day-text">დღე</span>
+      </div>
+    </div>
+    <div class="day-box-section-two">
+      <span class="box-description">
+        Cluster is made to optimize your expenses,
+        whether you are a physical entity or running a business of any size.
+        Paying less in stuff and services
+      </span>
+      <contact-button class="modal-contact-button"/>
+    </div>
+    <!--        <div>
+              <span>კლასტერი რიცხვებში</span>
+              <div class="row">
+                <div class="col-6">
+                  <div class="clusters-box"></div>
+                  <div class="clusters-text"></div>
+                  <div class="clusters-quantity">
+                    <span>კომპანია</span>
+                  </div>
+                </div>
+                <div class="col-6">
+                  <div class="clusters-box"></div>
+                  <div class="clusters-text"></div>
+                  <div class="clusters-quantity">
+                    <span>ადამიანი</span>
+                  </div>
+                </div>
+              </div>
+            </div>-->
+  </div>
+</template>
+
+<script>
+import {createNamespacedHelpers} from "vuex";
+import ContactButton from "./ContactButton";
+
+const {mapActions} = createNamespacedHelpers('results');
+export default {
+  name: "ResultsModal",
+  components: {ContactButton},
+  data() {
+    return {
+      windowWidth: window.innerWidth,
+    }
+  },
+  computed: {
+    getDays() {
+      const date = new Date(), y = date.getFullYear(), m = date.getMonth(), currentDay = date.getDate();
+      const monthLastDay = new Date(y, m + 1, 0).getDate();
+      return monthLastDay - currentDay;
+    },
+    isSmallScreen() {
+      return this.windowWidth <= 480
+    },
+  },
+  methods: {
+    ...mapActions(['hideResultsModal']),
+  },
+  mounted() {
+    window.addEventListener('resize', () => {
+      this.windowWidth = window.innerWidth
+    })
+  },
+}
+</script>
+
+<style lang="scss" scoped>
+@import url('https://fonts.googleapis.com/css2?family=Montserrat');
+@import url('https://fonts.googleapis.com/css2?family=Helvetica');
+
+.modal-first-layer {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: #1E1647;
+  opacity: 0.9;
+  top: 0;
+  backdrop-filter: blur(4px);
+}
+
+.modal-second-layer {
+  position: absolute;
+  width: 92%;
+  height: 926px;
+  left: 85px;
+  top: 96px;
+  background: #1E1647;
+  backdrop-filter: blur(4px);
+  border-radius: 100px 100px 0 0;
+}
+
+.modal-third-layer {
+  position: absolute;
+  width: 90%;
+  height: 927px;
+  left: 85px;
+  top: 96px;
+  background: linear-gradient(107.26deg, #2B198A -0.48%, rgba(35, 26, 83, 0) 35.91%);
+  opacity: 0.8;
+  border-radius: 100px 100px 0 0;
+}
+
+@media all and (max-width: 480px) {
+  .modal-first-layer {
+    display: none;
+  }
+
+  .modal-second-layer {
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 2171px;
+    border-radius: unset;
+    overflow-y: hidden;
+  }
+
+  .modal-third-layer {
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 2171px;
+    border-radius: unset;
+    overflow-y: hidden;
+  }
+}
+
+.home-icon {
+  position: absolute;
+  top: 26px;
+  left: 40px;
+  cursor: pointer;
+  width: 40px;
+  height: 40px;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(4px);
+  border-radius: 50px;
+}
+
+.close-modal {
+  cursor: pointer;
+  position: absolute;
+  width: 72px;
+  height: 18px;
+  right: 124px;
+  top: 53px;
+  font-family: Helvetica, sans-serif;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 16px;
+  line-height: 18px;
+  color: #FFFFFF;
+}
+
+.header-one {
+  position: absolute;
+  height: 26px;
+  left: 164px;
+  top: 158px;
+  font-family: Helvetica, sans-serif;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 24px;
+  line-height: 28px;
+  color: #D7CAFD;
+}
+
+.header-two {
+  position: absolute;
+  height: 26px;
+  left: 475px;
+  top: 163px;
+  font-family: Helvetica, sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 21px;
+  color: #D7CAFD;
+}
+
+@media all and (max-width: 480px) {
+  .header-one {
+    left: 39px;
+    top: 91px;
+  }
+
+  .header-two {
+    left: 42px;
+    top: 133px;
+  }
+}
+
+.month-calculation-box {
+  position: absolute;
+  width: 791px;
+  height: 372px;
+  left: 138px;
+  top: 220px;
+  background: #231A53;
+  opacity: 0.8;
+  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.04);
+  border-radius: 50px;
+}
+
+@media all and (max-width: 480px) {
+  .month-calculation-box {
+    width: 90%;
+    height: 683px;
+    left: 20px;
+    top: 211px;
+  }
+}
+
+.day-box {
+  position: absolute;
+  top: 224px;
+  left: 157px;
+}
+
+.time-calculation-container {
+  position: absolute;
+  width: 53px;
+  height: 134px;
+  left: 156px;
+  top: 122px;
+}
+
+.left-text {
+  position: absolute;
+  width: 51px;
+  height: 18px;
+  font-family: Helvetica, sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 18px;
+  text-align: center;
+  color: #D7C9FE;
+}
+
+.day-number-text {
+  position: absolute;
+  width: 53px;
+  height: 19px;
+  font-family: Montserrat, sans-serif;
+  font-style: normal;
+  font-weight: 800;
+  font-size: 60px;
+  line-height: 160%;
+  text-align: center;
+  color: #0AE29F;
+}
+
+.day-text {
+  position: absolute;
+  width: 53px;
+  top: 88px;
+  font-family: Helvetica, sans-serif;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 38.4px;
+  text-align: center;
+  color: #0AE29F;
+}
+
+@media all and (max-width: 480px) {
+  .day-box {
+    left: 25px;
+    top: 236px;
+  }
+
+  .time-background {
+    width: 97%;
+    height: 364.89px;
+  }
+
+  .time-calculation-container {
+    top: 119px;
+    left: 150px;
+  }
+}
+
+.day-box-section-two {
+  position: absolute;
+  top: 271px;
+  left: 577px;
+}
+
+.box-description {
+  position: absolute;
+  width: 311px;
+  height: 104px;
+  font-family: Montserrat, sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 160%;
+  color: #D7C9FE;
+}
+
+.modal-contact-button {
+  position: absolute;
+  margin: 225px 0 0 0;
+}
+
+@media all and (max-width: 480px) {
+  .day-box-section-two {
+    top: 610px;
+    left: 42px;
+  }
+
+  .modal-contact-button {
+    margin-top: 165px;
+  }
+}
+</style>

@@ -21,7 +21,7 @@
               <img class="info-messenger-icon" src="/assets/icons/messenger_green_icon.svg" alt="">
            </a>-->
         </div>
-        <contact-button class="info-contact-button" :text-style="textStyle"/>
+        <contact-button class="info-contact-button"/>
         <img class="info-video" :src="getVideoImg" alt="">
       </div>
     </div>
@@ -41,7 +41,6 @@ export default {
   },
   data() {
     return {
-      textStyle: {color: '#095A66'},
       windowWidth: window.innerWidth,
     }
   },

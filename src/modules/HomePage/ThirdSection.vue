@@ -209,6 +209,8 @@ export default {
 }
 
 .provider-image {
+  width: 180px;
+  height: 120px;
   padding: 0 !important;
 }
 
