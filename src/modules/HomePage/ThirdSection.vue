@@ -2,7 +2,7 @@
   <div class="main-page-third-section">
     <span class="provider-stroke"/>
     <p class="provider-title">პარტნიორი სადაზღვეო კომპანიები</p>
-    <div class="d-flex justify-content-between">
+    <div>
       <div class="provider-container">
         <ul class="providers-list">
           <li v-for="(item, index) in providers" :key="index" class="providers-list-item"
@@ -12,19 +12,21 @@
         </ul>
         <img class="provider-scroll" src="/assets/scroll_vector.svg" alt=""/>
       </div>
-      <!--      <div class="provider-info">
-              <img :src="activeProvider.logo_url" alt=""/>
-              <h1 class="provider-info-title mt-4 ml-2">{{ activeProvider.title }}</h1>
-              <p class="provider-info-description ml-2 mb-0 mt-4">{{ activeProvider.description }}</p>
-              <div v-if="activeProvider.tel" class="d-flex mt-5">
-                <object data="/assets/providers/call_icon.svg" type="image/svg+xml"/>
-                <a class="provider-info-contact ml-2" :href="`tel:${activeProvider.tel}`">{{ activeProvider.tel }}</a>
-              </div>
-              <div v-if="activeProvider.link" class="d-flex mt-3">
-                <object data="/assets/providers/browser_icon.svg" type="image/svg+xml"/>
-                <a class="provider-info-contact ml-2" :href="activeProvider.link">{{ activeProvider.link }}</a>
-              </div>
-            </div>-->
+      <div class="provider-info">
+        <img :src="activeProvider.logo_url" alt=""/>
+        <h1 class="provider-info-title">{{ activeProvider.title }}</h1>
+        <p class="provider-info-description">{{ activeProvider.description }}</p>
+        <div class="contact-container">
+          <div v-if="activeProvider.tel" class="d-flex">
+            <object class="contact-icon" data="/assets/providers/call_icon.svg" type="image/svg+xml"/>
+            <a class="provider-info-contact" :href="`tel:${activeProvider.tel}`">{{ activeProvider.tel }}</a>
+          </div>
+          <div v-if="activeProvider.link" class="d-flex">
+            <object class="contact-icon" data="/assets/providers/browser_icon.svg" type="image/svg+xml"/>
+            <a class="provider-info-contact" :href="activeProvider.link">{{ activeProvider.link }}</a>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -195,6 +197,7 @@ export default {
 
   .provider-container {
     width: 100%;
+    height: 100%;
   }
 
   .providers-list {
@@ -205,7 +208,8 @@ export default {
   }
 
   .providers-list-item {
-    padding: 0 38px 0 0 !important;
+    margin: 0 38px 0 0;
+    padding: 0 !important;
     display: block;
   }
 
@@ -217,38 +221,84 @@ export default {
 }
 
 .provider-info {
-  position: absolute;
-  left: 500px;
-  top: 126px;
+  margin-left: 325px;
+  margin-top: 81px;
 }
 
 .provider-info-title {
-  font-family: Helvetica;
+  font-family: Helvetica, sans-serif;
   font-style: normal;
   font-weight: normal;
   font-size: 40px;
   line-height: 160%;
   color: #212529;
+  margin: 13px 0 0 11px;
+  height: 46px !important;
+  width: 610px;
 }
 
 .provider-info-description {
   width: 655px;
   height: 187px;
-  font-family: Helvetica;
+  font-family: Helvetica, sans-serif;
   font-style: normal;
   font-weight: normal;
   font-size: 18px;
   line-height: 170%;
   color: #212529;
+  margin: 37px 0 0 11px;
+}
+
+.contact-container {
+  width: 296px;
+  height: 82px;
+  margin: 36px 0 0 15px;
+}
+
+.contact-icon {
+  width: 18.24px;
+  height: 19px;
 }
 
 .provider-info-contact {
-  font-family: Montserrat;
+  font-family: Montserrat, sans-serif;
   font-style: normal;
   font-weight: 500;
   font-size: 16px;
   line-height: 160%;
   color: #606870;
   text-decoration: none;
+  width: 169px;
+  height: 34px;
+  margin-left: 12.76px;
+  margin-top: -2px;
+}
+
+@media all and (max-width: 480px) {
+  .provider-info {
+    margin-left: 4px;
+    margin-top: 24px;
+  }
+
+  .provider-info-title {
+    width: 355px;
+    font-size: 32px;
+    margin-top: 25px;
+  }
+
+  .provider-info-description {
+    width: 335px;
+    height: 189px;
+    font-size: 16px;
+    margin-top: 25px;
+  }
+
+  .contact-container {
+    margin: 39px 0 0 19px;
+  }
+
+  .provider-info-contact {
+    font-size: 14px;
+  }
 }
 </style>
