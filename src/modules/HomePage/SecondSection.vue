@@ -61,7 +61,7 @@ import ContactButton from "./ContactButton";
 
 export default {
   name: "SecondSection",
-  components: {},
+  components: {ContactButton},
   data() {
     return {
       windowWidth: window.innerWidth,
@@ -184,15 +184,18 @@ export default {
 
 @media all and (max-width: 480px) {
   /deep/ ul {
-    overflow: auto;
+    overflow-x: auto;
+    overflow-y: hidden;
 
     > li {
       margin-right: 34px;
     }
   }
+
   .cluster-list {
     margin-left: 8px;
   }
+
   .flip-card {
     width: 300px;
     height: 320px;
@@ -264,5 +267,46 @@ export default {
   position: absolute;
   left: 30px;
   top: 431px;
+}
+
+@media all and (max-width: 480px) {
+  .list-numbers {
+    top: 40px;
+    left: 31.91px;
+    width: 13.56px;
+    height: 27.8px;
+    font-size: 32px;
+    line-height: 39px;
+  }
+
+  .list-back-numbers {
+    top: 40px;
+    left: 31.91px;
+    width: 13.56px;
+    height: 27.8px;
+    font-size: 32px;
+    line-height: 39px;
+  }
+
+  .list-texts {
+    width: 256.12px;
+    height: 89.65px;
+    left: 31.91px;
+    top: 60px;
+    font-size: 24px;
+  }
+
+  .list-back-texts {
+    width: 256.12px;
+    height: 89.65px;
+    left: 31.91px;
+    top: 60px;
+    font-size: 16px;
+  }
+
+  .contact-button {
+    left: 18px !important;
+    top: 242px !important;
+  }
 }
 </style>

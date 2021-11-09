@@ -344,6 +344,7 @@ export default {
   .radio-button-label {
     height: 22px;
     font-size: 16px;
+    margin-top: 7px;
   }
 }
 
