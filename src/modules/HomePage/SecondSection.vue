@@ -2,51 +2,57 @@
   <div class="main-page-second-section">
     <span class="cluster-stroke"/>
     <p class="cluster-title">როგორ მუშაობს კლასტერი?</p>
-    <div class="d-flex justify-content-between cluster-list">
-      <div class="flip-card">
-        <div class="flip-card-inner">
-          <div class="flip-card-front">
-            <object class="cluster-card" data="assets/list_backgraund_1.svg" type="image/svg+xml"/>
-            <span class="list-numbers">1</span>
-            <p class="list-texts">მოგვაწოდე ინფორმაცია <br/><b>შენი საჭიროების შესახებ</b></p>
-          </div>
-          <div class="flip-card-back">
-            <span class="list-back-numbers">1</span>
-            <p class="list-back-texts">შენთვის მოსახერხებელი გზით მოგვაწოდე ინფორმაცია სასურველი პროდუქტის და საჭირო
-              ოდენობის შესახებ</p>
-            <contact-button class="contact-button"/>
-          </div>
-        </div>
-      </div>
-      <div class="flip-card">
-        <div class="flip-card-inner">
-          <div class="flip-card-front">
-            <object class="cluster-card" data="assets/list_backgraund_2.svg" type="image/svg+xml"/>
-            <span class="list-numbers">2</span>
-            <p class="list-texts">მოხდება მსგავსი საჭიროებების <br/> <b>კონსოლიდაცია</b></p>
-          </div>
-          <div class="flip-card-back">
-            <span class="list-back-numbers">2</span>
-            <p class="list-back-texts">ჩვენ დავამუშავებთ მოწოდებულ ინფორმაციას, თქვენს მოთხოვნას გავაერთიანებთ სხვა
-              ანალოგიურთან და მოვიძიებთ შესაბამისი პროდუქტის ან სერვისის </p>
+    <ul class="cluster-list">
+      <li>
+        <div class="flip-card">
+          <div class="flip-card-inner">
+            <div class="flip-card-front">
+              <object class="cluster-card" :data="getFirstCard" type="image/svg+xml"/>
+              <span class="list-numbers">1</span>
+              <p class="list-texts">მოგვაწოდე ინფორმაცია <br/><b>შენი საჭიროების შესახებ</b></p>
+            </div>
+            <div class="flip-card-back">
+              <span class="list-back-numbers">1</span>
+              <p class="list-back-texts">შენთვის მოსახერხებელი გზით მოგვაწოდე ინფორმაცია სასურველი პროდუქტის და საჭირო
+                ოდენობის შესახებ</p>
+              <contact-button class="contact-button"/>
+            </div>
           </div>
         </div>
-      </div>
-      <div class="flip-card">
-        <div class="flip-card-inner">
-          <div class="flip-card-front">
-            <object class="cluster-card" data="assets/list_backgraund_3.svg" type="image/svg+xml"/>
-            <span class="list-numbers">3</span>
-            <p class="list-texts">მიიღე პროდუქტი ან სერვისი <br/><b>საუკეთესო ფასად</b></p>
-          </div>
-          <div class="flip-card-back">
-            <span class="list-back-numbers">3</span>
-            <p class="list-back-texts">კონსოლიდაციის ხარჯზე, მიმწოდებლები კლასტერის მონაწილე კომპანიებს შესთავაზებენ
-              მაქსიმალურად დაბალ ფასს</p>
+      </li>
+      <li>
+        <div class="flip-card">
+          <div class="flip-card-inner">
+            <div class="flip-card-front">
+              <object class="cluster-card" :data="getSecondCard" type="image/svg+xml"/>
+              <span class="list-numbers">2</span>
+              <p class="list-texts">მოხდება მსგავსი საჭიროებების <br/> <b>კონსოლიდაცია</b></p>
+            </div>
+            <div class="flip-card-back">
+              <span class="list-back-numbers">2</span>
+              <p class="list-back-texts">ჩვენ დავამუშავებთ მოწოდებულ ინფორმაციას, თქვენს მოთხოვნას გავაერთიანებთ სხვა
+                ანალოგიურთან და მოვიძიებთ შესაბამისი პროდუქტის ან სერვისის </p>
+            </div>
           </div>
         </div>
-      </div>
-    </div>
+      </li>
+      <li>
+        <div class="flip-card">
+          <div class="flip-card-inner">
+            <div class="flip-card-front">
+              <object class="cluster-card" :data="getThirdCard" type="image/svg+xml"/>
+              <span class="list-numbers">3</span>
+              <p class="list-texts">მიიღე პროდუქტი ან სერვისი <br/><b>საუკეთესო ფასად</b></p>
+            </div>
+            <div class="flip-card-back">
+              <span class="list-back-numbers">3</span>
+              <p class="list-back-texts">კონსოლიდაციის ხარჯზე, მიმწოდებლები კლასტერის მონაწილე კომპანიებს შესთავაზებენ
+                მაქსიმალურად დაბალ ფასს</p>
+            </div>
+          </div>
+        </div>
+      </li>
+    </ul>
   </div>
 </template>
 
@@ -55,13 +61,48 @@ import ContactButton from "./ContactButton";
 
 export default {
   name: "SecondSection",
-  components: {ContactButton}
+  components: {},
+  data() {
+    return {
+      windowWidth: window.innerWidth,
+    }
+  },
+  computed: {
+    getFirstCard() {
+      return this.windowWidth < 480 ? 'assets/list_backgraund_md_1.svg' : 'assets/list_backgraund_1.svg'
+    },
+    getSecondCard() {
+      return this.windowWidth < 480 ? 'assets/list_backgraund_md_2.svg' : 'assets/list_backgraund_2.svg'
+    },
+    getThirdCard() {
+      return this.windowWidth < 480 ? 'assets/list_backgraund_md_3.svg' : 'assets/list_backgraund_3.svg'
+    },
+  },
+  mounted() {
+    window.addEventListener('resize', () => {
+      this.windowWidth = window.innerWidth
+    })
+  },
 }
 </script>
 
 <style lang="scss" scoped>
 @import url('https://fonts.googleapis.com/css2?family=Montserrat');
 @import url('https://fonts.googleapis.com/css2?family=Helvetica');
+
+/deep/ ul {
+  display: flex;
+  align-items: stretch;
+  justify-content: space-between;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+
+  > li {
+    display: block;
+    list-style-type: none;
+  }
+}
 
 .main-page-second-section {
   position: relative;
@@ -92,7 +133,8 @@ export default {
 @media all and (max-width: 480px) {
   .main-page-second-section {
     margin-top: 110px;
-    margin-left: 42px;
+    margin-left: 24px;
+    margin-right: 0;
     height: 593px;
   }
 
@@ -138,6 +180,24 @@ export default {
   border-radius: 24px;
   filter: drop-shadow(0px 4px 12px rgba(0, 0, 0, 0.06));
   transform: rotateY(-180deg);
+}
+
+@media all and (max-width: 480px) {
+  /deep/ ul {
+    overflow: auto;
+
+    > li {
+      margin-right: 34px;
+    }
+  }
+  .cluster-list {
+    margin-left: 8px;
+  }
+  .flip-card {
+    width: 300px;
+    height: 320px;
+    margin-right: -5px;
+  }
 }
 
 .list-numbers {
