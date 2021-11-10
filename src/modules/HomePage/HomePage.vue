@@ -1,14 +1,15 @@
 <template>
   <div v-if="isResultsModal || isContactModal">
     <results-modal v-if="isResultsModal"/>
-    <contact-modal v-if="isContactModal"/>
+    <contact-modal v-if="isContactModal" :phone-number="phoneNumber" :email="email" :google-form="googleForm"/>
   </div>
   <div v-else class="main-page">
-    <first-section :phone-number="NUMBER" :email="EMAIL" @on-see-results-click="onResultsCLick"/>
+    <first-section :phone-number="phoneNumber" :email="email" @on-see-results-click="onResultsCLick"/>
     <second-section/>
     <third-section/>
-    <fourth-section :phone-number="NUMBER" :email="EMAIL"/>
+    <fourth-section :phone-number="phoneNumber" :email="email"/>
     <fifth-section/>
+    <seventh-section/>
   </div>
 </template>
 
@@ -21,16 +22,20 @@ import FifthSection from "./FifthSection";
 import {createNamespacedHelpers} from "vuex";
 import ResultsModal from "./ResultsModal";
 import ContactModal from "./ContactModal";
+import SeventhSection from "./SeventhSection";
 
 const {mapState, mapActions} = createNamespacedHelpers('results');
 export default {
   name: "HomePage",
-  components: {ContactModal, ResultsModal, FifthSection, FourthSection, ThirdSection, SecondSection, FirstSection},
+  components: {
+    SeventhSection,
+    ContactModal, ResultsModal, FifthSection, FourthSection, ThirdSection, SecondSection, FirstSection
+  },
   data() {
     return {
-      MESSENGER_URL: 'process.env.MESSENGER_URL',
-      NUMBER: 'process.env.NUMBER',
-      EMAIL: 'process.env.EMAIL',
+      phoneNumber: '557386688',
+      email: 'holla@klaster.ge',
+      googleForm: '',
     }
   },
   computed: {

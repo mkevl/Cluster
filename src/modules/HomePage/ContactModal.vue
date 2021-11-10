@@ -14,16 +14,18 @@
       whether you are a physical entity or running a business of any size.
       Paying less in stuff and services
     </p>
-    <b-button v-if="isSmallScreen" class="call-button">
+    <b-button v-if="isSmallScreen" class="call-button" :href="`tel:${phoneNumber}`">
       <span class="call-text">დარეკვა</span>
     </b-button>
-    <b-button class="google-form-button">
+    <b-button class="google-form-button" :href="googleForm">
       <span class="google-form-text">ფორმა</span>
     </b-button>
-    <b-button class="mail-button">
+    <b-button class="mail-button" :href="`mailto:${email}`">
       <span class="mail-text">გამოგვიგზავნე მეილი</span>
     </b-button>
-    <object class="whatsapp-icon" data="assets/icons/whatsapp_green_icon.svg" type="image/svg+xml"/>
+    <a class="whatsapp-icon" :href="`https://wa.me/${phoneNumber}`" target='_blank'>
+      <img class="whatsapp-img" src="/assets/icons/whatsapp_green_icon.svg" alt="">
+    </a>
   </div>
 </template>
 
@@ -33,6 +35,11 @@ import {createNamespacedHelpers} from "vuex";
 const {mapActions} = createNamespacedHelpers('results');
 export default {
   name: "ContactModal",
+  props: {
+    phoneNumber: String,
+    email: String,
+    googleForm: String,
+  },
   data() {
     return {
       windowWidth: window.innerWidth
@@ -192,6 +199,11 @@ export default {
   margin: 0;
 }
 
+.google-form-button:focus {
+  background: #0AE29F !important;
+  box-shadow: unset !important;
+}
+
 .google-form-text {
   position: static;
   width: 76px;
@@ -230,6 +242,11 @@ export default {
   margin: 0 16px;
 }
 
+.mail-button:focus {
+  background: rgba(10, 226, 159, 0.1) !important;
+  box-shadow: unset !important;
+}
+
 .mail-text {
   position: static;
   width: 196px;
@@ -256,5 +273,13 @@ export default {
   left: 890px;
   top: 506px;
   margin-left: 32px;
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(4px);
+  border-radius: 50px;
+}
+
+.whatsapp-img {
+  width: 53.93px;
+  height: 53.93px;
 }
 </style>
