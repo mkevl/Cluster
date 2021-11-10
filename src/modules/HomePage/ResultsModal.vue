@@ -46,6 +46,15 @@
         </div>
       </li>
     </ul>
+    <p class="proposed-text">შემოთავაზებული ფასები</p>
+    <ul class="providers-list">
+      <li class="providers-first-list-item">
+        <img class="provider-list-image" :src="providersFirstListItem.provider_logo_url" alt="">
+      </li>
+      <li class="providers-list-item" v-for="(item) in modalData" :key="item.uuid">
+          <img class="provider-list-image" :src="item.provider_logo_url" alt="">
+      </li>
+    </ul>
   </div>
 </template>
 
@@ -53,7 +62,7 @@
 import {createNamespacedHelpers} from "vuex";
 import ContactButton from "./ContactButton";
 
-const {mapActions} = createNamespacedHelpers('results');
+const {mapState, mapActions} = createNamespacedHelpers('results');
 export default {
   name: "ResultsModal",
   components: {ContactButton},
@@ -67,6 +76,12 @@ export default {
     }
   },
   computed: {
+    ...mapState({
+      modalData: state => state.results.modal.data
+    }),
+    providersFirstListItem() {
+      return this.modalData[0];
+    },
     getDays() {
       const date = new Date(), y = date.getFullYear(), m = date.getMonth(), currentDay = date.getDate();
       const monthLastDay = new Date(y, m + 1, 0).getDate();
@@ -459,5 +474,47 @@ export default {
   font-size: 14px;
   line-height: 16px;
   color: #D7CAFD;
+}
+
+@media all and (max-width: 480px) {
+  .proposed-text {
+    top: 1559px;
+    left: 42px;
+  }
+}
+
+.providers-list {
+  position: absolute;
+  top: 235px;
+  left: 960px;
+  display: block !important;
+}
+
+.providers-first-list-item {
+  position: absolute;
+  width: 65px;
+  height: 65px;
+  background: #191142;
+  border-radius: 50%;
+  left: 8px;
+  top: 28px;
+}
+
+.providers-list-item {
+  position: absolute;
+  width: 65px;
+  height: 65px;
+  background: #191142;
+  border-radius: 50%;
+  left: 8px;
+  top: 136px;
+  margin-top: 50px;
+}
+
+.provider-list-image {
+  position: absolute;
+  width: 37.14px;
+  height: 37.14px;
+  margin: 13.93px;
 }
 </style>
