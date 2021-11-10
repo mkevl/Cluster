@@ -1,4 +1,4 @@
-import {HIDE_RESULTS_MODAL, SHOW_RESULTS_MODAL} from "./mutation-types";
+import {HIDE_CONTACT_MODAL, HIDE_RESULTS_MODAL, SHOW_CONTACT_MODAL, SHOW_RESULTS_MODAL} from "./mutation-types";
 
 export default {
   [SHOW_RESULTS_MODAL](state, data) {
@@ -22,5 +22,11 @@ export default {
   [HIDE_RESULTS_MODAL](state) {
     state.results.modal.show = false
     state.results.modal.data = {}
+  },
+  [SHOW_CONTACT_MODAL](state) {
+    state.contact.modal.show = true
+  },
+  [HIDE_CONTACT_MODAL](state) {
+    state.contact.modal.show = false
   }
 }

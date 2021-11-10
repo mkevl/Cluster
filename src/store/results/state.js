@@ -4,6 +4,11 @@ const STATE = {
       show: false,
       data: {},
     }
+  },
+  contact: {
+    modal: {
+      show: false,
+    }
   }
 };
 

@@ -5,17 +5,22 @@
 </template>
 
 <script>
+import {createNamespacedHelpers} from "vuex";
+
+const {mapActions} = createNamespacedHelpers('results');
 export default {
   name: "ContactButton",
   props: {
     textStyle: {
       type: Object,
-      default: Object => {},
+      default: Object => {
+      },
     },
   },
   methods: {
+    ...mapActions(['showContactModal']),
     onConnectClick() {
-
+      this.showContactModal()
     },
   },
 }

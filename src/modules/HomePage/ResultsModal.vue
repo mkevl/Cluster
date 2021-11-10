@@ -47,14 +47,14 @@
       </li>
     </ul>
     <p class="proposed-text">შემოთავაზებული ფასები</p>
-    <ul class="providers-list">
+<!--    <ul class="providers-list">
       <li class="providers-first-list-item">
         <img class="provider-list-image" :src="providersFirstListItem.provider_logo_url" alt="">
       </li>
       <li class="providers-list-item" v-for="(item) in modalData" :key="item.uuid">
           <img class="provider-list-image" :src="item.provider_logo_url" alt="">
       </li>
-    </ul>
+    </ul>-->
   </div>
 </template>
 

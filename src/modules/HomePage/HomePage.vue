@@ -1,5 +1,8 @@
 <template>
-  <results-modal v-if="isResultsModal"/>
+  <div v-if="isResultsModal || isContactModal">
+    <results-modal v-if="isResultsModal"/>
+    <contact-modal v-if="isContactModal"/>
+  </div>
   <div v-else class="main-page">
     <first-section :phone-number="NUMBER" :email="EMAIL" @on-see-results-click="onResultsCLick"/>
     <second-section/>
@@ -17,11 +20,12 @@ import FourthSection from "./FourthSection";
 import FifthSection from "./FifthSection";
 import {createNamespacedHelpers} from "vuex";
 import ResultsModal from "./ResultsModal";
+import ContactModal from "./ContactModal";
 
 const {mapState, mapActions} = createNamespacedHelpers('results');
 export default {
   name: "HomePage",
-  components: {ResultsModal, FifthSection, FourthSection, ThirdSection, SecondSection, FirstSection},
+  components: {ContactModal, ResultsModal, FifthSection, FourthSection, ThirdSection, SecondSection, FirstSection},
   data() {
     return {
       MESSENGER_URL: 'process.env.MESSENGER_URL',
@@ -31,7 +35,8 @@ export default {
   },
   computed: {
     ...mapState({
-      isResultsModal: state => state.results.modal.show
+      isResultsModal: state => state.results.modal.show,
+      isContactModal: state => state.contact.modal.show
     }),
   },
   methods: {
