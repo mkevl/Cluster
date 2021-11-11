@@ -61,11 +61,11 @@ export default {
   data() {
     return {
       options: [
-        {value: 'min', text: 'მინიმალური'},
+        {value: 'minimal', text: 'მინიმალური'},
         {value: 'basic', text: 'საბაზისო'},
         {value: 'improved', text: 'გაუმჯობესებული', class: 'last-radio-button'},
       ],
-      checked: 'min',
+      checked: 'minimal',
       isActive: {
         life: true,
         health: false,
