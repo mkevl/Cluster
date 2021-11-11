@@ -2,7 +2,8 @@ const STATE = {
   results: {
     modal: {
       show: false,
-      data: {},
+      packageData: [],
+      statisticData: [],
     }
   },
   contact: {
