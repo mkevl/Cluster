@@ -17,7 +17,7 @@
         <img src="assets/icons/email_icon.svg" alt="">
         <a class="contact-info" :href="`mailto:${email}`" target="_blank">{{ email }}</a>
       </div>
-      <div class="d-flex contact-info-container">
+      <div class="d-flex contact-info-container mt-5">
         <img src="assets/icons/phone_icon.svg" alt="">
         <a class="contact-info" :href="`tel:${phoneNumber}`" target="_blank">{{ phoneNumber }}</a>
       </div>
@@ -93,7 +93,7 @@ export default {
 
 @media all and (max-width: 480px) {
   .main-page-seventh-section {
-    height: 1374px;
+    height: 1270px;
   }
 }
 
@@ -112,11 +112,13 @@ export default {
 
 @media all and (max-width: 480px) {
   .faq-title {
+    position: relative;
     width: 372px;
     height: 52px;
     font-size: 24px;
     line-height: 170%;
-    margin: 100px 0 0 35px;
+    margin: 0 0 0 35px;
+    padding-top: 100px;
   }
 }
 
@@ -176,8 +178,10 @@ export default {
 
 @media all and (max-width: 480px) {
   .faq-list {
-    margin-top: 195px;
+    position: relative;
+    margin-top: 63px;
     margin-left: 5%;
+    height: 425px;
 
     > li {
       margin-right: unset;
@@ -211,6 +215,7 @@ export default {
   font-size: 32px;
   line-height: 37px;
   color: #FFFFFF;
+  padding: 0;
 }
 
 .contact-info-container {
@@ -242,8 +247,7 @@ export default {
 
 @media all and (max-width: 480px) {
   .contact-container {
-    margin: 0 0 0 35px;
-    bottom: 438px;
+    margin: 112px 0 0 35px;
   }
 
   .contact-title {
@@ -254,11 +258,11 @@ export default {
   }
 
   .contact-info-container {
-    margin-top: 38px;
+    margin-top: 8px;
   }
 
   .icons {
-    margin: 92px 0 0 10px;
+    margin: 112px 0 0 10px;
   }
 }
 
