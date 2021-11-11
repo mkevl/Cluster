@@ -14,6 +14,12 @@
     <div class="carousel-next-slider" @click="onCarouselNextClick">
       <img class="carousel-next-button" src="/assets/next_button.svg" alt=""/>
     </div>
+    <div class="d-flex align-items-center justify-content-center carousel-dot">
+      <div class="carousel-dot-item" v-for="item in data" :key="item.uuid">
+        <img v-if="item.isActive" src="/assets/active_bull.svg" alt="">
+        <img v-else src="/assets/little_bull.svg" alt="">
+      </div>
+    </div>
   </div>
 </template>
 
@@ -276,5 +282,13 @@ export default {
   height: 39.5px;
   left: 124px;
   top: 315px;
+}
+
+.carousel-dot-item {
+  margin-right: 16px;
+}
+
+.carousel-dot {
+  margin-top: 356px;
 }
 </style>
