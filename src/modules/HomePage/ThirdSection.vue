@@ -4,15 +4,16 @@
     <p class="provider-title">პარტნიორი სადაზღვეო კომპანიები</p>
     <div :class="getProviderClass">
       <div class="provider-container">
-        <img v-if="isScrolled" class="provider-top-scroll" src="/assets/scroll_vector.svg" alt=""
-             @click="scrollUp()"/>
+        <!--<img v-if="isScrolled" class="provider-top-scroll" src="/assets/scroll_vector.svg" alt=""
+               @click="scrollUp()"/>-->
         <ul class="providers-list" ref="list-scroll" :style="getProviderScrollStyle">
           <li v-for="(item, index) in providers" :key="index" class="providers-list-item"
               :class="{'active-provider-item': item.isActive}" @click="setActiveProvider(item)">
             <img class="provider-image" :src="item.img_url" alt=""/>
           </li>
         </ul>
-        <img class="provider-scroll" src="/assets/scroll_vector.svg" alt="" @click="scrollDown()"/>
+        <img v-if="providers.length >= 5" class="provider-scroll" src="/assets/scroll_vector.svg" alt=""
+             @click="scrollDown()">
       </div>
       <div class="provider-info">
         <img :src="activeProvider.logo_url" alt=""/>
@@ -197,8 +198,9 @@ export default {
 .providers-list {
   padding: 0 0 0 16px;
   margin: 0;
-  overflow: auto;
   width: 100%;
+  max-height: 700px;
+  overflow: hidden;
 }
 
 .providers-list-item {
@@ -237,6 +239,8 @@ export default {
     display: flex;
     align-items: stretch;
     justify-content: space-between;
+    overflow: auto;
+    max-height: unset;
   }
 
   .providers-list-item {
