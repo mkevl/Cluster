@@ -9,7 +9,7 @@
     <third-section/>
     <fourth-section :phone-number="phoneNumber" :email="email"/>
     <fifth-section/>
-    <seventh-section :phone-number="phoneNumber"/>
+    <seventh-section :phone-number="phoneNumber" :email="email"/>
   </div>
 </template>
 

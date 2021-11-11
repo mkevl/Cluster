@@ -1,7 +1,6 @@
 <template>
   <div class="main-page-seventh-section">
     <p class="faq-title">ხშირად დასმული კითხვები</p>
-    <p class="contact-title">დაგვიკავშირდი</p>
     <ul class="faq-list">
       <li class="" v-for="(item, index) in faqData" :key="index">
         <div class="faq-list-item d-flex justify-content-between" @click="toggleFAQ(item)">
@@ -12,6 +11,21 @@
         <p class="active-question-description" :style="item.style">{{ item.answer }}</p>
       </li>
     </ul>
+    <div class="contact-container">
+      <p class="contact-title">დაგვიკავშირდი</p>
+      <div class="d-flex contact-info-container">
+        <img src="assets/icons/email_icon.svg" alt="">
+        <a class="contact-info" :href="`mailto:${email}`" target="_blank">{{ email }}</a>
+      </div>
+      <div class="d-flex contact-info-container">
+        <img src="assets/icons/phone_icon.svg" alt="">
+        <a class="contact-info" :href="`tel:${phoneNumber}`" target="_blank">{{ phoneNumber }}</a>
+      </div>
+      <a class="icons" :href="`https://wa.me/${phoneNumber}`" target='_blank'>
+        <img src="/assets/icons/whatsapp_icon.svg" alt="">
+      </a>
+    </div>
+    <p class="copyright-title">&copy; Copyright 2020 . All rights reserved.</p>
   </div>
 </template>
 
@@ -20,6 +34,7 @@ export default {
   name: "SeventhSection",
   props: {
     phoneNumber: String,
+    email: String,
   },
   data() {
     return {
@@ -67,6 +82,7 @@ export default {
 
 <style lang="scss" scoped>
 @import url('https://fonts.googleapis.com/css2?family=Helvetica');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat');
 
 .main-page-seventh-section {
   position: relative;
@@ -102,19 +118,6 @@ export default {
     line-height: 170%;
     margin: 100px 0 0 35px;
   }
-}
-
-.contact-title {
-  position: absolute;
-  width: 699px;
-  height: 54px;
-  font-family: Helvetica, sans-serif;
-  font-style: normal;
-  font-weight: bold;
-  font-size: 32px;
-  line-height: 37px;
-  color: #FFFFFF;
-  margin: 128px 0 0 1030px;
 }
 
 .faq-list {
@@ -191,6 +194,91 @@ export default {
 
   .active-question-description {
     font-size: 16px;
+  }
+}
+
+.contact-container {
+  position: absolute;
+  margin: 128px 0 0 1030px;
+}
+
+.contact-title {
+  width: 699px;
+  height: 54px;
+  font-family: Helvetica, sans-serif;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 32px;
+  line-height: 37px;
+  color: #FFFFFF;
+}
+
+.contact-info-container {
+  margin-top: 81px;
+}
+
+.contact-info {
+  width: 175px;
+  height: 22px;
+  font-family: Montserrat, sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 22px;
+  color: #FFFFFF;
+  margin-top: 8px;
+}
+
+.icons {
+  position: absolute;
+  width: 34px;
+  height: 34px;
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(4px);
+  border-radius: 50px;
+  margin-right: 40px;
+  margin-top: 135px;
+}
+
+@media all and (max-width: 480px) {
+  .contact-container {
+    margin: 0 0 0 35px;
+    bottom: 438px;
+  }
+
+  .contact-title {
+    width: 336px;
+    height: 77px;
+    font-size: 24px;
+    line-height: 160%;
+  }
+
+  .contact-info-container {
+    margin-top: 38px;
+  }
+
+  .icons {
+    margin: 92px 0 0 10px;
+  }
+}
+
+.copyright-title {
+  position: absolute;
+  height: 15px;
+  font-family: Montserrat, sans-serif;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 12px;
+  line-height: 15px;
+  color: #FFFFFF;
+  bottom: 79px;
+  left: 50%;
+}
+
+@media all and (max-width: 480px) {
+  .copyright-title {
+    bottom: 56px;
+    left: 80px;
   }
 }
 </style>
