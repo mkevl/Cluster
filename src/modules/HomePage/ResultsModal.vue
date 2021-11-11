@@ -34,14 +34,14 @@
       <li class="clusters-box">
         <p class="clusters-text">კომპანიების რაოდენობა კლასტერში</p>
         <div class="d-flex align-items-center clusters-quantity">
-          <p class="mr-3">{{ data.companyNum }}</p>
+          <p class="mr-3">{{ statisticData.companies }}</p>
           <p class="clusters-quantity-text">კომპანია</p>
         </div>
       </li>
       <li class="clusters-box">
         <p class="clusters-text">ადამიანების რაოდენობა კლასტერში</p>
         <div class="d-flex align-items-center clusters-quantity">
-          <p class="mr-3">{{ data.peopleNum }}</p>
+          <p class="mr-3">{{ statisticData.persons }}</p>
           <p class="clusters-quantity-text">ადამიანი</p>
         </div>
       </li>
@@ -51,7 +51,7 @@
       <li class="providers-first-list-item">
         <img class="provider-list-image" :src="providersFirstListItem.provider_logo_url" alt="">
       </li>
-      <li class="providers-list-item" v-for="(item) in modalData" :key="item.uuid">
+      <li class="providers-list-item" v-for="(item) in packageData" :key="item.uuid">
           <img class="provider-list-image" :src="item.provider_logo_url" alt="">
       </li>
     </ul>-->
@@ -69,18 +69,15 @@ export default {
   data() {
     return {
       windowWidth: window.innerWidth,
-      data: {
-        peopleNum: 6254,
-        companyNum: 123,
-      }
     }
   },
   computed: {
     ...mapState({
-      modalData: state => state.results.modal.data
+      packageData: state => state.results.modal.packageData,
+      statisticData: state => state.results.modal.statisticData
     }),
     providersFirstListItem() {
-      return this.modalData[0];
+      return this.packageData[0];
     },
     getDays() {
       const date = new Date(), y = date.getFullYear(), m = date.getMonth(), currentDay = date.getDate();

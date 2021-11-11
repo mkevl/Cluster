@@ -1,6 +1,6 @@
 <template>
   <div class="main-page-first-section">
-    <object class="klaster-logo" data="assets/klaster_logo.svg" type="image/svg+xml"/>
+    <img class="klaster-logo" src="assets/klaster_logo.svg" alt=""/>
     <h1 class="main-title">შეამცირე შენი ბიზნესის ხარჯი</h1>
     <p class="main-description">პლატფორმა საერთო ინტერესების გარშემო გაერთიანებისთვის</p>
     <p class="insurance-title">აირჩიე დაზღვევა</p>

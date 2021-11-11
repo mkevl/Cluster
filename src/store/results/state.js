@@ -3,7 +3,10 @@ const STATE = {
     modal: {
       show: false,
       packageData: [],
-      statisticData: [],
+      statisticData: {
+        companies: 0,
+        persons: 0,
+      },
     }
   },
   contact: {
