@@ -10,6 +10,7 @@
           <object class="carousel-top-quote" data="/assets/top_quote.svg" type="image/svg+xml"/>
           <object class="carousel-bottom-quote" data="/assets/bottom_quote.svg" type="image/svg+xml"/>
           <p class="feedback-text">{{ item.feedback }}</p>
+          <p class="feedback-author">-{{ item.author }}</p>
         </div>
       </li>
     </ul>
@@ -201,6 +202,19 @@ export default {
   line-height: 170%;
   color: #212529;
   margin: 0 0 0 237px
+}
+
+.feedback-author {
+  position: absolute;
+  width: 279px;
+  height: 59px;
+  font-family: Montserrat, sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 166%;
+  color: #212529;
+  margin: 149px 0 0 237px
 }
 
 @media all and (max-width: 480px) {
