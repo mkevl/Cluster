@@ -2,6 +2,10 @@
   <div class="main-page-sixth-section">
     <span class="feedback-stroke"/>
     <p class="feedback-title">უკუკავშირი</p>
+    <img class="carousel-logo" src="assets/tweeter_logo.png" alt="">
+    <span class="carousel-stroke"></span>
+    <object class="carousel-top-quote" data="/assets/top_quote.svg" type="image/svg+xml"/>
+    <object class="carousel-bottom-quote" data="/assets/bottom_quote.svg" type="image/svg+xml"/>
   </div>
 </template>
 
@@ -55,6 +59,50 @@ export default {
     height: 37px;
     font-size: 20px;
     line-height: 176.4%;
+  }
+}
+
+.carousel-logo {
+  margin: 140px 0 0 308px;
+}
+
+.carousel-stroke {
+  position: absolute;
+  width: 0;
+  height: 351px;
+  border: 1px solid #DEE2E6;
+  margin: 131px 0 0 56px;
+}
+
+.carousel-top-quote {
+  margin-top: 24px;
+  margin-left: 96px;
+}
+
+.carousel-bottom-quote {
+  position: absolute;
+  margin-left: 493px;
+  margin-top: 473px;
+}
+
+@media all and (max-width: 480px) {
+  .carousel-logo {
+    margin: 104px 0 0 13px;
+  }
+
+  .carousel-stroke {
+    display: none;
+  }
+
+  .carousel-top-quote {
+    position: absolute;
+    margin-top: 202px;
+    margin-left: -145px;
+  }
+
+  .carousel-bottom-quote {
+    margin-top: 489px;
+    margin-left: 175px;
   }
 }
 </style>
