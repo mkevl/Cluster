@@ -2,16 +2,99 @@
   <div class="main-page-sixth-section">
     <span class="feedback-stroke"/>
     <p class="feedback-title">უკუკავშირი</p>
-    <img class="carousel-logo" src="assets/tweeter_logo.png" alt="">
-    <span class="carousel-stroke"></span>
-    <object class="carousel-top-quote" data="/assets/top_quote.svg" type="image/svg+xml"/>
-    <object class="carousel-bottom-quote" data="/assets/bottom_quote.svg" type="image/svg+xml"/>
+    <ul class="carousel-list" ref="list-carousel">
+      <li v-for="(item, index) in data" :key="item.uuid">
+        <div class="carousel-list-item-container" :id="`carousel-list-item-${index}`">
+          <img class="carousel-logo" :src="item.logo_url" alt="">
+          <span class="carousel-stroke"/>
+          <object class="carousel-top-quote" data="/assets/top_quote.svg" type="image/svg+xml"/>
+          <object class="carousel-bottom-quote" data="/assets/bottom_quote.svg" type="image/svg+xml"/>
+        </div>
+      </li>
+    </ul>
+    <div class="carousel-next-slider" @click="onCarouselNextClick()">
+      <img class="carousel-next-button" src="/assets/next_button.svg" alt=""/>
+    </div>
   </div>
 </template>
 
 <script>
 export default {
-  name: "SixthSection"
+  name: "SixthSection",
+  data() {
+    return {
+      data: [
+        {
+          uuid: '1',
+          logo_url: '/assets/tweeter_logo.png',
+          feedback: 'პრიორიტეტულია მდგრადი მასალების გამოყენება. კოლექციების შექმნისას, გარდა ეკოლოგიური ფაქტორისა',
+          author: 'ANa Gloveli'
+        },
+        {
+          uuid: '2',
+          logo_url: '/assets/providers/tbc_logo_2.png',
+          feedback: 'პრიორიტეტულია მდგრადი მასალების გამოყენება. კოლექციების შექმნისას, გარდა ეკოლოგიური ფაქტორისა',
+          author: 'ANa Gloveli'
+        },
+        {
+          uuid: '3',
+          logo_url: '/assets/tweeter_logo.png',
+          feedback: 'პრიორიტეტულია მდგრადი მასალების გამოყენება. კოლექციების შექმნისას, გარდა ეკოლოგიური ფაქტორისა',
+          author: 'ANa Gloveli'
+        },
+        {
+          uuid: '4',
+          logo_url: '/assets/providers/tbc_logo_2.png',
+          feedback: 'პრიორიტეტულია მდგრადი მასალების გამოყენება. კოლექციების შექმნისას, გარდა ეკოლოგიური ფაქტორისა',
+          author: 'ANa Gloveli'
+        },
+        {
+          uuid: '5',
+          logo_url: '/assets/tweeter_logo.png',
+          feedback: 'პრიორიტეტულია მდგრადი მასალების გამოყენება. კოლექციების შექმნისას, გარდა ეკოლოგიური ფაქტორისა',
+          author: 'ANa Gloveli'
+        },
+        {
+          uuid: '6',
+          logo_url: '/assets/providers/tbc_logo_2.png',
+          feedback: 'პრიორიტეტულია მდგრადი მასალების გამოყენება. კოლექციების შექმნისას, გარდა ეკოლოგიური ფაქტორისა',
+          author: 'ANa Gloveli'
+        },
+        {
+          uuid: '7',
+          logo_url: '/assets/tweeter_logo.png',
+          feedback: 'პრიორიტეტულია მდგრადი მასალების გამოყენება. კოლექციების შექმნისას, გარდა ეკოლოგიური ფაქტორისა',
+          author: 'ANa Gloveli'
+        },
+        {
+          uuid: '8',
+          logo_url: '/assets/providers/tbc_logo_2.png',
+          feedback: 'პრიორიტეტულია მდგრადი მასალების გამოყენება. კოლექციების შექმნისას, გარდა ეკოლოგიური ფაქტორისა',
+          author: 'ANa Gloveli'
+        },
+      ],
+      listWidth: 0,
+    }
+  },
+  methods: {
+    computeLiWidth() {
+      this.data.forEach((item, index) => {
+        const listItem = document.getElementById(`carousel-list-item-${index}`)
+        console.log(listItem.parentElement.parentElement.offsetWidth)
+        const width = (listItem.parentElement.parentElement.offsetWidth * 93) / 100
+        this.listWidth = width
+        listItem.style.width = `${width}px`
+      })
+    },
+    onCarouselNextClick() {
+      console.log(this.listWidth)
+      this.$refs['list-carousel'].scrollLeft += this.listWidth
+    }
+  },
+  mounted() {
+    this.computeLiWidth();
+    window.addEventListener('resize', this.computeLiWidth)
+  }
 }
 </script>
 
@@ -62,8 +145,31 @@ export default {
   }
 }
 
+.carousel-list {
+  margin: 24px 20px 0 192px;
+  position: relative;
+  display: flex;
+  overflow: hidden;
+  padding: 0;
+  height: 100%;
+
+  > li {
+    list-style-type: none;
+    display: inline-block;
+    padding: 0;
+    position: relative;
+    width: 100%;
+  }
+}
+
+.carousel-list-item-container {
+  height: 100%;
+}
+
 .carousel-logo {
-  margin: 140px 0 0 308px;
+  margin: 116px 0 0 0;
+  width: 86px;
+  height: 86px;
 }
 
 .carousel-stroke {
@@ -71,18 +177,17 @@ export default {
   width: 0;
   height: 351px;
   border: 1px solid #DEE2E6;
-  margin: 131px 0 0 56px;
+  margin: 109px 0 0 56px;
 }
 
 .carousel-top-quote {
-  margin-top: 24px;
   margin-left: 96px;
 }
 
 .carousel-bottom-quote {
   position: absolute;
   margin-left: 493px;
-  margin-top: 473px;
+  margin-top: 380px;
 }
 
 @media all and (max-width: 480px) {
@@ -104,5 +209,24 @@ export default {
     margin-top: 489px;
     margin-left: 175px;
   }
+}
+
+.carousel-next-slider {
+  position: absolute;
+  width: 308px;
+  height: 495px;
+  margin-top: 150px;
+  top: 0;
+  right: -93px;
+  background: linear-gradient(180deg, #FFFFFF 0%, rgba(255, 255, 255, 0.5) 100%);
+  cursor: pointer;
+}
+
+.carousel-next-button {
+  position: absolute;
+  width: 50px;
+  height: 39.5px;
+  left: 124px;
+  top: 315px;
 }
 </style>
