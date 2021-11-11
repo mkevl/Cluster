@@ -14,7 +14,7 @@
         </div>
       </li>
     </ul>
-    <div class="carousel-next-slider" @click="onCarouselNextClick()">
+    <div class="carousel-next-slider" @click="onCarouselNextClick">
       <img class="carousel-next-button" src="/assets/next_button.svg" alt=""/>
     </div>
   </div>
@@ -82,13 +82,12 @@ export default {
     computeLiWidth() {
       this.data.forEach((item, index) => {
         const listItem = document.getElementById(`carousel-list-item-${index}`)
-        console.log(listItem.parentElement.parentElement.offsetWidth)
         const width = (listItem.parentElement.parentElement.offsetWidth * 93) / 100
+        this.listWidth = width
         listItem.style.width = `${width}px`
       })
     },
     onCarouselNextClick() {
-      console.log(this.listWidth)
       this.$refs['list-carousel'].scrollLeft += this.listWidth
     }
   },
