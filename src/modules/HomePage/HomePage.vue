@@ -9,6 +9,7 @@
     <third-section/>
     <fourth-section :phone-number="phoneNumber" :email="email"/>
     <fifth-section/>
+    <sixth-section/>
     <seventh-section :phone-number="phoneNumber" :email="email"/>
   </div>
 </template>
@@ -23,11 +24,13 @@ import {createNamespacedHelpers} from "vuex";
 import ResultsModal from "./ResultsModal";
 import ContactModal from "./ContactModal";
 import SeventhSection from "./SeventhSection";
+import SixthSection from "./SixthSection";
 
 const {mapState, mapActions} = createNamespacedHelpers('results');
 export default {
   name: "HomePage",
   components: {
+    SixthSection,
     SeventhSection,
     ContactModal, ResultsModal, FifthSection, FourthSection, ThirdSection, SecondSection, FirstSection
   },

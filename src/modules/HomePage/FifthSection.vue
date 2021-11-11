@@ -85,6 +85,7 @@ export default {
   position: relative;
   height: 1024px;
   background: linear-gradient(136.35deg, #2C1D7A -16.03%, #1E1647 75.59%);
+  overflow: hidden;
 }
 
 .background-image {
