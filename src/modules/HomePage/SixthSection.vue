@@ -9,6 +9,7 @@
           <span class="carousel-stroke"/>
           <object class="carousel-top-quote" data="/assets/top_quote.svg" type="image/svg+xml"/>
           <object class="carousel-bottom-quote" data="/assets/bottom_quote.svg" type="image/svg+xml"/>
+          <p class="feedback-text">{{ item.feedback }}</p>
         </div>
       </li>
     </ul>
@@ -82,7 +83,6 @@ export default {
         const listItem = document.getElementById(`carousel-list-item-${index}`)
         console.log(listItem.parentElement.parentElement.offsetWidth)
         const width = (listItem.parentElement.parentElement.offsetWidth * 93) / 100
-        this.listWidth = width
         listItem.style.width = `${width}px`
       })
     },
@@ -188,6 +188,19 @@ export default {
   position: absolute;
   margin-left: 493px;
   margin-top: 380px;
+}
+
+.feedback-text {
+  position: absolute;
+  max-width: 592px;
+  height: 134px;
+  font-family: Helvetica, sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 24px;
+  line-height: 170%;
+  color: #212529;
+  margin: 0 0 0 237px
 }
 
 @media all and (max-width: 480px) {
