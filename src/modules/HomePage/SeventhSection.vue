@@ -4,7 +4,7 @@
     <p class="contact-title">დაგვიკავშირდი</p>
     <ul class="faq-list">
       <li class="" v-for="(item, index) in faqData" :key="index">
-        <div class="faq-list-item d-flex justify-content-between" @click="toggleFAQ(index)">
+        <div class="faq-list-item d-flex justify-content-between" @click="toggleFAQ(item)">
           <p class="faq-list-question">{{ item.question }}</p>
           <img v-if="item.isActive" class="toggle-icon" src="/assets/icons/minus_icon.svg" alt="">
           <img v-else class="toggle-icon" src="/assets/icons/plus_icon.svg" alt="">
@@ -49,9 +49,17 @@ export default {
     }
   },
   methods: {
-    toggleFAQ(index) {
-      this.faqData[index].isActive = !this.faqData[index].isActive
-      this.faqData[index].style = this.faqData[index].isActive ? {display: 'block'} : {display: 'none'};
+    toggleFAQ(item) {
+      this.faqData.map(d => {
+        if (d.uuid === item.uuid) {
+          d.isActive = !d.isActive
+          d.style = d.isActive ? {display: 'block'} : {display: 'none'};
+        } else {
+          d.isActive = false
+          d.style = {display: 'none'}
+        }
+        return d
+      })
     },
   },
 }
@@ -98,9 +106,12 @@ export default {
   margin-top: 246px;
   margin-left: 117px;
   padding: 0;
+  height: 368px;
+  overflow-x: auto;
 
   > li {
     list-style-type: none;
+    margin-right: 30px;
   }
 }
 
