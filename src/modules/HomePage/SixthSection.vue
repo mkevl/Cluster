@@ -2,18 +2,15 @@
   <div class="main-page-sixth-section">
     <span class="feedback-stroke"/>
     <p class="feedback-title">უკუკავშირი</p>
-    <ul class="carousel-list" ref="list-carousel">
-      <li v-for="(item, index) in data" :key="item.uuid">
-        <div class="carousel-list-item-container" :id="`carousel-list-item-${index}`">
-          <img class="carousel-logo" :src="item.logo_url" alt="">
-          <span class="carousel-stroke"/>
-          <object class="carousel-top-quote" data="/assets/top_quote.svg" type="image/svg+xml"/>
-          <object class="carousel-bottom-quote" data="/assets/bottom_quote.svg" type="image/svg+xml"/>
-          <p class="feedback-text">{{ item.feedback }}</p>
-          <p class="feedback-author">-{{ item.author }}</p>
-        </div>
-      </li>
-    </ul>
+    <div class="carousel-list">
+      <img class="carousel-logo" :src="activeItem.logo_url" alt="">
+      <span class="carousel-stroke"/>
+      <object class="carousel-top-quote" data="/assets/top_quote.svg" type="image/svg+xml"/>
+      <object class="carousel-bottom-quote" data="/assets/bottom_quote.svg" type="image/svg+xml"/>
+      <p class="feedback-text">{{ activeItem.feedback }}</p>
+      <p class="feedback-author">-{{ activeItem.author }}</p>
+    </div>
+    <img class="carousel-next-item-logo" :src="nextItem.logo_url" alt="">
     <div class="carousel-next-slider" @click="onCarouselNextClick">
       <img class="carousel-next-button" src="/assets/next_button.svg" alt=""/>
     </div>
@@ -30,71 +27,101 @@ export default {
           uuid: '1',
           logo_url: '/assets/tweeter_logo.png',
           feedback: 'პრიორიტეტულია მდგრადი მასალების გამოყენება. კოლექციების შექმნისას, გარდა ეკოლოგიური ფაქტორისა',
-          author: 'ANa Gloveli'
+          author: 'ANa Gloveli',
+          isActive: true,
+          isNextItem: false,
         },
         {
           uuid: '2',
           logo_url: '/assets/providers/tbc_logo_2.png',
           feedback: 'პრიორიტეტულია მდგრადი მასალების გამოყენება. კოლექციების შექმნისას, გარდა ეკოლოგიური ფაქტორისა',
-          author: 'ANa Gloveli'
+          author: 'ANa Gloveli',
+          isActive: false,
+          isNextItem: false,
         },
         {
           uuid: '3',
           logo_url: '/assets/tweeter_logo.png',
           feedback: 'პრიორიტეტულია მდგრადი მასალების გამოყენება. კოლექციების შექმნისას, გარდა ეკოლოგიური ფაქტორისა',
-          author: 'ANa Gloveli'
+          author: 'ANa Gloveli',
+          isActive: false,
+          isNextItem: false,
         },
         {
           uuid: '4',
           logo_url: '/assets/providers/tbc_logo_2.png',
           feedback: 'პრიორიტეტულია მდგრადი მასალების გამოყენება. კოლექციების შექმნისას, გარდა ეკოლოგიური ფაქტორისა',
-          author: 'ANa Gloveli'
+          author: 'ANa Gloveli',
+          isActive: false,
+          isNextItem: false,
         },
         {
           uuid: '5',
           logo_url: '/assets/tweeter_logo.png',
           feedback: 'პრიორიტეტულია მდგრადი მასალების გამოყენება. კოლექციების შექმნისას, გარდა ეკოლოგიური ფაქტორისა',
-          author: 'ANa Gloveli'
+          author: 'ANa Gloveli',
+          isActive: false,
+          isNextItem: false,
         },
         {
           uuid: '6',
           logo_url: '/assets/providers/tbc_logo_2.png',
           feedback: 'პრიორიტეტულია მდგრადი მასალების გამოყენება. კოლექციების შექმნისას, გარდა ეკოლოგიური ფაქტორისა',
-          author: 'ANa Gloveli'
+          author: 'ANa Gloveli',
+          isActive: false,
+          isNextItem: false,
         },
         {
           uuid: '7',
           logo_url: '/assets/tweeter_logo.png',
           feedback: 'პრიორიტეტულია მდგრადი მასალების გამოყენება. კოლექციების შექმნისას, გარდა ეკოლოგიური ფაქტორისა',
-          author: 'ANa Gloveli'
+          author: 'ANa Gloveli',
+          isActive: false,
+          isNextItem: false,
         },
         {
           uuid: '8',
           logo_url: '/assets/providers/tbc_logo_2.png',
           feedback: 'პრიორიტეტულია მდგრადი მასალების გამოყენება. კოლექციების შექმნისას, გარდა ეკოლოგიური ფაქტორისა',
-          author: 'ANa Gloveli'
+          author: 'ANa Gloveli',
+          isActive: false,
+          isNextItem: false,
         },
       ],
       listWidth: 0,
     }
   },
-  methods: {
-    computeLiWidth() {
-      this.data.forEach((item, index) => {
-        const listItem = document.getElementById(`carousel-list-item-${index}`)
-        const width = (listItem.parentElement.parentElement.offsetWidth * 93) / 100
-        this.listWidth = width
-        listItem.style.width = `${width}px`
+  computed: {
+    activeItem() {
+      return this.data.find((item, index) => {
+        if (item.isActive) {
+          if (this.data[index + 1]) {
+            this.data[index + 1].isNextItem = true
+          } else {
+            this.data[0].isNextItem = true
+          }
+          return true
+        }
+        return false
       })
     },
+    nextItem() {
+      return this.data.find(item => item.isNextItem)
+    },
+  },
+  methods: {
     onCarouselNextClick() {
-      this.$refs['list-carousel'].scrollLeft += this.listWidth
+      this.data.map(item => item.isActive = false)
+      let index = this.data.findIndex(item => item.isNextItem)
+      this.data[index].isActive = true
+      this.data[index].isNextItem = false
+      if (this.data[index + 1]) {
+        this.data[index + 1].isNextItem = true
+      } else {
+        this.data[0].isNextItem = true
+      }
     }
   },
-  mounted() {
-    this.computeLiWidth();
-    window.addEventListener('resize', this.computeLiWidth)
-  }
 }
 </script>
 
@@ -147,19 +174,6 @@ export default {
 
 .carousel-list {
   margin: 24px 20px 0 192px;
-  position: relative;
-  display: flex;
-  overflow: hidden;
-  padding: 0;
-  height: 100%;
-
-  > li {
-    list-style-type: none;
-    display: inline-block;
-    padding: 0;
-    position: relative;
-    width: 100%;
-  }
 }
 
 .carousel-list-item-container {
@@ -170,6 +184,14 @@ export default {
   margin: 116px 0 0 0;
   width: 86px;
   height: 86px;
+}
+
+.carousel-next-item-logo {
+  position: absolute;
+  width: 86px;
+  height: 86px;
+  top: 348px;
+  right: 25px;
 }
 
 .carousel-stroke {
