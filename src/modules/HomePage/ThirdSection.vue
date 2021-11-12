@@ -43,6 +43,9 @@ import ContentSpinner from "./ContentSpinner";
 const {mapState, mapActions} = createNamespacedHelpers('results');
 export default {
   name: "ThirdSection",
+  props: {
+    baseUrl: String
+  },
   components: {ContentSpinner},
   data() {
     return {
@@ -50,7 +53,6 @@ export default {
       windowWidth: window.innerWidth,
       isScrolled: false,
       localProviders: [],
-      baseUrl: process.env.VUE_APP_API_HOST,
       loading: false,
     }
   },

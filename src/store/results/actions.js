@@ -1,17 +1,24 @@
 import {
   HIDE_CONTACT_MODAL,
   HIDE_RESULTS_MODAL,
+  SET_FEEDBACK_DATA,
   SET_PROVIDERS,
   SHOW_CONTACT_MODAL,
   SHOW_RESULTS_MODAL
 } from "./mutation-types";
 import httpService from "../../core/services/httpService";
-// localhost:8000/api/v1/feedback/
 
 export async function getAllProvider({commit}) {
   const {success, body} = await httpService.get(`/v1/insurance/providers`)
   if (success) {
     commit(SET_PROVIDERS, body)
+  }
+}
+
+export async function getFeedbackData({commit}) {
+  const {success, body} = await httpService.get(`/v1/feedback`)
+  if (success) {
+    commit(SET_FEEDBACK_DATA, body)
   }
 }
 

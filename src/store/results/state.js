@@ -15,6 +15,7 @@ const STATE = {
     }
   },
   providers: [],
+  feedbackData: [],
 };
 
 export default STATE;

@@ -1,6 +1,7 @@
 import {
   HIDE_CONTACT_MODAL,
   HIDE_RESULTS_MODAL,
+  SET_FEEDBACK_DATA,
   SET_PROVIDERS,
   SHOW_CONTACT_MODAL,
   SHOW_RESULTS_MODAL
@@ -42,6 +43,11 @@ export default {
   [SET_PROVIDERS](state, data) {
     if (data) {
       state.providers = [...data]
+    }
+  },
+  [SET_FEEDBACK_DATA](state, data) {
+    if (data) {
+      state.feedbackData = [...data]
     }
   }
 }

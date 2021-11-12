@@ -82,11 +82,13 @@ import ContactButton from "./ContactButton";
 const {mapState, mapActions} = createNamespacedHelpers('results');
 export default {
   name: "ResultsModal",
+  props: {
+    baseUrl: String,
+  },
   components: {ContactButton},
   data() {
     return {
       windowWidth: window.innerWidth,
-      baseUrl: process.env.VUE_APP_API_HOST
     }
   },
   computed: {

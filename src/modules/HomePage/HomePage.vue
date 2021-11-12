@@ -1,15 +1,15 @@
 <template>
   <div v-if="isResultsModal || isContactModal">
-    <results-modal v-if="isResultsModal"/>
+    <results-modal v-if="isResultsModal" :base-url="baseUrl"/>
     <contact-modal v-if="isContactModal" :phone-number="phoneNumber" :email="email" :google-form="googleForm"/>
   </div>
   <div v-else class="main-page">
     <first-section :phone-number="phoneNumber" :email="email" @on-see-results-click="onResultsCLick"/>
     <second-section/>
-    <third-section/>
+    <third-section :base-url="baseUrl"/>
     <fourth-section :phone-number="phoneNumber" :email="email"/>
     <fifth-section/>
-    <sixth-section/>
+    <sixth-section :base-url="baseUrl"/>
     <seventh-section :phone-number="phoneNumber" :email="email"/>
   </div>
 </template>
@@ -45,6 +45,7 @@ export default {
       phoneNumber: '557386688',
       email: 'holla@klaster.ge',
       googleForm: '',
+      baseUrl: process.env.VUE_APP_API_HOST,
     }
   },
   computed: {

@@ -3,15 +3,15 @@
     <span class="feedback-stroke"/>
     <p class="feedback-title">უკუკავშირი</p>
     <div class="carousel-list">
-      <img class="carousel-logo" :src="activeItem.logo_url" alt="">
+      <img class="carousel-logo" :src="`${computeBaseUrl}${activeItem.image_url}`" alt="">
       <span class="carousel-stroke"/>
       <object class="carousel-top-quote" data="/assets/top_quote.svg" type="image/svg+xml"/>
       <object class="carousel-bottom-quote" data="/assets/bottom_quote.svg" type="image/svg+xml"/>
-      <p class="feedback-text">{{ activeItem.feedback }}</p>
-      <p class="feedback-author">-{{ activeItem.author }}</p>
+      <p class="feedback-text">{{ activeItem.feedback_text }}</p>
+      <p class="feedback-author">- {{ activeItem.user_full_name }}</p>
     </div>
-    <img v-if="!isSmallScreen" class="carousel-next-item-logo" :src="nextItem.logo_url" alt="">
-    <div class="carousel-next-slider" @click="onCarouselNextClick">
+    <img v-if="showNextItem" class="carousel-next-item-logo" :src="`${computeBaseUrl}${nextItem.image_url}`" alt="">
+    <div v-if="data.length > 1" class="carousel-next-slider" @click="onCarouselNextClick">
       <img class="carousel-next-button" src="/assets/next_button.svg" alt=""/>
     </div>
     <div v-if="!isSmallScreen" class="d-flex align-items-center justify-content-center carousel-dot">
@@ -24,81 +24,29 @@
 </template>
 
 <script>
+import {createNamespacedHelpers} from "vuex";
+import _ from "lodash";
+
+const {mapState, mapActions} = createNamespacedHelpers('results');
 export default {
   name: "SixthSection",
+  props: {
+    baseUrl: String,
+  },
   data() {
     return {
-      data: [
-        {
-          uuid: '1',
-          logo_url: '/assets/tweeter_logo.png',
-          feedback: 'პრიორიტეტულია aaმდგრადი მასალების გამოყენება. კოლექციების შექმნისას, გარდა ეკოლოგიური ფაქტორისა',
-          author: 'ANa Gloveli',
-          isActive: true,
-          isNextItem: false,
-        },
-        {
-          uuid: '2',
-          logo_url: '/assets/providers/tbc_logo_2.png',
-          feedback: 'პრიორიტეტულია dsdfsdმდგრადი მასალების გამოყენება. კოლექციების შექმნისას, გარდა ეკოლოგიური ფაქტორისა',
-          author: 'ANa Gloveli',
-          isActive: false,
-          isNextItem: false,
-        },
-        {
-          uuid: '3',
-          logo_url: '/assets/tweeter_logo.png',
-          feedback: 'პრიორიტეტულიაdfdg მდგრადი მასალების გამოყენება. კოლექციების შექმნისას, გარდა ეკოლოგიური ფაქტორისა',
-          author: 'ANa Gloveli',
-          isActive: false,
-          isNextItem: false,
-        },
-        {
-          uuid: '4',
-          logo_url: '/assets/providers/tbc_logo_2.png',
-          feedback: 'პრიორიტეტულია მდგრადი მასალების გამოყენება. კოლექციების შექმნისას, გარდა ეკოლოგიური ფაქტორისა',
-          author: 'ANa Gloveli',
-          isActive: false,
-          isNextItem: false,
-        },
-        {
-          uuid: '5',
-          logo_url: '/assets/tweeter_logo.png',
-          feedback: 'პრიორიტეტულია მდგრადი მასალების გამოყენება. კოლექციების შექმნისას, გარდა ეკოლოგიური ფაქტორისა',
-          author: 'ANa Gloveli',
-          isActive: false,
-          isNextItem: false,
-        },
-        {
-          uuid: '6',
-          logo_url: '/assets/providers/tbc_logo_2.png',
-          feedback: 'პრიორიტეტულია მდგრადი მასალების გამოყენება. კოლექციების შექმნისას, გარდა ეკოლოგიური ფაქტორისა',
-          author: 'ANa Gloveli',
-          isActive: false,
-          isNextItem: false,
-        },
-        {
-          uuid: '7',
-          logo_url: '/assets/tweeter_logo.png',
-          feedback: 'პრიორიტეტულია მდგრადი მასალების გამოყენება. კოლექციების შექმნისას, გარდა ეკოლოგიური ფაქტორისა',
-          author: 'ANa Gloveli',
-          isActive: false,
-          isNextItem: false,
-        },
-        {
-          uuid: '8',
-          logo_url: '/assets/providers/tbc_logo_2.png',
-          feedback: 'პრიორიტეტულია მდგრადი მასალების გამოყენება. კოლექციების შექმნისას, გარდა ეკოლოგიური ფაქტორისა',
-          author: 'ANa Gloveli',
-          isActive: false,
-          isNextItem: false,
-        },
-      ],
+      data: [],
       listWidth: 0,
       windowWidth: window.innerWidth,
     }
   },
   computed: {
+    ...mapState({
+      feedbackData: state => state.feedbackData,
+    }),
+    showNextItem() {
+      return !this.isSmallScreen && this.data.length > 1
+    },
     activeItem() {
       return this.data.find((item, index) => {
         if (item.isActive) {
@@ -118,8 +66,16 @@ export default {
     isSmallScreen() {
       return this.windowWidth <= 480;
     },
+    computeBaseUrl() {
+      const len = this.baseUrl.length
+      if (this.baseUrl[len - 1] === '/') {
+        return this.baseUrl.substring(0, this.baseUrl.length - 1);
+      }
+      return this.baseUrl
+    },
   },
   methods: {
+    ...mapActions(['getFeedbackData']),
     onCarouselNextClick() {
       this.data.map(item => item.isActive = false)
       let index = this.data.findIndex(item => item.isNextItem)
@@ -132,7 +88,14 @@ export default {
       }
     }
   },
-  mounted() {
+  async mounted() {
+    await this.getFeedbackData()
+    this.data = _.cloneDeep(this.feedbackData.map((item, index) => {
+      if (index === 0) {
+        item.isActive = true
+      }
+      return item
+    }))
     window.addEventListener('resize', () => {
       this.windowWidth = window.innerWidth
     })
@@ -199,6 +162,7 @@ export default {
   margin: 116px 0 0 0;
   width: 86px;
   height: 86px;
+  border-radius: 50%;
 }
 
 .carousel-next-item-logo {
@@ -207,6 +171,7 @@ export default {
   height: 86px;
   top: 348px;
   right: 25px;
+  border-radius: 50%;
 }
 
 .carousel-stroke {
