@@ -2,7 +2,7 @@
 
 ## First Step
 
-######Copy .env.example to .env and add host url
+##### Copy .env.example to .env and add host url
 
 
 ## Project setup
