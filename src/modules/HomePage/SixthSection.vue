@@ -2,7 +2,7 @@
   <div class="main-page-sixth-section">
     <span class="feedback-stroke"/>
     <p class="feedback-title">უკუკავშირი</p>
-    <div class="carousel-list">
+    <div v-if="activeItem" class="carousel-list">
       <img class="carousel-logo" :src="`${computeBaseUrl}${activeItem.image_url}`" alt="">
       <span class="carousel-stroke"/>
       <object class="carousel-top-quote" data="/assets/top_quote.svg" type="image/svg+xml"/>

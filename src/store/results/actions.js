@@ -13,6 +13,7 @@ export async function getAllProvider({commit}) {
   if (success) {
     commit(SET_PROVIDERS, body)
   }
+  return body
 }
 
 export async function getFeedbackData({commit}) {
@@ -20,6 +21,7 @@ export async function getFeedbackData({commit}) {
   if (success) {
     commit(SET_FEEDBACK_DATA, body)
   }
+  return body
 }
 
 export async function showResultsModal({commit}, {insurance, selectedPackage}) {
