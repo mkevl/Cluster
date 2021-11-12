@@ -30,6 +30,10 @@
 </template>
 
 <script>
+import {createNamespacedHelpers} from "vuex";
+import _ from "lodash";
+
+const {mapState, mapActions} = createNamespacedHelpers('results');
 export default {
   name: "SeventhSection",
   props: {
@@ -38,32 +42,16 @@ export default {
   },
   data() {
     return {
-      faqData: [
-        {
-          uuid: '1',
-          question: 'როგორ დავრეგისტრირდე?',
-          answer: 'მომხმარებელს აქვს შესაძლებლობა კლასტერში გაწევრიანებისას განაცხადოს რომ ნებისმიერი შედეგის შემთხვევაში, არ მიიღებს პროცესში მონაწილე რომელიმე მიმწოდებლის პროდუქტს. მთავარია, ამის შესახებ კლასტერის მენეჯერს ეცნობოს კომპანიის რეგისტრაციისას',
-          isActive: false,
-          style: {display: 'none'}
-        },
-        {
-          uuid: '2',
-          question: 'როგორ ავირიდო არასასურველი მომწოდებელი?როგორ ავირიდო არასასურველი მომწოდებელი?როგორ ავირიდო არასასურველი მომწოდებელი?',
-          answer: 'მომხმარებელს აქვს შესაძლებლობა კლასტერში გაწევრიანებისას განაცხადოს რომ ნებისმიერი შედეგის შემთხვევაში, არ მიიღებს პროცესში მონაწილე რომელიმე მიმწოდებლის პროდუქტს. მთავარია, ამის შესახებ კლასტერის მენეჯერს ეცნობოს კომპანიის რეგისტრაციისას',
-          isActive: false,
-          style: {display: 'none'}
-        },
-        {
-          uuid: '3',
-          question: 'რამდენად უსაფრთხოა კლასტერი?',
-          answer: 'მომხმარებელს აქვს შესაძლებლობა კლასტერში გაწევრიანებისას განაცხადოს რომ ნებისმიერი შედეგის შემთხვევაში, არ მიიღებს პროცესში მონაწილე რომელიმე მიმწოდებლის პროდუქტს. მთავარია, ამის შესახებ კლასტერის მენეჯერს ეცნობოს კომპანიის რეგისტრაციისას',
-          isActive: false,
-          style: {display: 'none'}
-        },
-      ]
+      faqData: []
     }
   },
+  computed: {
+    ...mapState({
+      data: state => state.faqData,
+    }),
+  },
   methods: {
+    ...mapActions(['getFaqData']),
     toggleFAQ(item) {
       this.faqData.map(d => {
         if (d.uuid === item.uuid) {
@@ -77,6 +65,10 @@ export default {
       })
     },
   },
+  async mounted() {
+    await this.getFaqData()
+    this.faqData = _.cloneDeep(this.data.map(d => ({...d, isActive: false, style: {display: 'none'}})))
+  }
 }
 </script>
 

@@ -1,6 +1,7 @@
 import {
   HIDE_CONTACT_MODAL,
   HIDE_RESULTS_MODAL,
+  SET_FAQ_DATA,
   SET_FEEDBACK_DATA,
   SET_PROVIDERS,
   SET_SELECTED_VALUES,
@@ -53,5 +54,10 @@ export default {
   },
   [SET_SELECTED_VALUES](state, data) {
     state.defaultValues = {...data}
+  },
+  [SET_FAQ_DATA](state, data) {
+    if (data) {
+      state.faqData = [...data]
+    }
   }
 }

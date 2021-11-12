@@ -1,6 +1,7 @@
 import {
   HIDE_CONTACT_MODAL,
   HIDE_RESULTS_MODAL,
+  SET_FAQ_DATA,
   SET_FEEDBACK_DATA,
   SET_PROVIDERS,
   SET_SELECTED_VALUES,
@@ -21,6 +22,14 @@ export async function getFeedbackData({commit}) {
   const {success, body} = await httpService.get(`/v1/feedback`)
   if (success) {
     commit(SET_FEEDBACK_DATA, body)
+  }
+  return body
+}
+
+export async function getFaqData({commit}) {
+  const {success, body} = await httpService.get(`/v1/faq`)
+  if (success) {
+    commit(SET_FAQ_DATA, body)
   }
   return body
 }

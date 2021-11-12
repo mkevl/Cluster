@@ -20,6 +20,7 @@ const STATE = {
   },
   providers: [],
   feedbackData: [],
+  faqData: [],
 };
 
 export default STATE;
