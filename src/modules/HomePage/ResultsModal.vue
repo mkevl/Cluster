@@ -50,22 +50,23 @@
     <div class="providers-list">
       <div class="d-flex">
         <div class="providers-first-list-image-background">
-          <img class="provider-list-image" :src="`http://127.0.0.1:8000${providersFirstListItem.provider.provider_logo_url}`" alt="">
+          <img class="provider-list-image" :src="`${computeBaseUrl}${providersFirstListItem.provider.provider_logo_url}`"
+               alt="">
         </div>
-        <p class="provider-first-title">{{ providersFirstListItem.name }}</p>
-        <p class="provider-first-item-price">{{ providersFirstListItem.price_per_month }} $</p>
+        <p class="provider-first-title">{{ providersFirstListItem.provider.name }}</p>
+        <p class="provider-first-item-price">{{ Math.round(providersFirstListItem.price_per_month) }} &#8382;</p>
         <span class="best-offer-stroke"/>
       </div>
       <p class="best-offer-text">&bull; საუკეთესო შეთავაზება</p>
-      <p class="last-update">ბოლოს განახლდა <br/> {{ providersFirstListItem.last_updated_date }}</p>
+      <p class="last-update">ბოლოს განახლდა <br/> {{ getFormattedDate }}</p>
       <div class="provider-list-second-section">
         <div class="providers-list-item" v-for="(item) in packageData" :key="item.uuid">
           <div class="d-flex">
             <div class="providers-list-image-background">
-              <img class="provider-list-image" :src="item.provider.provider_logo_url" alt="">
+              <img class="provider-list-image" :src="`${computeBaseUrl}${item.provider.provider_logo_url}`" alt="">
             </div>
-            <p class="provider-title">{{ item.name }}</p>
-            <p class="provider-item-price">{{ item.price_per_month }} $</p>
+            <p class="provider-title">{{ item.provider.name }}</p>
+            <p class="provider-item-price">{{ Math.round(item.price_per_month) }} &#8382;</p>
           </div>
         </div>
       </div>
@@ -84,6 +85,7 @@ export default {
   data() {
     return {
       windowWidth: window.innerWidth,
+      baseUrl: process.env.VUE_APP_API_HOST
     }
   },
   computed: {
@@ -102,6 +104,18 @@ export default {
     isSmallScreen() {
       return this.windowWidth <= 480
     },
+    computeBaseUrl() {
+      const len = this.baseUrl.length
+      if (this.baseUrl[len - 1] === '/') {
+        return this.baseUrl.substring(0, this.baseUrl.length - 1);
+      }
+      return this.baseUrl
+    },
+    getFormattedDate() {
+      const date = new Date(this.providersFirstListItem.price_last_updated_at)
+      const year = date.getFullYear().toString().substring(2)
+      return `${date.getMonth()}.${date.getDate()}.${year}`
+    }
   },
   methods: {
     ...mapActions(['hideResultsModal']),
@@ -555,7 +569,9 @@ export default {
 }
 
 .provider-first-title {
-  width: 200px;
+  max-width: 170px;
+  overflow: hidden;
+  text-overflow: ellipsis;
   height: 25.43px;
   font-family: Montserrat, sans-serif;
   font-style: normal;
@@ -568,7 +584,9 @@ export default {
 }
 
 .provider-title {
-  width: 200px;
+  max-width: 170px;
+  overflow: hidden;
+  text-overflow: ellipsis;
   height: 25.43px;
   font-family: Montserrat, sans-serif;
   font-style: normal;
@@ -582,7 +600,7 @@ export default {
 
 .provider-first-item-price {
   position: absolute;
-  width: 59px;
+  min-width: 59px;
   height: 25px;
   font-family: Montserrat, sans-serif;
   font-style: normal;
@@ -596,7 +614,7 @@ export default {
 
 .provider-item-price {
   position: absolute;
-  width: 59px;
+  min-width: 59px;
   height: 25px;
   font-family: Montserrat, sans-serif;
   font-style: normal;
