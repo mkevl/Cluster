@@ -48,20 +48,21 @@
     </ul>
     <p class="proposed-text">შემოთავაზებული ფასები</p>
     <div class="providers-list">
-      <div class="d-flex">
+      <div v-if="providerExist" class="d-flex">
         <div class="providers-first-list-image-background">
-          <img class="provider-list-image" :src="`${computeBaseUrl}${providersFirstListItem.provider.provider_logo_url}`"
+          <img class="provider-list-image"
+               :src="`${computeBaseUrl}${providersFirstListItem.provider.provider_logo_url}`"
                alt="">
         </div>
         <p class="provider-first-title">{{ providersFirstListItem.provider.name }}</p>
         <p class="provider-first-item-price">{{ Math.round(providersFirstListItem.price_per_month) }} &#8382;</p>
         <span class="best-offer-stroke"/>
       </div>
-      <p class="best-offer-text">&bull; საუკეთესო შეთავაზება</p>
-      <p class="last-update">ბოლოს განახლდა <br/> {{ getFormattedDate }}</p>
+      <p v-if="providerExist" class="best-offer-text">&bull; საუკეთესო შეთავაზება</p>
+      <p v-if="providerExist" class="last-update">ბოლოს განახლდა <br/> {{ getFormattedDate }}</p>
       <div class="provider-list-second-section">
-        <div class="providers-list-item" v-for="(item) in packageData" :key="item.uuid">
-          <div class="d-flex">
+        <div class="providers-list-item" v-for="(item) in otherProviders" :key="item.uuid">
+          <div v-if="item && item.provider" class="d-flex">
             <div class="providers-list-image-background">
               <img class="provider-list-image" :src="`${computeBaseUrl}${item.provider.provider_logo_url}`" alt="">
             </div>
@@ -96,6 +97,9 @@ export default {
     providersFirstListItem() {
       return this.packageData[0];
     },
+    otherProviders() {
+      return this.packageData.slice(1)
+    },
     getDays() {
       const date = new Date(), y = date.getFullYear(), m = date.getMonth(), currentDay = date.getDate();
       const monthLastDay = new Date(y, m + 1, 0).getDate();
@@ -115,7 +119,10 @@ export default {
       const date = new Date(this.providersFirstListItem.price_last_updated_at)
       const year = date.getFullYear().toString().substring(2)
       return `${date.getMonth()}.${date.getDate()}.${year}`
-    }
+    },
+    providerExist() {
+      return this.providersFirstListItem && this.providersFirstListItem.provider
+    },
   },
   methods: {
     ...mapActions(['hideResultsModal']),
