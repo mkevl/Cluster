@@ -56,9 +56,8 @@ export default {
   },
   methods: {
     ...mapActions(['showResultsModal']),
-    onResultsCLick(insurance, selectedPackage) {
-      insurance = insurance.life ? 'life' : 'health'
-      this.showResultsModal({insurance, selectedPackage});
+    onResultsCLick(selectedValues) {
+      this.showResultsModal(selectedValues);
     },
   },
 }

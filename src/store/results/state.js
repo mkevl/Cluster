@@ -1,4 +1,8 @@
 const STATE = {
+  defaultValues: {
+    package: 'minimal',
+    insurance: 'life',
+  },
   results: {
     modal: {
       show: false,

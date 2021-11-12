@@ -3,6 +3,7 @@ import {
   HIDE_RESULTS_MODAL,
   SET_FEEDBACK_DATA,
   SET_PROVIDERS,
+  SET_SELECTED_VALUES,
   SHOW_CONTACT_MODAL,
   SHOW_RESULTS_MODAL
 } from "./mutation-types";
@@ -24,9 +25,10 @@ export async function getFeedbackData({commit}) {
   return body
 }
 
-export async function showResultsModal({commit}, {insurance, selectedPackage}) {
-  const packageData = await httpService.get(`/v1/insurance/packages?insurance_type=${insurance}&package_type=${selectedPackage}`)
-  const statisticData = await httpService.get(`/v1/customers/stats?insurance_type=${insurance}&package_type=${selectedPackage}`)
+export async function showResultsModal({commit}, data) {
+  commit(SET_SELECTED_VALUES, data)
+  const packageData = await httpService.get(`/v1/insurance/packages?insurance_type=${data.insurance}&package_type=${data.package}`)
+  const statisticData = await httpService.get(`/v1/customers/stats?insurance_type=${data.insurance}&package_type=${data.package}`)
   if (packageData.success && statisticData.success) {
     const data = {
       packageData: packageData.body,

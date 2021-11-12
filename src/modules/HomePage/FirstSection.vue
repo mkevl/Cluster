@@ -5,14 +5,14 @@
     <p class="main-description">პლატფორმა საერთო ინტერესების გარშემო გაერთიანებისთვის</p>
     <p class="insurance-title">აირჩიე დაზღვევა</p>
     <div class="d-flex justify-content-center insurance-buttons">
-      <div class="d-flex align-items-center" :class="{'active-insurance-button': isActive.life}">
-        <b-button class="insurance-option-button" :class="{'active-button-background': isActive.life}" size="sm"
+      <div class="d-flex align-items-center" :class="{'active-insurance-button': isLife}">
+        <b-button class="insurance-option-button" :class="{'active-button-background': isLife}" size="sm"
                   @click="onSelectButtonClick('life')">
           <span :class="getActiveLifeClass">სიცოცხლის</span>
         </b-button>
       </div>
-      <div class="d-flex align-items-center last-insurance-btn" :class="{'active-insurance-button': isActive.health}">
-        <b-button class="insurance-option-button" :class="{'active-button-background': isActive.health}" size="sm"
+      <div class="d-flex align-items-center last-insurance-btn" :class="{'active-insurance-button': isHealth}">
+        <b-button class="insurance-option-button" :class="{'active-button-background': isHealth}" size="sm"
                   @click="onSelectButtonClick('health')">
           <span :class="getActiveHealthClass">ჯანმრთელობის</span>
         </b-button>
@@ -20,9 +20,10 @@
     </div>
     <div class="insurance-package">
       <p class="package-text">აირჩიე პაკეტი</p>
-      <b-form-radio-group v-model="checked" class="package-radio-buttons">
+      <b-form-radio-group v-model="checked" class="package-radio-buttons" @change="onPackageChange">
         <b-form-radio v-for="item in options" class="ml-4" :class="item.class" :key="item.value" :value="item.value">
-          <p class="mb-0 ml-3 radio-button-label" :class="{'active-radio-button': checked === item.value}">
+          <p class="mb-0 ml-3 radio-button-label"
+             :class="{'active-radio-button': selectedValues.package === item.value}">
             {{ item.text }}
           </p>
         </b-form-radio>
@@ -51,6 +52,10 @@
 </template>
 
 <script>
+import {createNamespacedHelpers} from "vuex";
+import _ from "lodash";
+
+const {mapState} = createNamespacedHelpers('results');
 export default {
   name: "FirstSection",
   props: {
@@ -66,33 +71,44 @@ export default {
         {value: 'improved', text: 'გაუმჯობესებული', class: 'last-radio-button'},
       ],
       checked: 'minimal',
-      isActive: {
-        life: true,
-        health: false,
-      },
+      selectedValues: {},
     }
   },
   computed: {
+    ...mapState({
+      defaultValues: state => state.defaultValues,
+    }),
     getActiveLifeClass() {
-      return this.isActive.life ? 'insurance-active-text' : 'insurance-button-text'
+      return this.isLife ? 'insurance-active-text' : 'insurance-button-text'
     },
     getActiveHealthClass() {
-      return this.isActive.health ? 'insurance-active-text' : 'insurance-button-text'
+      return this.isHealth ? 'insurance-active-text' : 'insurance-button-text'
+    },
+    isLife() {
+      return this.selectedValues.insurance === 'life'
+    },
+    isHealth() {
+      return this.selectedValues.insurance === 'health'
     },
   },
   methods: {
     onSelectButtonClick(type) {
       if (type === 'life') {
-        this.isActive.life = true
-        this.isActive.health = false
+        this.selectedValues.insurance = 'life'
       } else {
-        this.isActive.life = false
-        this.isActive.health = true
+        this.selectedValues.insurance = 'health'
       }
     },
-    onResultsCLick() {
-      this.$emit('on-see-results-click', this.isActive, this.checked)
+    onPackageChange(value) {
+      this.selectedValues.package = value
     },
+    onResultsCLick() {
+      this.$emit('on-see-results-click', this.selectedValues)
+    },
+  },
+  mounted() {
+    this.selectedValues = _.cloneDeep(this.defaultValues)
+    this.checked = this.selectedValues.package
   }
 }
 </script>

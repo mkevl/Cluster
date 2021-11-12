@@ -3,6 +3,7 @@ import {
   HIDE_RESULTS_MODAL,
   SET_FEEDBACK_DATA,
   SET_PROVIDERS,
+  SET_SELECTED_VALUES,
   SHOW_CONTACT_MODAL,
   SHOW_RESULTS_MODAL
 } from "./mutation-types";
@@ -49,5 +50,8 @@ export default {
     if (data) {
       state.feedbackData = [...data]
     }
+  },
+  [SET_SELECTED_VALUES](state, data) {
+    state.defaultValues = {...data}
   }
 }
