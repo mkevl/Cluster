@@ -125,7 +125,7 @@ export default {
   position: absolute;
   width: 72px;
   height: 18px;
-  right: 350px;
+  left: 1017px;
   top: 233px;
   font-family: Helvetica, sans-serif;
   font-style: normal;
