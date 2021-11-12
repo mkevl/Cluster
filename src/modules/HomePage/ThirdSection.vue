@@ -1,5 +1,6 @@
 <template>
-  <div class="main-page-third-section">
+  <content-spinner v-if="loading" :show="loading"/>
+  <div v-else class="main-page-third-section">
     <span class="provider-stroke"/>
     <p class="provider-title">პარტნიორი სადაზღვეო კომპანიები</p>
     <div :class="getProviderClass">
@@ -37,10 +38,12 @@
 <script>
 import _ from "lodash";
 import {createNamespacedHelpers} from "vuex";
+import ContentSpinner from "./ContentSpinner";
 
 const {mapState, mapActions} = createNamespacedHelpers('results');
 export default {
   name: "ThirdSection",
+  components: {ContentSpinner},
   data() {
     return {
       activeProvider: {},
@@ -48,6 +51,7 @@ export default {
       isScrolled: false,
       localProviders: [],
       baseUrl: process.env.VUE_APP_API_HOST,
+      loading: false,
     }
   },
   computed: {
@@ -87,10 +91,13 @@ export default {
     }
   },
   async mounted() {
+    this.loading = true
+
     await this.getAllProvider()
     this.localProviders = _.cloneDeep(this.providers)
     this.activeProvider = {...this.providers[0]}
 
+    this.loading = false
     window.addEventListener('resize', () => {
       this.windowWidth = window.innerWidth
     })
