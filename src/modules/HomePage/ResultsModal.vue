@@ -50,7 +50,7 @@
     <div class="providers-list">
       <div class="d-flex">
         <div class="providers-first-list-image-background">
-          <img class="provider-list-image" :src="providersFirstListItem.provider_logo_url" alt="">
+          <img class="provider-list-image" :src="`http://127.0.0.1:8000${providersFirstListItem.provider.provider_logo_url}`" alt="">
         </div>
         <p class="provider-first-title">{{ providersFirstListItem.name }}</p>
         <p class="provider-first-item-price">{{ providersFirstListItem.price_per_month }} $</p>
@@ -62,7 +62,7 @@
         <div class="providers-list-item" v-for="(item) in packageData" :key="item.uuid">
           <div class="d-flex">
             <div class="providers-list-image-background">
-              <img class="provider-list-image" :src="item.provider_logo_url" alt="">
+              <img class="provider-list-image" :src="item.provider.provider_logo_url" alt="">
             </div>
             <p class="provider-title">{{ item.name }}</p>
             <p class="provider-item-price">{{ item.price_per_month }} $</p>
@@ -551,6 +551,7 @@ export default {
   width: 37.14px;
   height: 37.14px;
   margin: 13.93px;
+  border-radius: 50%;
 }
 
 .provider-first-title {
