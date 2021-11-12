@@ -10,11 +10,11 @@
       <p class="feedback-text">{{ activeItem.feedback }}</p>
       <p class="feedback-author">-{{ activeItem.author }}</p>
     </div>
-    <img class="carousel-next-item-logo" :src="nextItem.logo_url" alt="">
+    <img v-if="!isSmallScreen" class="carousel-next-item-logo" :src="nextItem.logo_url" alt="">
     <div class="carousel-next-slider" @click="onCarouselNextClick">
       <img class="carousel-next-button" src="/assets/next_button.svg" alt=""/>
     </div>
-    <div class="d-flex align-items-center justify-content-center carousel-dot">
+    <div v-if="!isSmallScreen" class="d-flex align-items-center justify-content-center carousel-dot">
       <div class="carousel-dot-item" v-for="item in data" :key="item.uuid">
         <img v-if="item.isActive" src="/assets/active_bull.svg" alt="">
         <img v-else src="/assets/little_bull.svg" alt="">
@@ -32,7 +32,7 @@ export default {
         {
           uuid: '1',
           logo_url: '/assets/tweeter_logo.png',
-          feedback: 'პრიორიტეტულია მდგრადი მასალების გამოყენება. კოლექციების შექმნისას, გარდა ეკოლოგიური ფაქტორისა',
+          feedback: 'პრიორიტეტულია aaმდგრადი მასალების გამოყენება. კოლექციების შექმნისას, გარდა ეკოლოგიური ფაქტორისა',
           author: 'ANa Gloveli',
           isActive: true,
           isNextItem: false,
@@ -40,7 +40,7 @@ export default {
         {
           uuid: '2',
           logo_url: '/assets/providers/tbc_logo_2.png',
-          feedback: 'პრიორიტეტულია მდგრადი მასალების გამოყენება. კოლექციების შექმნისას, გარდა ეკოლოგიური ფაქტორისა',
+          feedback: 'პრიორიტეტულია dsdfsdმდგრადი მასალების გამოყენება. კოლექციების შექმნისას, გარდა ეკოლოგიური ფაქტორისა',
           author: 'ANa Gloveli',
           isActive: false,
           isNextItem: false,
@@ -48,7 +48,7 @@ export default {
         {
           uuid: '3',
           logo_url: '/assets/tweeter_logo.png',
-          feedback: 'პრიორიტეტულია მდგრადი მასალების გამოყენება. კოლექციების შექმნისას, გარდა ეკოლოგიური ფაქტორისა',
+          feedback: 'პრიორიტეტულიაdfdg მდგრადი მასალების გამოყენება. კოლექციების შექმნისას, გარდა ეკოლოგიური ფაქტორისა',
           author: 'ANa Gloveli',
           isActive: false,
           isNextItem: false,
@@ -95,6 +95,7 @@ export default {
         },
       ],
       listWidth: 0,
+      windowWidth: window.innerWidth,
     }
   },
   computed: {
@@ -114,6 +115,9 @@ export default {
     nextItem() {
       return this.data.find(item => item.isNextItem)
     },
+    isSmallScreen() {
+      return this.windowWidth <= 480;
+    },
   },
   methods: {
     onCarouselNextClick() {
@@ -128,6 +132,11 @@ export default {
       }
     }
   },
+  mounted() {
+    window.addEventListener('resize', () => {
+      this.windowWidth = window.innerWidth
+    })
+  }
 }
 </script>
 
@@ -244,27 +253,6 @@ export default {
   margin: 149px 0 0 237px
 }
 
-@media all and (max-width: 480px) {
-  .carousel-logo {
-    margin: 104px 0 0 13px;
-  }
-
-  .carousel-stroke {
-    display: none;
-  }
-
-  .carousel-top-quote {
-    position: absolute;
-    margin-top: 202px;
-    margin-left: -145px;
-  }
-
-  .carousel-bottom-quote {
-    margin-top: 489px;
-    margin-left: 175px;
-  }
-}
-
 .carousel-next-slider {
   position: absolute;
   width: 308px;
@@ -282,6 +270,57 @@ export default {
   height: 39.5px;
   left: 124px;
   top: 315px;
+}
+
+@media all and (max-width: 480px) {
+  .carousel-list {
+    margin: 104px 0 0 13px;
+  }
+  .carousel-logo {
+    margin: 0;
+  }
+
+  .carousel-stroke {
+    display: none;
+  }
+
+  .feedback-text {
+    max-width: 334px;
+    max-height: 134px;
+    font-size: 20px;
+    line-height: 200%;
+    margin: 68px 0 0 0;
+  }
+
+  .feedback-author {
+    margin: 281px 0 0 4px;
+  }
+
+  .carousel-top-quote {
+    position: absolute;
+    margin-top: 100px;
+    margin-left: -145px;
+  }
+
+  .carousel-bottom-quote {
+    margin-top: 400px;
+    margin-left: 175px;
+  }
+
+  .carousel-next-slider {
+    margin-top: 150px;
+    width: 0;
+    height: 0;
+    background: transparent;
+  }
+
+  .carousel-next-button {
+    width: 15px;
+    height: 25px;
+    right: 110px;
+    left: unset;
+    top: 315px;
+  }
 }
 
 .carousel-dot-item {
