@@ -18,9 +18,8 @@ export default {
     },
   },
   methods: {
-    ...mapActions(['showContactModal', 'hideResultsModal']),
+    ...mapActions(['showContactModal']),
     async onConnectClick() {
-      await this.hideResultsModal();
       await this.showContactModal();
     },
   },
