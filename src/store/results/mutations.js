@@ -1,17 +1,25 @@
-import {HIDE_CONTACT_MODAL, HIDE_RESULTS_MODAL, SHOW_CONTACT_MODAL, SHOW_RESULTS_MODAL} from "./mutation-types";
+import {
+  HIDE_CONTACT_MODAL,
+  HIDE_RESULTS_MODAL,
+  SET_PROVIDERS,
+  SHOW_CONTACT_MODAL,
+  SHOW_RESULTS_MODAL
+} from "./mutation-types";
 
 export default {
   [SHOW_RESULTS_MODAL](state, data) {
     state.results.modal.show = true
-    state.results.modal.packageData = [...data.packageData.sort((a, b) => {
-      if (a.price_per_month < b.price_per_month) {
-        return -1
-      }
-      if (a.price_per_month > b.price_per_month) {
-        return 1
-      }
-      return 0
-    })]
+    if (data.packageData.length) {
+      state.results.modal.packageData = [...data.packageData.sort((a, b) => {
+        if (a.price_per_month < b.price_per_month) {
+          return -1
+        }
+        if (a.price_per_month > b.price_per_month) {
+          return 1
+        }
+        return 0
+      })]
+    }
     state.results.modal.statisticData = {
       companies: data.statisticData.companies,
       persons: data.statisticData.persons,
@@ -30,5 +38,10 @@ export default {
   },
   [HIDE_CONTACT_MODAL](state) {
     state.contact.modal.show = false
+  },
+  [SET_PROVIDERS](state, data) {
+    if (data) {
+      state.providers = [...data]
+    }
   }
 }

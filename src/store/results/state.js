@@ -13,7 +13,8 @@ const STATE = {
     modal: {
       show: false,
     }
-  }
+  },
+  providers: [],
 };
 
 export default STATE;

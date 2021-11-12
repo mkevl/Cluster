@@ -1,9 +1,20 @@
-import {HIDE_CONTACT_MODAL, HIDE_RESULTS_MODAL, SHOW_CONTACT_MODAL, SHOW_RESULTS_MODAL} from "./mutation-types";
+import {
+  HIDE_CONTACT_MODAL,
+  HIDE_RESULTS_MODAL,
+  SET_PROVIDERS,
+  SHOW_CONTACT_MODAL,
+  SHOW_RESULTS_MODAL
+} from "./mutation-types";
 import httpService from "../../core/services/httpService";
-// localhost:8000/api/v1/insurance/providers/
-// localhost:8000/api/v1/insurance/packages/?insurance_type=health&package_type=basic
-// localhost:8000/api/v1/customers/stats?insurance_type=health&package_type=basic
 // localhost:8000/api/v1/feedback/
+
+export async function getAllProvider({commit}) {
+  const {success, body} = await httpService.get(`/v1/insurance/providers`)
+  if (success) {
+    commit(SET_PROVIDERS, body)
+  }
+}
+
 export async function showResultsModal({commit}, {insurance, selectedPackage}) {
   const packageData = await httpService.get(`/v1/insurance/packages?insurance_type=${insurance}&package_type=${selectedPackage}`)
   const statisticData = await httpService.get(`/v1/customers/stats?insurance_type=${insurance}&package_type=${selectedPackage}`)

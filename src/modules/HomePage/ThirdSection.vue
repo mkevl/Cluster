@@ -7,22 +7,22 @@
         <!--<img v-if="isScrolled" class="provider-top-scroll" src="/assets/scroll_vector.svg" alt=""
                @click="scrollUp()"/>-->
         <ul class="providers-list" ref="list-scroll" :style="getProviderScrollStyle">
-          <li v-for="(item, index) in providers" :key="index" class="providers-list-item"
-              :class="{'active-provider-item': item.isActive}" @click="setActiveProvider(item)">
-            <img class="provider-image" :src="item.img_url" alt=""/>
+          <li v-for="(item, index) in localProviders" :key="index" class="providers-list-item"
+              :class="{'active-provider-item': activeProvider.uuid === item.uuid}" @click="setActiveProvider(item)">
+            <img class="provider-image" :src="`${computeBaseUrl}${item.provider_image_url}`" alt=""/>
           </li>
         </ul>
         <img v-if="providers.length >= 5" class="provider-scroll" src="/assets/scroll_vector.svg" alt=""
              @click="scrollDown()">
       </div>
       <div class="provider-info">
-        <img :src="activeProvider.logo_url" alt=""/>
-        <h1 class="provider-info-title">{{ activeProvider.title }}</h1>
+        <img class="provider-logo" :src="`${computeBaseUrl}${activeProvider.provider_logo_url}`" alt=""/>
+        <h1 class="provider-info-title">{{ activeProvider.name }}</h1>
         <p class="provider-info-description">{{ activeProvider.description }}</p>
         <div class="contact-container">
-          <div v-if="activeProvider.tel" class="d-flex">
+          <div v-if="activeProvider.phone" class="d-flex">
             <object class="contact-icon" data="/assets/providers/call_icon.svg" type="image/svg+xml"/>
-            <a class="provider-info-contact" :href="`tel:${activeProvider.tel}`">{{ activeProvider.tel }}</a>
+            <a class="provider-info-contact" :href="`tel:${activeProvider.phone}`">{{ activeProvider.phone }}</a>
           </div>
           <div v-if="activeProvider.link" class="d-flex">
             <object class="contact-icon" data="/assets/providers/browser_icon.svg" type="image/svg+xml"/>
@@ -35,83 +35,45 @@
 </template>
 
 <script>
+import _ from "lodash";
+import {createNamespacedHelpers} from "vuex";
+
+const {mapState, mapActions} = createNamespacedHelpers('results');
 export default {
   name: "ThirdSection",
   data() {
     return {
-      providers: [
-        {
-          id: 1,
-          img_url: '/assets/providers/tbc.png',
-          isActive: true,
-          logo_url: 'assets/providers/tbc_logo.png',
-          title: 'TBC დაზღვევა',
-          description: 'თიბისი დაზღვევა თანამედროვე სადაზღვევო კომპანიაა. ჩვენი მიზანია ციფრული და ტექნოლოგიური მიდგომებით, დაზღვევა მარტივი და ყველასთვის ხელმისაწვდომი გავხადოთ.',
-          tel: '0322 272 727',
-          link: 'tbcinsurance.ge'
-        },
-        {
-          id: 2,
-          img_url: '/assets/providers/irao.png',
-          isActive: false,
-          logo_url: '',
-          title: '',
-          description: '',
-          tel: '',
-          link: ''
-        },
-        {
-          id: 3,
-          img_url: '/assets/providers/ardi.png',
-          isActive: false,
-          logo_url: '',
-          title: '',
-          description: '',
-          tel: '',
-          link: ''
-        },
-        {
-          id: 4,
-          img_url: '/assets/providers/gpi.png',
-          isActive: false,
-          logo_url: '',
-          title: '',
-          description: '',
-          tel: '',
-          link: ''
-        },
-        {
-          id: 5,
-          img_url: '/assets/providers/alfa.png',
-          isActive: false,
-          logo_url: '',
-          title: '',
-          description: '',
-          tel: '',
-          link: ''
-        },
-      ],
       activeProvider: {},
       windowWidth: window.innerWidth,
       isScrolled: false,
+      localProviders: [],
+      baseUrl: process.env.VUE_APP_API_HOST,
     }
   },
   computed: {
+    ...mapState({
+      providers: state => state.providers,
+    }),
     getProviderClass() {
       return this.windowWidth <= 480 ? '' : 'd-flex justify-content-between'
     },
     getProviderScrollStyle() {
       return this.windowWidth <= 480 || this.isScrolled ? {} : {paddingTop: '33px'}
     },
+    computeBaseUrl() {
+      const len = this.baseUrl.length
+      if (this.baseUrl[len - 1] === '/') {
+        return this.baseUrl.substring(0, this.baseUrl.length - 1);
+      }
+      return this.baseUrl
+    },
   },
   methods: {
+    ...mapActions(['getAllProvider']),
     setActiveProvider(item) {
-      this.providers.map(list => {
-        if (list.id === item.id) {
-          list.isActive = true
+      this.localProviders.map(list => {
+        if (list.uuid === item.uuid) {
           this.activeProvider = {...list}
-        } else {
-          list.isActive = false
         }
         return list
       })
@@ -124,8 +86,11 @@ export default {
       this.$refs["list-scroll"].scrollTop -= 150
     }
   },
-  mounted() {
+  async mounted() {
+    await this.getAllProvider()
+    this.localProviders = _.cloneDeep(this.providers)
     this.activeProvider = {...this.providers[0]}
+
     window.addEventListener('resize', () => {
       this.windowWidth = window.innerWidth
     })
@@ -214,6 +179,11 @@ export default {
   width: 180px;
   height: 120px;
   padding: 0 !important;
+}
+
+.provider-logo {
+  width: 63px;
+  height: 36px;
 }
 
 .active-provider-item {
