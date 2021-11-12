@@ -25,9 +25,9 @@
             <object class="contact-icon" data="/assets/providers/call_icon.svg" type="image/svg+xml"/>
             <a class="provider-info-contact" :href="`tel:${activeProvider.phone}`">{{ activeProvider.phone }}</a>
           </div>
-          <div v-if="activeProvider.link" class="d-flex">
+          <div v-if="activeProvider.site" class="d-flex">
             <object class="contact-icon" data="/assets/providers/browser_icon.svg" type="image/svg+xml"/>
-            <a class="provider-info-contact" :href="activeProvider.link" target="_blank">{{ activeProvider.link }}</a>
+            <a class="provider-info-contact" :href="activeProvider.site" target="_blank">{{ activeProvider.site }}</a>
           </div>
         </div>
       </div>

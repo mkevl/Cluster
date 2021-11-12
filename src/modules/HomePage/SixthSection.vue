@@ -86,6 +86,7 @@ export default {
       } else {
         this.data[0].isNextItem = true
       }
+      this.data = [...this.data]
     }
   },
   async mounted() {
