@@ -30,9 +30,15 @@ const {mapState, mapActions} = createNamespacedHelpers('results');
 export default {
   name: "HomePage",
   components: {
+    FirstSection,
+    SecondSection,
+    ThirdSection,
+    FourthSection,
+    FifthSection,
     SixthSection,
     SeventhSection,
-    ContactModal, ResultsModal, FifthSection, FourthSection, ThirdSection, SecondSection, FirstSection
+    ContactModal,
+    ResultsModal,
   },
   data() {
     return {

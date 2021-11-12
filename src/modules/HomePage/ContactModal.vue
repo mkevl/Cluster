@@ -3,7 +3,7 @@
     <div class="first-layer"/>
     <div class="second-layer"/>
     <div class="third-layer"/>
-    <div class="d-flex close-modal" @click="hideContactModal">
+    <div class="close-modal" :class="{'d-flex': !isSmallScreen}" @click="hideContactModal">
       <img src="/assets/close_button.png" alt="">
       <span v-if="!isSmallScreen" class="ml-2">დახურვა</span>
     </div>
@@ -139,6 +139,7 @@ export default {
   .close-modal {
     top: 99px;
     right: 40px;
+    width: auto;
   }
 }
 
@@ -167,8 +168,8 @@ export default {
 
 .contact-description {
   position: absolute;
-  width: 627px;
-  height: 52px;
+  max-width: 627px;
+  max-height: 52px;
   left: 397px;
   top: 390px;
   font-family: Montserrat, sans-serif;
@@ -177,6 +178,72 @@ export default {
   font-size: 16px;
   line-height: 160%;
   color: #EAE2FF;
+}
+
+@media all and (max-width: 480px) {
+  .contact-stroke {
+    top: 187px;
+    left: 27px;
+  }
+
+  .contact-title {
+    width: auto;
+    top: 175px;
+    left: 42px;
+  }
+
+  .contact-description {
+    max-width: 334px;
+    max-height: 104px;
+    left: 40px;
+    top: 251px;
+  }
+}
+
+@media all and (max-width: 480px) {
+  .call-button {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    position: absolute;
+    width: 156px;
+    height: 54px;
+    left: 40px;
+    top: 431px;
+    filter: drop-shadow(0px 20px 40px rgba(10, 226, 159, 0.2));
+    border-radius: 16px;
+    background: #0AE29F;
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+    margin: 0;
+  }
+
+  .call-button:focus {
+    background: #0AE29F !important;
+    box-shadow: unset !important;
+  }
+
+  .call-text {
+    position: static;
+    width: 76px;
+    height: 18px;
+    left: 40px;
+    top: 18px;
+    font-family: Helvetica, sans-serif;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 18px;
+    text-transform: uppercase;
+    color: #095A66;
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+    margin: 0 10px;
+  }
 }
 
 .google-form-button {
@@ -220,7 +287,7 @@ export default {
   flex: none;
   order: 0;
   flex-grow: 0;
-  margin: 0px 10px;
+  margin: 0 10px;
 }
 
 .mail-button {
@@ -266,6 +333,39 @@ export default {
   margin: 0 10px;
 }
 
+@media all and(max-width: 480px) {
+  .google-form-button {
+    left: 42px;
+    top: 509px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    border-radius: 16px;
+    background: rgba(10, 226, 159, 0.1);
+    margin: 0 !important;
+  }
+
+  .google-form-button:focus {
+    background: rgba(10, 226, 159, 0.1) !important;
+    box-shadow: unset !important;
+  }
+
+  .google-form-text {
+    left: 40px;
+    top: 18px;
+    color: #0AE29F;
+  }
+
+  .mail-button {
+    position: absolute;
+    left: 40px;
+    top: 589px;
+    margin: 0;
+  }
+}
+
 .whatsapp-icon {
   position: absolute;
   width: 53.93px;
@@ -276,6 +376,14 @@ export default {
   background: rgba(255, 255, 255, 0.2);
   backdrop-filter: blur(4px);
   border-radius: 50px;
+}
+
+@media all and (max-width: 480px) {
+  .whatsapp-icon {
+    left: 40px;
+    top: 700px;
+    margin: 0;
+  }
 }
 
 .whatsapp-img {
