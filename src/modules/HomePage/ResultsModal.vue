@@ -47,14 +47,29 @@
       </li>
     </ul>
     <p class="proposed-text">შემოთავაზებული ფასები</p>
-<!--    <ul class="providers-list">
-      <li class="providers-first-list-item">
-        <img class="provider-list-image" :src="providersFirstListItem.provider_logo_url" alt="">
-      </li>
-      <li class="providers-list-item" v-for="(item) in packageData" :key="item.uuid">
-          <img class="provider-list-image" :src="item.provider_logo_url" alt="">
-      </li>
-    </ul>-->
+    <div class="providers-list">
+      <div class="d-flex">
+        <div class="providers-first-list-image-background">
+          <img class="provider-list-image" :src="providersFirstListItem.provider_logo_url" alt="">
+        </div>
+        <p class="provider-first-title">{{ providersFirstListItem.name }}</p>
+        <p class="provider-first-item-price">{{ providersFirstListItem.price_per_month }} $</p>
+        <span class="best-offer-stroke"/>
+      </div>
+      <p class="best-offer-text">&bull; საუკეთესო შეთავაზება</p>
+      <p class="last-update">ბოლოს განახლდა <br/> {{ providersFirstListItem.last_updated_date }}</p>
+      <div class="provider-list-second-section">
+        <div class="providers-list-item" v-for="(item) in packageData" :key="item.uuid">
+          <div class="d-flex">
+            <div class="providers-list-image-background">
+              <img class="provider-list-image" :src="item.provider_logo_url" alt="">
+            </div>
+            <p class="provider-title">{{ item.name }}</p>
+            <p class="provider-item-price">{{ item.price_per_month }} $</p>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -485,26 +500,33 @@ export default {
   top: 235px;
   left: 960px;
   display: block !important;
+  height: 685px;
+  width: 340px;
+  overflow-x: hidden;
+  overflow-y: auto;
 }
 
-.providers-first-list-item {
+.provider-list-second-section {
+  position: absolute;
+  top: 136px;
+  left: 8px;
+}
+
+.providers-first-list-image-background {
   position: absolute;
   width: 65px;
   height: 65px;
   background: #191142;
   border-radius: 50%;
-  left: 8px;
+  left: 5px;
   top: 28px;
 }
 
-.providers-list-item {
-  position: absolute;
+.providers-list-image-background {
   width: 65px;
   height: 65px;
   background: #191142;
   border-radius: 50%;
-  left: 8px;
-  top: 136px;
   margin-top: 50px;
 }
 
@@ -513,5 +535,94 @@ export default {
   width: 37.14px;
   height: 37.14px;
   margin: 13.93px;
+}
+
+.provider-first-title {
+  width: 200px;
+  height: 25.43px;
+  font-family: Montserrat, sans-serif;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 20px;
+  color: #EAE2FF;
+  padding: 0;
+  margin: 50px 0 0 80px;
+}
+
+.provider-title {
+  width: 200px;
+  height: 25.43px;
+  font-family: Montserrat, sans-serif;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 20px;
+  color: #EAE2FF;
+  padding: 0;
+  margin: 75px 0 0 15px;
+}
+
+.provider-first-item-price {
+  position: absolute;
+  width: 59px;
+  height: 25px;
+  font-family: Montserrat, sans-serif;
+  font-style: normal;
+  font-weight: 800;
+  font-size: 24px;
+  line-height: 29px;
+  text-align: right;
+  color: #0AE29F;
+  margin: 45px 0 0 249px;
+}
+
+.provider-item-price {
+  position: absolute;
+  width: 59px;
+  height: 25px;
+  font-family: Montserrat, sans-serif;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 18px;
+  line-height: 22px;
+  text-align: right;
+  color: #EAE2FF;
+  margin: 75px 0 0 240px;
+}
+
+.best-offer-text {
+  position: absolute;
+  width: 172px;
+  height: 28px;
+  font-family: Helvetica, sans-serif;
+  font-style: italic;
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 14px;
+  color: #D7CAFD;
+  margin: 45px 0 0 25px;
+}
+
+.last-update {
+  position: absolute;
+  width: 122px;
+  height: 36px;
+  font-family: Helvetica, sans-serif;
+  font-style: italic;
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 150%;
+  text-align: right;
+  color: #D7CAFD;
+  margin: 43px 0 0 185px;
+}
+
+.best-offer-stroke {
+  position: absolute;
+  width: 342px;
+  height: 0;
+  border: 1px solid #100640;
+  margin: 165px 0 0 0;
 }
 </style>
