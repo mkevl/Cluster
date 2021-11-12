@@ -338,7 +338,7 @@ export default {
 
   .time-calculation-container {
     top: 119px;
-    left: 150px;
+    left: 138px;
   }
 }
 
@@ -530,6 +530,22 @@ export default {
   margin-top: 50px;
 }
 
+@media all and (max-width: 480px) {
+  .providers-list {
+    height: 500px;
+    left: 30px;
+    top: 1622px;
+  }
+
+  .provider-list-second-section {
+    left: 0;
+  }
+
+  .providers-first-list-image-background {
+    left: 0;
+  }
+}
+
 .provider-list-image {
   position: absolute;
   width: 37.14px;
@@ -624,5 +640,11 @@ export default {
   height: 0;
   border: 1px solid #100640;
   margin: 165px 0 0 0;
+}
+
+@media all and (max-width: 480px) {
+  .best-offer-stroke {
+    width: 325px;
+  }
 }
 </style>

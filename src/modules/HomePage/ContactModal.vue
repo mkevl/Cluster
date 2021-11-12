@@ -139,6 +139,7 @@ export default {
   .close-modal {
     top: 99px;
     right: 40px;
+    left: unset;
     width: auto;
   }
 }
