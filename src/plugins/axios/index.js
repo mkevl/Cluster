@@ -1,7 +1,7 @@
 import axios from 'axios';
 import Vue from "vue";
 
-const API_ENDPOINT = process.env.VUE_APP_API_HOST || 'http://localhost:8081/';
+const API_ENDPOINT = process.env.VUE_APP_API_HOST || 'https://clusterback.herokuapp.com/';
 
 let config = {
   baseURL: `${API_ENDPOINT}api/`,
