@@ -21,8 +21,9 @@
     <div class="insurance-package">
       <p class="package-text">აირჩიე პაკეტი</p>
       <b-form-radio-group v-model="checked" class="package-radio-buttons" @change="onPackageChange">
-        <b-form-radio v-for="item in options" class="ml-4" :class="item.class" :key="item.value" :value="item.value">
-          <p class="mb-0 ml-3 radio-button-label"
+        <b-form-radio v-for="item in options" class="radio-button-item" :class="item.class" :key="item.value"
+                      :value="item.value">
+          <p class="radio-button-label"
              :class="{'active-radio-button': selectedValues.package === item.value}">
             {{ item.text }}
           </p>
@@ -241,6 +242,12 @@ export default {
   }
 }
 
+@media all and (max-width: 320px) {
+  .insurance-option-button {
+    padding: 10px 9px;
+  }
+}
+
 .insurance-option-button:focus {
   background: rgba(30, 22, 71, 0.3) !important;
   box-shadow: unset !important;
@@ -257,6 +264,12 @@ export default {
 @media all and (max-width: 480px) {
   .active-insurance-button {
     height: 58px;
+  }
+}
+
+@media all and (max-width: 320px) {
+  .active-insurance-button {
+    padding: 0 5px;
   }
 }
 
@@ -287,6 +300,12 @@ export default {
   }
 }
 
+@media all and (max-width: 320px) {
+  .insurance-button-text {
+    font-size: 14px;
+  }
+}
+
 .insurance-active-text {
   font-weight: bold;
   color: #FFFFFF;
@@ -306,6 +325,13 @@ export default {
   .insurance-active-text {
     height: 22px;
     font-size: 16px;
+  }
+}
+
+
+@media all and (max-width: 320px) {
+  .insurance-active-text {
+    font-size: 14px;
   }
 }
 
@@ -344,6 +370,10 @@ export default {
   margin-top: 26px;
 }
 
+.radio-button-item {
+  margin-left: 10px;
+}
+
 .radio-button-label {
   height: 28px;
   font-family: Helvetica, sans-serif;
@@ -352,7 +382,7 @@ export default {
   font-size: 20px;
   line-height: 137.9%;
   color: #FFFFFF;
-  margin-right: 15px;
+  margin: 0 15px 0 10px;
   opacity: 0.7;
 }
 
@@ -361,6 +391,17 @@ export default {
     height: 22px;
     font-size: 16px;
     margin-top: 7px;
+  }
+}
+
+@media all and (max-width: 320px) {
+  .radio-button-item {
+    margin-right: 0;
+  }
+
+  .radio-button-label {
+    font-size: 14px;
+    margin: 5px 15px 0 10px;
   }
 }
 
@@ -377,6 +418,12 @@ export default {
   }
   .last-radio-button {
     margin-top: 40px;
+  }
+}
+
+@media all and (max-width: 320px) {
+  .active-radio-button {
+    font-size: 14px !important;
   }
 }
 
