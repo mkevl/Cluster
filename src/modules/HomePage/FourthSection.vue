@@ -1,28 +1,32 @@
 <template>
   <div class="main-page-fourth-section">
-    <div class="d-flex more-information">
-      <div class="about">
-        <div class="d-flex info">
-          <span class="info-stroke"/>
-          <p class="info-title mb-0">მეტი ინფორმაცია</p>
+    <div class="more-information container-fluid">
+      <div class="row about p-0">
+        <div class="col-lg-6 col-md-12 p-0">
+          <div class="d-flex info">
+            <span class="info-stroke"/>
+            <p class="info-title mb-0">მეტი ინფორმაცია</p>
+          </div>
+          <p class="info-description mb-0">
+            კლასტერის კორპორაციული ხედვაა, გაააზრებინოს მსოფლიოს მასშტაბით, ადამიანებსა და ბიზნესებს მათი ერთიანობის
+            სარფიანობა და გონივრულობა.
+          </p>
+          <div class="d-flex more-info-icons">
+            <a class="info-icons" :href="`mailto:${email}`">
+              <img src="/assets/icons/email_green_icon.svg" alt="">
+            </a>
+            <a class="info-icons" :href="`https://wa.me/${phoneNumber}`" target='_blank'>
+              <img src="/assets/icons/whatsapp_green_icon.svg" alt="">
+            </a>
+            <!--<a class="info-icons ml-5" :href="`https://www.m.me/${messengerUrl}`" target='_blank'>
+                <img class="info-messenger-icon" src="/assets/icons/messenger_green_icon.svg" alt="">
+             </a>-->
+          </div>
+          <contact-button class="info-contact-button"/>
         </div>
-        <p class="info-description mb-0">
-          კლასტერის კორპორაციული ხედვაა, გაააზრებინოს მსოფლიოს მასშტაბით, ადამიანებსა და ბიზნესებს მათი ერთიანობის
-          სარფიანობა და გონივრულობა.
-        </p>
-        <div class="d-flex more-info-icons">
-          <a class="info-icons" :href="`mailto:${email}`">
-            <img src="/assets/icons/email_green_icon.svg" alt="">
-          </a>
-          <a class="info-icons" :href="`https://wa.me/${phoneNumber}`" target='_blank'>
-            <img src="/assets/icons/whatsapp_green_icon.svg" alt="">
-          </a>
-          <!--<a class="info-icons ml-5" :href="`https://www.m.me/${messengerUrl}`" target='_blank'>
-              <img class="info-messenger-icon" src="/assets/icons/messenger_green_icon.svg" alt="">
-           </a>-->
+        <div class="col-lg-6 col-md-12 p-0">
+          <img class="info-video" :src="getVideoImg" alt="">
         </div>
-        <contact-button class="info-contact-button"/>
-        <img class="info-video" :src="getVideoImg" alt="">
       </div>
     </div>
   </div>
@@ -76,25 +80,12 @@ export default {
   border-radius: 200px 0 0 40px;
 }
 
-@media all and (max-width: 480px) {
-  .main-page-fourth-section {
-    height: 1049px;
-  }
-
-  .more-information {
-    width: 374px;
-    height: 887px;
-    left: 40px;
-    top: 88px;
-    background: linear-gradient(139.74deg, #2C1D7A 5.01%, #1E1647 77.08%);
-    border-radius: 64px 0 0 64px;
-  }
+.about {
+  margin-left: 0;
 }
 
 .info {
-  position: absolute;
-  left: 108px;
-  top: 155px;
+  margin: 155px 0 0 108px;
 }
 
 .info-stroke {
@@ -116,25 +107,10 @@ export default {
   height: 77px;
 }
 
-@media all and (max-width: 480px) {
-  .info {
-    left: 41px;
-    top: 79px;
-  }
-
-  .info-title {
-    height: 34px;
-    font-size: 20px;
-    margin-top: -6px;
-  }
-}
-
 .info-description {
-  position: absolute;
-  width: 448px;
+  max-width: 448px;
   height: 159px;
-  left: 108px;
-  top: 213px;
+  margin-left: 108px;
   font-family: Helvetica, sans-serif;
   font-style: normal;
   font-weight: normal;
@@ -143,20 +119,8 @@ export default {
   color: #FFFFFF;
 }
 
-@media all and (max-width: 480px) {
-  .info-description {
-    width: 310px;
-    left: 41px;
-    top: 134px;
-    font-size: 16px;
-  }
-}
-
-
 .more-info-icons {
-  position: absolute;
-  left: 108px;
-  top: 402px;
+  margin-left: 108px;
 }
 
 .info-icons {
@@ -168,17 +132,6 @@ export default {
   margin-right: 34px;
 }
 
-@media all and (max-width: 480px) {
-  .more-info-icons {
-    left: 41px;
-    top: 340px;
-  }
-
-  .info-icons {
-    margin-right: 32px;
-  }
-}
-
 /*.info-messenger-icon {
   position: absolute;
   top: 8px;
@@ -187,28 +140,116 @@ export default {
 }*/
 
 .info-contact-button {
-  position: absolute;
-  left: 108px;
-  top: 490px;
-}
-
-@media all and (max-width: 480px) {
-  .info-contact-button {
-    left: 41px;
-    top: 421px;
-    margin: 0 !important;
-  }
+  margin: 54px 0 0 195px;
 }
 
 .info-video {
-  position: absolute;
-  top: 155px;
+  margin-top: 155px;
   right: 0;
+  width: 100%;
+  height: 651px;
+}
+
+@media all and (max-width: 992px) {
+  .main-page-fourth-section {
+    height: 1049px;
+  }
+
+  .more-information {
+    height: 887px;
+    left: 40px;
+    top: 88px;
+    background: linear-gradient(139.74deg, #2C1D7A 5.01%, #1E1647 77.08%);
+    border-radius: 64px 0 0 64px;
+  }
+
+  .info {
+    margin-left: 41px;
+    margin-top: 79px;
+  }
+
+  .info-title {
+    height: 34px;
+    font-size: 20px;
+    margin-top: -6px;
+  }
+
+  .info-description {
+    max-width: 600px;
+    margin-left: 41px;
+    margin-top: 21px;
+    font-size: 16px;
+    margin-right: 79px;
+  }
+
+  .more-info-icons {
+    margin-left: 41px;
+  }
+
+  .info-icons {
+    margin-right: 32px;
+  }
+
+  .info-contact-button {
+    margin: 41px 0 0 41px;
+  }
+
+  .info-video {
+    margin-top: 45px;
+    margin-left: -39px;
+  }
 }
 
 @media all and (max-width: 480px) {
+  .info-description {
+    max-width: 310px;
+    margin-top: 21px;
+  }
+
+  .info-icons {
+    margin-top: 47px;
+  }
+
   .info-video {
-    top: 560px;
+    height: unset;
+    margin-top: 80px;
+  }
+}
+
+@media all and (max-width: 320px) {
+  .main-page-fourth-section {
+    height: 958px;
+  }
+
+  .more-information {
+    left: 25px;
+    height: 796px;
+  }
+
+  .info {
+    margin-left: 25px;
+  }
+
+  .info-title {
+    font-size: 14px;
+    margin-top: -3px;
+  }
+
+  .info-description {
+    margin-left: 25px;
+    margin-right: 45px;
+  }
+
+  .more-info-icons {
+    margin-left: 25px;
+  }
+
+  .info-contact-button {
+    margin-left: 25px;
+  }
+
+  .info-video {
+    margin-left: -25px;
   }
 }
 </style>
