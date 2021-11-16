@@ -42,7 +42,7 @@ export default {
   },
   data() {
     return {
-      phoneNumber: '557386688',
+      phoneNumber: '+995557386688',
       email: 'holla@klaster.ge',
       googleForm: '',
       baseUrl: process.env.VUE_APP_API_HOST,
