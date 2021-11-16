@@ -57,7 +57,7 @@ export default {
         {
           uuid: '2',
           frontText: 'მოხდება მსგავსი საჭიროებების <br/><b>კონსოლიდაცია</b>',
-          backText: 'ჩვენ დავამუშავებთ მოწოდებულ ინფორმაციას, თქვენს მოთხოვნას გავაერთიანებთ სხვა ანალოგიურთან და მოვიძიებთ შესაბამისი პროდუქტის ან სერვისის',
+          backText: 'ჩვენ დავამუშავებთ მოწოდებულ ინფორმაციას, თქვენს მოთხოვნას გავაერთიანებთ სხვა ანალოგიურთან და მოვიძიებთ შესაბამისი პროდუქტის ან სერვისის მიმწოდებლებს.',
           imageUrl: this.getSecondCard,
           hasContactButton: false,
         },
@@ -125,8 +125,6 @@ export default {
 
 .cluster-list {
   margin-top: 40px;
-  overflow-x: auto;
-  overflow-y: hidden;
 }
 
 .flip-card {
@@ -242,6 +240,9 @@ export default {
   }
 
   .cluster-list {
+    overflow-x: auto;
+    overflow-y: hidden;
+
     > li {
       margin-right: 34px;
     }
