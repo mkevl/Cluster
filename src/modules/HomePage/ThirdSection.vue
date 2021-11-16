@@ -3,21 +3,21 @@
   <div v-else class="main-page-third-section">
     <span class="provider-stroke"/>
     <p class="provider-title">პარტნიორი სადაზღვეო კომპანიები</p>
-    <div :class="getProviderClass">
-      <div class="provider-container">
+    <div class="row" v-if="localProviders.length">
+      <div class="col-lg-6 col-sm-12 provider-container">
         <!--<img v-if="isScrolled" class="provider-top-scroll" src="/assets/scroll_vector.svg" alt=""
                @click="scrollUp()"/>-->
         <ul class="providers-list" ref="list-scroll" :style="getProviderScrollStyle">
           <li v-for="(item, index) in localProviders" :key="index" class="providers-list-item"
               :class="{'active-provider-item': activeProvider.uuid === item.uuid}" @click="setActiveProvider(item)">
-            <img class="provider-image" :src="`${computeBaseUrl}${item.provider_image_url}`" alt=""/>
+            <img class="provider-image" :src="`${item.provider_image_url}`" alt=""/>
           </li>
         </ul>
         <img v-if="providers.length >= 5" class="provider-scroll" src="/assets/scroll_vector.svg" alt=""
              @click="scrollDown()">
       </div>
-      <div class="provider-info">
-        <img class="provider-logo" :src="`${computeBaseUrl}${activeProvider.provider_logo_url}`" alt=""/>
+      <div class="col-lg-6 col-sm-12 provider-info">
+        <img class="provider-logo" :src="`${activeProvider.provider_logo_url}`" alt=""/>
         <h1 class="provider-info-title">{{ activeProvider.name }}</h1>
         <p class="provider-info-description">{{ activeProvider.description }}</p>
         <div class="contact-container">
@@ -60,11 +60,8 @@ export default {
     ...mapState({
       providers: state => state.providers,
     }),
-    getProviderClass() {
-      return this.windowWidth <= 480 ? '' : 'd-flex justify-content-between'
-    },
     getProviderScrollStyle() {
-      return this.windowWidth <= 480 || this.isScrolled ? {} : {paddingTop: '33px'}
+      return this.windowWidth <= 992 || this.isScrolled ? {} : {paddingTop: '33px'}
     },
     computeBaseUrl() {
       const len = this.baseUrl.length
@@ -141,20 +138,6 @@ export default {
   margin: -28px 0 0 13px;
 }
 
-@media all and (max-width: 480px) {
-  .main-page-third-section {
-    padding: 72px 0 0 24px;
-    height: 800px;
-  }
-
-  .provider-title {
-    height: 37px;
-    font-size: 19px;
-    width: 479px;
-    margin-top: -24px;
-  }
-}
-
 .provider-scroll {
   margin-left: 49px;
   cursor: pointer;
@@ -199,44 +182,7 @@ export default {
   mix-blend-mode: unset;
 }
 
-@media all and (max-width: 480px) {
-  .provider-scroll {
-    display: none;
-  }
-
-  .provider-top-scroll {
-    display: none;
-  }
-
-  .provider-container {
-    width: 100%;
-    height: 100%;
-  }
-
-  .providers-list {
-    padding-top: 20px;
-    display: flex;
-    align-items: stretch;
-    justify-content: space-between;
-    overflow: auto;
-    max-height: unset;
-  }
-
-  .providers-list-item {
-    margin: 0 38px 0 0;
-    padding: 0 !important;
-    display: block;
-  }
-
-  .provider-image {
-    width: 120px;
-    height: 120px;
-    padding: 33px 0 0 !important;
-  }
-}
-
 .provider-info {
-  margin-left: 325px;
   margin-top: 81px;
 }
 
@@ -253,7 +199,7 @@ export default {
 }
 
 .provider-info-description {
-  width: 655px;
+  width: auto;
   height: 187px;
   font-family: Helvetica, sans-serif;
   font-style: normal;
@@ -289,7 +235,57 @@ export default {
   margin-top: -2px;
 }
 
-@media all and (max-width: 480px) {
+@media all and (max-width: 992px) {
+  .main-page-third-section {
+    padding: 72px 0 0 24px;
+    height: 800px;
+  }
+
+  .provider-title {
+    height: 37px;
+    font-size: 19px;
+    width: 479px;
+    margin-top: -24px;
+  }
+
+  .provider-scroll {
+    display: none;
+  }
+
+  .provider-top-scroll {
+    display: none;
+  }
+
+  .provider-container {
+    width: 100%;
+    height: 100%;
+  }
+
+  .providers-list {
+    padding-top: 20px;
+    display: flex;
+    align-items: stretch;
+    justify-content: space-between;
+    overflow: auto;
+    max-height: unset;
+
+    :last-child {
+      margin-right: 0;
+    }
+  }
+
+  .providers-list-item {
+    margin: 0 38px 0 0;
+    padding: 0 !important;
+    display: block;
+  }
+
+  .provider-image {
+    width: 120px;
+    height: 120px;
+    padding: 33px 0 0 !important;
+  }
+
   .provider-info {
     margin-left: 4px;
     margin-top: 24px;
@@ -302,10 +298,10 @@ export default {
   }
 
   .provider-info-description {
-    width: 335px;
     height: 189px;
     font-size: 16px;
     margin-top: 25px;
+    margin-right: 25px;
   }
 
   .contact-container {

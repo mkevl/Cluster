@@ -37,13 +37,13 @@ export default {
   },
   computed: {
     getFirstCard() {
-      return this.windowWidth <= 480 ? 'assets/list_backgraund_md_1.svg' : 'assets/list_backgraund_1.svg'
+      return this.windowWidth <= 992 ? 'assets/list_backgraund_md_1.svg' : 'assets/list_backgraund_1.svg'
     },
     getSecondCard() {
-      return this.windowWidth <= 480 ? 'assets/list_backgraund_md_2.svg' : 'assets/list_backgraund_2.svg'
+      return this.windowWidth <= 992 ? 'assets/list_backgraund_md_2.svg' : 'assets/list_backgraund_2.svg'
     },
     getThirdCard() {
-      return this.windowWidth <= 480 ? 'assets/list_backgraund_md_3.svg' : 'assets/list_backgraund_3.svg'
+      return this.windowWidth <= 992 ? 'assets/list_backgraund_md_3.svg' : 'assets/list_backgraund_3.svg'
     },
     cardItems() {
       return [
@@ -123,23 +123,10 @@ export default {
   margin: -28px 0 0 13px;
 }
 
-@media all and (max-width: 480px) {
-  .main-page-second-section {
-    padding: 110px 0 0 24px;
-    height: 593px;
-    background: #F8F9FA;
-  }
-
-  .cluster-title {
-    height: 37px;
-    font-size: 20px;
-    width: 479px;
-    margin-top: -24px;
-  }
-}
-
 .cluster-list {
   margin-top: 40px;
+  overflow-x: auto;
+  overflow-y: hidden;
 }
 
 .flip-card {
@@ -172,27 +159,6 @@ export default {
   border-radius: 24px;
   filter: drop-shadow(0px 4px 12px rgba(0, 0, 0, 0.06));
   transform: rotateY(-180deg);
-}
-
-@media all and (max-width: 480px) {
-  /deep/ ul {
-    overflow-x: auto;
-    overflow-y: hidden;
-
-    > li {
-      margin-right: 34px;
-    }
-  }
-
-  .cluster-list {
-    margin-left: 8px;
-  }
-
-  .flip-card {
-    width: 300px;
-    height: 320px;
-    margin-right: -5px;
-  }
 }
 
 .list-numbers {
@@ -261,7 +227,36 @@ export default {
   top: 431px;
 }
 
-@media all and (max-width: 480px) {
+@media all and (max-width: 992px) {
+  .main-page-second-section {
+    padding: 110px 0 0 24px;
+    height: 593px;
+    background: #F8F9FA;
+  }
+
+  .cluster-title {
+    height: 37px;
+    font-size: 20px;
+    width: 479px;
+    margin-top: -24px;
+  }
+
+  .cluster-list {
+    > li {
+      margin-right: 34px;
+    }
+  }
+
+  .cluster-list {
+    margin-left: 8px;
+  }
+
+  .flip-card {
+    width: 300px;
+    height: 320px;
+    margin-right: -5px;
+  }
+
   .list-numbers {
     top: 40px;
     left: 31.91px;
