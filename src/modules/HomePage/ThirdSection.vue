@@ -312,4 +312,11 @@ export default {
     font-size: 14px;
   }
 }
+
+@media all and (max-width: 320px) {
+  .provider-title {
+    font-size: 14px;
+    margin-top: -22px;
+  }
+}
 </style>

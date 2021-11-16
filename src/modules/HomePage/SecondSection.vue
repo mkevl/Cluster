@@ -328,4 +328,11 @@ export default {
     top: 242px !important;
   }
 }
+
+@media all and (max-width: 320px) {
+  .cluster-title {
+    font-size: 14px;
+    margin-top: -22px;
+  }
+}
 </style>
