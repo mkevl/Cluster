@@ -51,7 +51,7 @@
       <div v-if="providerExist" class="d-flex">
         <div class="providers-first-list-image-background">
           <img class="provider-list-image"
-               :src="`${computeBaseUrl}${providersFirstListItem.provider.provider_logo_url}`"
+               :src="providersFirstListItem.provider.provider_logo_url"
                alt="">
         </div>
         <p class="provider-first-title">{{ providersFirstListItem.provider.name }}</p>
@@ -64,7 +64,7 @@
         <div class="providers-list-item" v-for="(item) in otherProviders" :key="item.uuid">
           <div v-if="item && item.provider" class="d-flex">
             <div class="providers-list-image-background">
-              <img class="provider-list-image" :src="`${computeBaseUrl}${item.provider.provider_logo_url}`" alt="">
+              <img class="provider-list-image" :src="item.provider.provider_logo_url" alt="">
             </div>
             <p class="provider-title">{{ item.provider.name }}</p>
             <p class="provider-item-price">{{ Math.round(item.price_per_month) }} &#8382;</p>

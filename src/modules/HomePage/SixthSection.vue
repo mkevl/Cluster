@@ -3,14 +3,14 @@
     <span class="feedback-stroke"/>
     <p class="feedback-title">უკუკავშირი</p>
     <div v-if="activeItem" class="carousel-list">
-      <img class="carousel-logo" :src="`${computeBaseUrl}${activeItem.image_url}`" alt="">
+      <img class="carousel-logo" :src="activeItem.image_url" alt="">
       <span class="carousel-stroke"/>
       <object class="carousel-top-quote" data="/assets/top_quote.svg" type="image/svg+xml"/>
       <object class="carousel-bottom-quote" data="/assets/bottom_quote.svg" type="image/svg+xml"/>
       <p class="feedback-text">{{ activeItem.feedback_text }}</p>
       <p class="feedback-author">- {{ activeItem.user_full_name }}</p>
     </div>
-    <img v-if="showNextItem" class="carousel-next-item-logo" :src="`${computeBaseUrl}${nextItem.image_url}`" alt="">
+    <img v-if="showNextItem" class="carousel-next-item-logo" :src="nextItem.image_url" alt="">
     <div v-if="data.length > 1" class="carousel-next-slider" @click="onCarouselNextClick">
       <img class="carousel-next-button" src="/assets/next_button.svg" alt=""/>
     </div>
