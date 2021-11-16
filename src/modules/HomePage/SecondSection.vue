@@ -3,51 +3,18 @@
     <span class="cluster-stroke"/>
     <p class="cluster-title">როგორ მუშაობს კლასტერი?</p>
     <ul class="cluster-list">
-      <li>
+      <li v-for="item in cardItems" :key="item.uuid" class="mr-5">
         <div class="flip-card">
           <div class="flip-card-inner">
             <div class="flip-card-front">
-              <object class="cluster-card" :data="getFirstCard" type="image/svg+xml"/>
-              <span class="list-numbers">1</span>
-              <p class="list-texts">მოგვაწოდე ინფორმაცია <br/><b>შენი საჭიროების შესახებ</b></p>
+              <object class="cluster-card" :data="item.imageUrl" type="image/svg+xml"/>
+              <span class="list-numbers">{{ item.uuid }}</span>
+              <p class="list-texts" v-html="item.frontText"/>
             </div>
             <div class="flip-card-back">
               <span class="list-back-numbers">1</span>
-              <p class="list-back-texts">შენთვის მოსახერხებელი გზით მოგვაწოდე ინფორმაცია სასურველი პროდუქტის და საჭირო
-                ოდენობის შესახებ</p>
-              <contact-button class="contact-button" :text-style="textStyle"/>
-            </div>
-          </div>
-        </div>
-      </li>
-      <li>
-        <div class="flip-card">
-          <div class="flip-card-inner">
-            <div class="flip-card-front">
-              <object class="cluster-card" :data="getSecondCard" type="image/svg+xml"/>
-              <span class="list-numbers">2</span>
-              <p class="list-texts">მოხდება მსგავსი საჭიროებების <br/> <b>კონსოლიდაცია</b></p>
-            </div>
-            <div class="flip-card-back">
-              <span class="list-back-numbers">2</span>
-              <p class="list-back-texts">ჩვენ დავამუშავებთ მოწოდებულ ინფორმაციას, თქვენს მოთხოვნას გავაერთიანებთ სხვა
-                ანალოგიურთან და მოვიძიებთ შესაბამისი პროდუქტის ან სერვისის </p>
-            </div>
-          </div>
-        </div>
-      </li>
-      <li>
-        <div class="flip-card">
-          <div class="flip-card-inner">
-            <div class="flip-card-front">
-              <object class="cluster-card" :data="getThirdCard" type="image/svg+xml"/>
-              <span class="list-numbers">3</span>
-              <p class="list-texts">მიიღე პროდუქტი ან სერვისი <br/><b>საუკეთესო ფასად</b></p>
-            </div>
-            <div class="flip-card-back">
-              <span class="list-back-numbers">3</span>
-              <p class="list-back-texts">კონსოლიდაციის ხარჯზე, მიმწოდებლები კლასტერის მონაწილე კომპანიებს შესთავაზებენ
-                მაქსიმალურად დაბალ ფასს</p>
+              <p class="list-back-texts">{{ item.backText }}</p>
+              <contact-button v-if="item.hasContactButton" class="contact-button" :text-style="textStyle"/>
             </div>
           </div>
         </div>
@@ -78,6 +45,31 @@ export default {
     getThirdCard() {
       return this.windowWidth <= 480 ? 'assets/list_backgraund_md_3.svg' : 'assets/list_backgraund_3.svg'
     },
+    cardItems() {
+      return [
+        {
+          uuid: '1',
+          frontText: 'მოგვაწოდე ინფორმაცია <br/><b>შენი საჭიროების შესახებ</b>',
+          backText: 'შენთვის მოსახერხებელი გზით მოგვაწოდე ინფორმაცია სასურველი პროდუქტის და საჭირო ოდენობის შესახებ',
+          imageUrl: this.getFirstCard,
+          hasContactButton: true,
+        },
+        {
+          uuid: '2',
+          frontText: 'მოხდება მსგავსი საჭიროებების <br/><b>კონსოლიდაცია</b>',
+          backText: 'ჩვენ დავამუშავებთ მოწოდებულ ინფორმაციას, თქვენს მოთხოვნას გავაერთიანებთ სხვა ანალოგიურთან და მოვიძიებთ შესაბამისი პროდუქტის ან სერვისის',
+          imageUrl: this.getSecondCard,
+          hasContactButton: false,
+        },
+        {
+          uuid: '3',
+          frontText: 'მიიღე პროდუქტი ან სერვისი <br/><b>საუკეთესო ფასად</b>',
+          backText: 'კონსოლიდაციის ხარჯზე, მიმწოდებლები კლასტერის მონაწილე კომპანიებს შესთავაზებენ მაქსიმალურად დაბალ ფასს',
+          imageUrl: this.getThirdCard,
+          hasContactButton: false,
+        }
+      ]
+    }
   },
   mounted() {
     window.addEventListener('resize', () => {

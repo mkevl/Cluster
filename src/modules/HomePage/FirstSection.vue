@@ -425,6 +425,7 @@ export default {
 }
 
 .results-text {
+  white-space: nowrap;
   font-family: Helvetica, sans-serif;
   font-style: normal;
   font-weight: bold;
