@@ -3,16 +3,17 @@
     <span class="cluster-stroke"/>
     <p class="cluster-title">როგორ მუშაობს კლასტერი?</p>
     <ul class="cluster-list">
-      <li v-for="item in cardItems" :key="item.uuid" class="mr-5">
+      <li v-for="item in cardItems" :key="item.uuid" class="mr-5" @mouseover="onMouseMove(item.uuid, true)"
+          @mouseleave="onMouseMove(item.uuid)" @click="onMouseClick($event, item.uuid)">
         <div class="flip-card">
-          <div class="flip-card-inner">
+          <div class="flip-card-inner" :id="`flip-card-inner-${item.uuid}`">
             <div class="flip-card-front">
               <object class="cluster-card" :data="item.imageUrl" type="image/svg+xml"/>
               <span class="list-numbers">{{ item.uuid }}</span>
               <p class="list-texts" v-html="item.frontText"/>
             </div>
             <div class="flip-card-back">
-              <span class="list-back-numbers">1</span>
+              <span class="list-back-numbers">{{ item.uuid }}</span>
               <p class="list-back-texts">{{ item.backText }}</p>
               <contact-button v-if="item.hasContactButton" class="contact-button" :text-style="textStyle"/>
             </div>
@@ -32,18 +33,19 @@ export default {
   data() {
     return {
       windowWidth: window.innerWidth,
-      textStyle: {color: '#045C41'}
+      textStyle: {color: '#045C41'},
+      isFirstClick: true,
     }
   },
   computed: {
     getFirstCard() {
-      return this.windowWidth <= 992 ? 'assets/list_backgraund_md_1.svg' : 'assets/list_backgraund_1.svg'
+      return this.isSmallScreen ? 'assets/list_backgraund_md_1.svg' : 'assets/list_backgraund_1.svg'
     },
     getSecondCard() {
-      return this.windowWidth <= 992 ? 'assets/list_backgraund_md_2.svg' : 'assets/list_backgraund_2.svg'
+      return this.isSmallScreen ? 'assets/list_backgraund_md_2.svg' : 'assets/list_backgraund_2.svg'
     },
     getThirdCard() {
-      return this.windowWidth <= 992 ? 'assets/list_backgraund_md_3.svg' : 'assets/list_backgraund_3.svg'
+      return this.isSmallScreen ? 'assets/list_backgraund_md_3.svg' : 'assets/list_backgraund_3.svg'
     },
     cardItems() {
       return [
@@ -69,7 +71,36 @@ export default {
           hasContactButton: false,
         }
       ]
-    }
+    },
+    isSmallScreen() {
+      return this.windowWidth <= 992
+    },
+  },
+  methods: {
+    onMouseClick(e, uuid) {
+      if (this.isSmallScreen && e.target.nodeName !== 'BUTTON') {
+        const flipCardInner = document.getElementById(`flip-card-inner-${uuid}`)
+        if (flipCardInner) {
+          if (this.isFirstClick) {
+            flipCardInner.style.transform = 'rotateY(-180deg)';
+            this.isFirstClick = false
+          } else {
+            flipCardInner.style.transform = '';
+            this.isFirstClick = true
+          }
+        }
+      }
+    },
+    onMouseMove(uuid, isMouseOver = false) {
+      const flipCardInner = document.getElementById(`flip-card-inner-${uuid}`)
+      if (flipCardInner) {
+        if (isMouseOver) {
+          flipCardInner.style.transform = 'rotateY(-180deg)';
+        } else {
+          flipCardInner.style.transform = '';
+        }
+      }
+    },
   },
   mounted() {
     window.addEventListener('resize', () => {
@@ -100,7 +131,7 @@ export default {
 .main-page-second-section {
   position: relative;
   padding: 140px 116px 0 116px;
-  height: 1024px;
+  height: 824px;
 }
 
 .cluster-stroke {
@@ -133,9 +164,9 @@ export default {
   cursor: pointer;
 }
 
-.flip-card:hover .flip-card-inner {
+/*.flip-card:hover .flip-card-inner {
   transform: rotateY(-180deg);
-}
+}*/
 
 .flip-card-inner {
   position: relative;
