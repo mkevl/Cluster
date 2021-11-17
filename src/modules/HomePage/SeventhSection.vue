@@ -1,29 +1,35 @@
 <template>
   <div class="main-page-seventh-section">
     <p class="faq-title">ხშირად დასმული კითხვები</p>
-    <ul class="faq-list">
-      <li class="" v-for="(item, index) in faqData" :key="index">
-        <div class="faq-list-item d-flex justify-content-between" @click="toggleFAQ(item)">
-          <p class="faq-list-question">{{ item.question }}</p>
-          <img v-if="item.isActive" class="toggle-icon" src="/assets/icons/minus_icon.svg" alt="">
-          <img v-else class="toggle-icon" src="/assets/icons/plus_icon.svg" alt="">
+    <div class="row">
+      <div class="col-lg-6 col-md-12">
+        <ul class="faq-list">
+          <li class="" v-for="(item, index) in faqData" :key="index">
+            <div class="faq-list-item d-flex justify-content-between" @click="toggleFAQ(item)">
+              <p class="faq-list-question">{{ item.question }}</p>
+              <img v-if="item.isActive" class="toggle-icon" src="/assets/icons/minus_icon.svg" alt="">
+              <img v-else class="toggle-icon" src="/assets/icons/plus_icon.svg" alt="">
+            </div>
+            <p class="active-question-description" :style="item.style">{{ item.answer }}</p>
+          </li>
+        </ul>
+      </div>
+      <div class="col-lg-6 col-md-12">
+        <div class="contact-container">
+          <p class="contact-title">დაგვიკავშირდი</p>
+          <div class="d-flex contact-info-container">
+            <img src="assets/icons/email_icon.svg" alt="">
+            <a class="contact-info" :href="`mailto:${email}`" target="_blank">{{ email }}</a>
+          </div>
+          <div class="d-flex contact-info-container mt-5">
+            <img src="assets/icons/phone_icon.svg" alt="">
+            <a class="contact-info" :href="`tel:${phoneNumber}`" target="_blank">{{ phoneNumber }}</a>
+          </div>
+          <a class="icons" :href="`https://wa.me/${phoneNumber}`" target='_blank'>
+            <img src="/assets/icons/whatsapp_icon.svg" alt="">
+          </a>
         </div>
-        <p class="active-question-description" :style="item.style">{{ item.answer }}</p>
-      </li>
-    </ul>
-    <div class="contact-container">
-      <p class="contact-title">დაგვიკავშირდი</p>
-      <div class="d-flex contact-info-container">
-        <img src="assets/icons/email_icon.svg" alt="">
-        <a class="contact-info" :href="`mailto:${email}`" target="_blank">{{ email }}</a>
       </div>
-      <div class="d-flex contact-info-container mt-5">
-        <img src="assets/icons/phone_icon.svg" alt="">
-        <a class="contact-info" :href="`tel:${phoneNumber}`" target="_blank">{{ phoneNumber }}</a>
-      </div>
-      <a class="icons" :href="`https://wa.me/${phoneNumber}`" target='_blank'>
-        <img src="/assets/icons/whatsapp_icon.svg" alt="">
-      </a>
     </div>
     <p class="copyright-title">&copy; Copyright 2020 . All rights reserved.</p>
   </div>
@@ -79,14 +85,8 @@ export default {
 .main-page-seventh-section {
   position: relative;
   width: 100%;
-  height: 925px;
+  min-height: 925px;
   background: linear-gradient(162.38deg, #8B63FF -57.19%, #6335E9 87.95%);
-}
-
-@media all and (max-width: 480px) {
-  .main-page-seventh-section {
-    height: 1270px;
-  }
 }
 
 .faq-title {
@@ -102,25 +102,11 @@ export default {
   margin: 120px 0 0 114px;
 }
 
-@media all and (max-width: 480px) {
-  .faq-title {
-    position: relative;
-    width: 372px;
-    height: 52px;
-    font-size: 24px;
-    line-height: 170%;
-    margin: 0 0 0 35px;
-    padding-top: 100px;
-  }
-}
-
 .faq-list {
-  position: absolute;
   margin-top: 246px;
   margin-left: 117px;
   padding: 0;
-  height: 368px;
-  overflow-x: auto;
+  margin-bottom: 200px;
 
   > li {
     list-style-type: none;
@@ -168,34 +154,8 @@ export default {
   margin: 32px 40px 40px 29px;
 }
 
-@media all and (max-width: 480px) {
-  .faq-list {
-    position: relative;
-    margin-top: 63px;
-    margin-left: 5%;
-    height: 425px;
-
-    > li {
-      margin-right: unset;
-    }
-  }
-
-  .faq-list-item {
-    width: 334px;
-  }
-
-  .faq-list-question {
-    font-size: 16px;
-  }
-
-  .active-question-description {
-    font-size: 16px;
-  }
-}
-
 .contact-container {
-  position: absolute;
-  margin: 128px 0 0 1030px;
+  margin: 128px 0 0 280px;
 }
 
 .contact-title {
@@ -233,13 +193,63 @@ export default {
   background: rgba(255, 255, 255, 0.2);
   backdrop-filter: blur(4px);
   border-radius: 50px;
-  margin-right: 40px;
+  margin-left: 10px;
   margin-top: 135px;
 }
 
-@media all and (max-width: 480px) {
+.copyright-title {
+  position: absolute;
+  height: 15px;
+  font-family: Montserrat, sans-serif;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 12px;
+  line-height: 15px;
+  color: #FFFFFF;
+  bottom: 79px;
+  left: 45%;
+}
+
+@media all and (max-width: 992px) {
+  .main-page-seventh-section {
+    min-height: 1270px;
+  }
+
+  .faq-title {
+    position: relative;
+    width: 372px;
+    height: 52px;
+    font-size: 24px;
+    line-height: 170%;
+    margin: 0 0 0 35px;
+    padding-top: 100px;
+  }
+
+  .faq-list {
+    position: relative;
+    margin-top: 63px;
+    margin-left: 5%;
+    margin-bottom: 112px;
+
+    > li {
+      margin-right: unset;
+    }
+  }
+
+  .faq-list-item {
+    min-width: 334px;
+  }
+
+  .faq-list-question {
+    font-size: 16px;
+  }
+
+  .active-question-description {
+    font-size: 16px;
+  }
+
   .contact-container {
-    margin: 112px 0 0 35px;
+    margin: 0 0 250px 35px;
   }
 
   .contact-title {
@@ -254,27 +264,48 @@ export default {
   }
 
   .icons {
-    margin: 112px 0 0 10px;
+    margin: 50px 0 100px 10px;
+  }
+
+  .copyright-title {
+    bottom: 56px;
+    left: 35%;
   }
 }
 
-.copyright-title {
-  position: absolute;
-  height: 15px;
-  font-family: Montserrat, sans-serif;
-  font-style: normal;
-  font-weight: 300;
-  font-size: 12px;
-  line-height: 15px;
-  color: #FFFFFF;
-  bottom: 79px;
-  left: 50%;
-}
+@media all and (max-width: 380px) {
+  .faq-title {
+    font-size: 18px;
+    margin: 0 0 0 25px;
+  }
 
-@media all and (max-width: 480px) {
+  .faq-list-item {
+    min-width: 100px;
+    width: 255px;
+  }
+
+  .faq-list-question {
+    font-size: 14px;
+  }
+
+  .active-question-description {
+    font-size: 14px;
+  }
+
+  .contact-container {
+    margin-left: 25px;
+  }
+
+  .contact-title {
+    font-size: 16px;
+  }
+
+  .contact-info-container {
+    margin-top: 6px;
+  }
+
   .copyright-title {
-    bottom: 56px;
-    left: 80px;
+    left: 10%;
   }
 }
 </style>
