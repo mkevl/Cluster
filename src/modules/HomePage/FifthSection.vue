@@ -6,7 +6,8 @@
       <p class="benefits-title mb-0">სარგებელი ყველა მონაწილეს</p>
     </div>
     <div class="request-response-boxes" :class="{'d-flex': !isSmallScreen}">
-      <div class="request" :class="{'active-box': isActiveRequest}" @click="onBoxCLick('request')">
+      <div class="request" :class="{'active-box': isActiveRequest}" @mouseover="onMouseOver('request')"
+           @mouseleave="onMouseLeave">
         <h1 class="box-title" :class="{'active-box-title': isActiveRequest}">მოთხოვნა</h1>
         <div v-if="isActiveRequest">
           <ul class="active-box-list">
@@ -18,7 +19,8 @@
           <contact-button v-if="!isSmallScreen" class="box-contact-button"/>
         </div>
       </div>
-      <div class="response" :class="{'active-box': isActiveResponse}" @click="onBoxCLick('response')">
+      <div class="response" :class="{'active-box': isActiveResponse}" @mouseover="onMouseOver('response')"
+           @mouseleave="onMouseLeave">
         <h1 class="box-title" :class="{'active-box-title': isActiveResponse}">მიწოდება</h1>
         <div v-if="isActiveResponse">
           <ul class="active-box-list">
@@ -42,7 +44,7 @@ export default {
   data() {
     return {
       activeBox: {
-        request: true,
+        request: false,
         response: false,
       },
       windowWidth: window.innerWidth,
@@ -60,14 +62,16 @@ export default {
     }
   },
   methods: {
-    onBoxCLick(type) {
+    onMouseOver(type) {
       if (type === 'request') {
         this.activeBox.request = true
-        this.activeBox.response = false
       } else {
-        this.activeBox.request = false
         this.activeBox.response = true
       }
+    },
+    onMouseLeave() {
+      this.activeBox.request = false
+      this.activeBox.response = false
     },
   },
   mounted() {
