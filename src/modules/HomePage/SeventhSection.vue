@@ -273,7 +273,17 @@ export default {
   }
 }
 
-@media all and (max-width: 380px) {
+@media all and (max-width: 480px) {
+  .faq-list-item {
+    width: 85%;
+  }
+
+  .copyright-title {
+    left: 20%;
+  }
+}
+
+@media all and (max-width: 320px) {
   .faq-title {
     font-size: 18px;
     margin: 0 0 0 25px;
