@@ -16,7 +16,7 @@
         <img v-if="providers.length >= 5" class="provider-scroll" src="/assets/scroll_vector.svg" alt=""
              @click="scrollDown()">
       </div>
-      <div class="col-lg-6 col-sm-12 provider-info">
+      <div v-if="Object.keys(activeProvider).length" class="col-lg-6 col-sm-12 provider-info">
         <img class="provider-logo" :src="`${activeProvider.provider_logo_url}`" alt=""/>
         <h1 class="provider-info-title">{{ activeProvider.name }}</h1>
         <p class="provider-info-description">{{ activeProvider.description }}</p>
@@ -94,7 +94,6 @@ export default {
 
     await this.getAllProvider()
     this.localProviders = _.cloneDeep(this.providers)
-    this.activeProvider = {...this.providers[0]}
 
     this.loading = false
     window.addEventListener('resize', () => {
@@ -168,8 +167,8 @@ export default {
 }
 
 .provider-image {
-  width: 180px;
-  height: 120px;
+  max-width: 180px;
+  max-height: 120px;
   padding: 0 !important;
 }
 
@@ -200,7 +199,7 @@ export default {
 
 .provider-info-description {
   width: auto;
-  height: 187px;
+  min-height: 187px;
   font-family: Helvetica, sans-serif;
   font-style: normal;
   font-weight: normal;
@@ -238,7 +237,7 @@ export default {
 @media all and (max-width: 992px) {
   .main-page-third-section {
     padding: 72px 0 0 24px;
-    height: 800px;
+    min-height: 800px;
   }
 
   .provider-title {
@@ -298,7 +297,7 @@ export default {
   }
 
   .provider-info-description {
-    height: 189px;
+    min-height: 189px;
     font-size: 16px;
     margin-top: 25px;
     margin-right: 25px;
@@ -314,9 +313,19 @@ export default {
 }
 
 @media all and (max-width: 320px) {
+  .main-page-third-section {
+    min-height: 1150px;
+  }
+
   .provider-title {
     font-size: 14px;
     margin-top: -22px;
+  }
+
+  .provider-info-title {
+    width: 355px;
+    font-size: 24px;
+    margin-top: 25px;
   }
 }
 </style>
