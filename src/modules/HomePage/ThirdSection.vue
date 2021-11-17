@@ -10,14 +10,17 @@
         <ul class="providers-list" ref="list-scroll" :style="getProviderScrollStyle">
           <li v-for="(item, index) in localProviders" :key="index" class="providers-list-item"
               :class="{'active-provider-item': activeProvider.uuid === item.uuid}" @click="setActiveProvider(item)">
-            <img class="provider-image" :src="`${item.provider_image_url}`" alt=""/>
+            <img class="provider-image" :src="`https://drive.google.com/uc?export=view&id=${item.provider_image_url}`"
+                 alt="">
+
           </li>
         </ul>
         <img v-if="providers.length >= 5" class="provider-scroll" src="/assets/scroll_vector.svg" alt=""
              @click="scrollDown()">
       </div>
       <div v-if="Object.keys(activeProvider).length" class="col-lg-6 col-sm-12 provider-info">
-        <img class="provider-logo" :src="`${activeProvider.provider_logo_url}`" alt=""/>
+<!--        <img class="provider-logo"-->
+<!--             :src="`https://drive.google.com/uc?export=view&id=${activeProvider.provider_logo_url}`" alt=""/>-->
         <h1 class="provider-info-title">{{ activeProvider.name }}</h1>
         <p class="provider-info-description">{{ activeProvider.description }}</p>
         <div class="contact-container">
@@ -157,6 +160,7 @@ export default {
   width: 100%;
   max-height: 700px;
   overflow: hidden;
+  align-items: center;
 }
 
 .providers-list-item {
@@ -164,6 +168,10 @@ export default {
   cursor: pointer;
   mix-blend-mode: luminosity;
   padding-top: 16px;
+  width: 180px;
+  height: 120px;
+  display: flex;
+  align-items: center;
 }
 
 .provider-image {
@@ -192,7 +200,8 @@ export default {
   font-size: 40px;
   line-height: 160%;
   color: #212529;
-  margin: 13px 0 0 11px;
+  //margin: 13px 0 0 11px;
+  margin: 0 0 0 11px;
   height: 46px !important;
   width: 610px;
 }
@@ -276,12 +285,14 @@ export default {
   .providers-list-item {
     margin: 0 38px 0 0;
     padding: 0 !important;
-    display: block;
+    //display: block;
+    width: 120px;
+    height: 120px;
   }
 
   .provider-image {
-    width: 120px;
-    height: 120px;
+    max-width: 120px;
+    max-height: 120px;
     padding: 33px 0 0 !important;
   }
 
