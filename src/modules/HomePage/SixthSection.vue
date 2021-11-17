@@ -1,7 +1,7 @@
 <template>
-  <div class="main-page-sixth-section">
+  <div v-if="data.length" class="main-page-sixth-section">
     <span class="feedback-stroke"/>
-    <p class="feedback-title">უკუკავშირი</p>
+    <p class="feedback-title">შეფასება</p>
     <div v-if="activeItem" class="carousel-list">
       <img class="carousel-logo" :src="activeItem.image_url" alt="">
       <span class="carousel-stroke"/>
