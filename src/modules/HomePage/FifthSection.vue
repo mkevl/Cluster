@@ -5,8 +5,8 @@
       <span class="benefits-stroke"/>
       <p class="benefits-title mb-0">სარგებელი ყველა მონაწილეს</p>
     </div>
-    <div class="row request-response-boxes justify-content-between" :class="{'d-flex': !isSmallScreen}">
-      <div class="col-lg-6 col-md-12 request" :class="{'active-box': isActiveRequest}"
+    <div class="request-response-boxes" :class="{'d-flex justify-content-between': !isSmallScreen}">
+      <div class="request" :class="{'active-box': isActiveRequest}"
            @mouseover="onMouseOver('request')"
            @mouseleave="onMouseLeave">
         <h1 class="box-title" :class="{'active-box-title': isActiveRequest}">მოთხოვნა</h1>
@@ -20,7 +20,7 @@
           <contact-button v-if="!isSmallScreen" class="box-contact-button"/>
         </div>
       </div>
-      <div class="col-lg-6 col-md-12 response" :class="{'active-box': isActiveResponse}"
+      <div class="response" :class="{'active-box': isActiveResponse}"
            @mouseover="onMouseOver('response')"
            @mouseleave="onMouseLeave">
         <h1 class="box-title" :class="{'active-box-title': isActiveResponse}">მიწოდება</h1>
@@ -131,15 +131,14 @@ export default {
 }
 
 .request {
-  max-width: 300px;
+  width: 300px;
   height: 545px;
   background: #1E1647;
   border-radius: 40px;
-
 }
 
 .response {
-  max-width: 300px;
+  width: 300px;
   height: 545px;
   background: #1E1647;
   border-radius: 40px;
@@ -149,7 +148,7 @@ export default {
 .active-box {
   border: 1px solid #0AE29F;
   box-sizing: border-box;
-  max-width: 792px;
+  width: 792px;
 }
 
 .box-title {
@@ -207,9 +206,8 @@ export default {
     width: unset;
   }
 
-
   .request-response-boxes {
-    top: 190px;
+    top: 220px;
     margin-left: 115px;
   }
 
@@ -226,27 +224,30 @@ export default {
   }
 
   .active-box {
-    width: 100%;
+    width: 95%;
   }
 
   .active-box-title {
-    width: 274px;
-    height: 35px;
-    font-size: 23px;
-    margin-left: 20px;
+    margin-left: 50px;
     margin-top: 48px;
   }
 
   .active-box-list {
-    font-size: 18px;
-    height: 248px;
-    width: 329px;
-    margin: 20px 0 0 0;
+    width: 85%;
+    margin: 30px 0 0 35px;
     padding: 0 0 0 35px;
   }
 }
 
-@media all and (max-width: 480px) {
+@media all and (max-width: 700px) {
+  .main-page-fifth-section {
+    height: 1200px;
+  }
+
+  .background-image {
+    height: 1200px;
+  }
+
   .benefits {
     left: 30px;
     top: 91px;
@@ -259,7 +260,50 @@ export default {
 
   .request-response-boxes {
     margin-left: 26px;
-    margin-right: unset;
+    top: 190px;
+  }
+
+  .request {
+    height: 470px;
+  }
+
+  .active-box {
+    width: 100%;
+  }
+
+  .active-box-title {
+    width: 274px;
+    height: 35px;
+    font-size: 23px;
+    margin-left: 20px;
+    margin-top: 48px;
+  }
+
+  .active-box-list {
+    margin: 20px 0 0 0;
+  }
+}
+
+@media all and (max-width: 320px) {
+  .main-page-fifth-section {
+    height: 1350px;
+  }
+
+  .background-image {
+    height: 1350px;
+  }
+
+  .request-response-boxes {
+    margin-left: 26px;
+    top: 170px;
+  }
+
+  .request {
+    height: 550px;
+  }
+
+  .response {
+    height: 400px;
   }
 }
 </style>
