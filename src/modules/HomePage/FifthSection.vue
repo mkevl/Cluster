@@ -5,8 +5,9 @@
       <span class="benefits-stroke"/>
       <p class="benefits-title mb-0">სარგებელი ყველა მონაწილეს</p>
     </div>
-    <div class="request-response-boxes" :class="{'d-flex': !isSmallScreen}">
-      <div class="request" :class="{'active-box': isActiveRequest}" @mouseover="onMouseOver('request')"
+    <div class="row request-response-boxes justify-content-between" :class="{'d-flex': !isSmallScreen}">
+      <div class="col-lg-6 col-md-12 request" :class="{'active-box': isActiveRequest}"
+           @mouseover="onMouseOver('request')"
            @mouseleave="onMouseLeave">
         <h1 class="box-title" :class="{'active-box-title': isActiveRequest}">მოთხოვნა</h1>
         <div v-if="isActiveRequest">
@@ -19,7 +20,8 @@
           <contact-button v-if="!isSmallScreen" class="box-contact-button"/>
         </div>
       </div>
-      <div class="response" :class="{'active-box': isActiveResponse}" @mouseover="onMouseOver('response')"
+      <div class="col-lg-6 col-md-12 response" :class="{'active-box': isActiveResponse}"
+           @mouseover="onMouseOver('response')"
            @mouseleave="onMouseLeave">
         <h1 class="box-title" :class="{'active-box-title': isActiveResponse}">მიწოდება</h1>
         <div v-if="isActiveResponse">
@@ -52,7 +54,7 @@ export default {
   },
   computed: {
     isSmallScreen() {
-      return this.windowWidth <= 480
+      return this.windowWidth <= 1330
     },
     isActiveRequest() {
       return this.activeBox.request || this.isSmallScreen
@@ -121,54 +123,33 @@ export default {
   height: 77px;
 }
 
-@media all and (max-width: 480px) {
-  .main-page-fifth-section {
-    width: 415px;
-    height: 1150px;
-  }
-
-  .background-image {
-    height: 1150px;
-    width: unset;
-  }
-
-  .benefits {
-    left: 26px;
-    top: 91px;
-  }
-
-  .benefits-title {
-    height: 34px;
-    font-size: 20px;
-    margin-top: -7px;
-  }
-}
-
 .request-response-boxes {
   position: absolute;
   top: 257px;
+  margin-left: 127px;
+  width: 80%;
 }
 
 .request {
-  width: 272px;
+  max-width: 300px;
   height: 545px;
   background: #1E1647;
   border-radius: 40px;
-  margin-left: 127px;
+
 }
 
 .response {
-  width: 272px;
+  max-width: 300px;
   height: 545px;
   background: #1E1647;
   border-radius: 40px;
-  margin-left: 144px;
+  margin-left: 15px;
 }
 
 .active-box {
   border: 1px solid #0AE29F;
   box-sizing: border-box;
-  width: 792px;
+  max-width: 792px;
 }
 
 .box-title {
@@ -204,10 +185,32 @@ export default {
   margin: 50px 0 0 52px;
 }
 
-@media all and (max-width: 480px) {
+.box-contact-button {
+  margin-left: 76px;
+  margin-bottom: 73px;
+}
+
+.box-contact-button-sm {
+  position: absolute;
+  bottom: -100px;
+  margin: 0 0 0 10px;
+}
+
+@media all and (max-width: 1330px) {
+  .main-page-fifth-section {
+    width: 100%;
+    height: 1150px;
+  }
+
+  .background-image {
+    height: 1150px;
+    width: unset;
+  }
+
+
   .request-response-boxes {
     top: 190px;
-    margin-left: 26px;
+    margin-left: 115px;
   }
 
   .request {
@@ -217,6 +220,7 @@ export default {
 
   .response {
     margin-left: unset;
+    margin-right: 150px;
     margin-top: 40px;
     height: 292px;
   }
@@ -242,12 +246,20 @@ export default {
   }
 }
 
-.box-contact-button {
-  margin-left: 76px;
-  margin-bottom: 73px;
-}
+@media all and (max-width: 480px) {
+  .benefits {
+    left: 30px;
+    top: 91px;
+  }
 
-.box-contact-button-sm {
-  margin-top: 64px;
+  .benefits-title {
+    font-size: 14px;
+    margin-top: -3px;
+  }
+
+  .request-response-boxes {
+    margin-left: 26px;
+    margin-right: unset;
+  }
 }
 </style>
