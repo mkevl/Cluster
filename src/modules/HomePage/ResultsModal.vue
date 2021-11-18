@@ -10,66 +10,80 @@
       <img src="/assets/close_button.png" alt="">
       <span class="ml-2">დახურვა</span>
     </div>
-    <p class="header-one mb-0">ჯანმრთელობის დაზღვევა</p>
-    <p class="header-two mb-0">- გაუმჯობესებული პაკეტი</p>
-    <div class="month-calculation-box"/>
-    <div class="day-box">
-      <object class="time-background" data="/assets/time_background.svg" type="image/svg+xml"/>
-      <div class="time-calculation-container">
-        <span class="left-text">დარჩა</span>
-        <span class="day-number-text mt-3">{{ getDays }}</span>
-        <span class="day-text">დღე</span>
+    <div class="result-modal-container">
+      <div class="headers">
+        <p class="header-one mb-0">ჯანმრთელობის დაზღვევა</p>
+        <p class="header-two mb-0">- გაუმჯობესებული პაკეტი</p>
       </div>
-    </div>
-    <div class="day-box-section-two">
-      <span class="box-description">
-        Cluster is made to optimize your expenses,
-        whether you are a physical entity or running a business of any size.
-        Paying less in stuff and services
-      </span>
-      <contact-button class="modal-contact-button"/>
-    </div>
-    <p class="cluster-in-number">კლასტერი რიცხვებში</p>
-    <ul class="clusters">
-      <li class="clusters-box">
-        <p class="clusters-text">კომპანიების რაოდენობა კლასტერში</p>
-        <div class="d-flex align-items-center clusters-quantity">
-          <p class="mr-3">{{ statisticData.companies }}</p>
-          <p class="clusters-quantity-text">კომპანია</p>
-        </div>
-      </li>
-      <li class="clusters-box">
-        <p class="clusters-text">ადამიანების რაოდენობა კლასტერში</p>
-        <div class="d-flex align-items-center clusters-quantity">
-          <p class="mr-3">{{ statisticData.persons }}</p>
-          <p class="clusters-quantity-text">ადამიანი</p>
-        </div>
-      </li>
-    </ul>
-    <p class="proposed-text">შემოთავაზებული ფასები</p>
-    <div class="providers-list">
-      <div v-if="providerExist" class="d-flex">
-        <div class="providers-first-list-image-background">
-          <img class="provider-list-image"
-               :src="`https://drive.google.com/uc?export=view&id=${providersFirstListItem.provider.provider_logo_url}`"
-               alt="">
-        </div>
-        <p class="provider-first-title">{{ providersFirstListItem.provider.name }}</p>
-        <p class="provider-first-item-price">{{ Math.round(providersFirstListItem.price_per_month) }} &#8382;</p>
-        <span class="best-offer-stroke"/>
-      </div>
-      <p v-if="providerExist" class="best-offer-text">&bull; საუკეთესო შეთავაზება</p>
-      <p v-if="providerExist && !isSmScreen" class="last-update">ბოლოს განახლდა <br/> {{ getFormattedDate }}</p>
-      <p v-if="providerExist && isSmScreen" class="last-update">ბოლოს განახლდა {{ getFormattedDate }}</p>
-      <div class="provider-list-second-section">
-        <div class="providers-list-item" v-for="(item) in otherProviders" :key="item.uuid">
-          <div v-if="item && item.provider" class="d-flex">
-            <div class="providers-list-image-background">
-              <img class="provider-list-image"
-                   :src="`https://drive.google.com/uc?export=view&id=${item.provider.provider_logo_url}`" alt="">
+      <div class="row">
+        <div class="col-auto">
+          <div class="month-calculation-box"/>
+          <div class="calculation-box-container">
+            <div class="day-box">
+              <object class="time-background" data="/assets/time_background.svg" type="image/svg+xml"/>
+              <div class="time-calculation-container">
+                <span class="left-text">დარჩა</span>
+                <span class="day-number-text mt-3">{{ getDays }}</span>
+                <span class="day-text">დღე</span>
+              </div>
             </div>
-            <p class="provider-title">{{ item.provider.name }}</p>
-            <p class="provider-item-price">{{ Math.round(item.price_per_month) }} &#8382;</p>
+            <div class="day-box-section-two">
+              <p class="box-description">
+                Cluster is made to optimize your expenses,
+                whether you are a physical entity or running a business of any size.
+                Paying less in stuff and services
+              </p>
+              <contact-button class="modal-contact-button"/>
+            </div>
+          </div>
+          <p class="cluster-in-number">კლასტერი რიცხვებში</p>
+          <ul class="clusters">
+            <li class="clusters-box">
+              <p class="clusters-text">კომპანიების რაოდენობა კლასტერში</p>
+              <div class="d-flex align-items-center clusters-quantity">
+                <p class="mr-3">{{ statisticData.companies }}</p>
+                <p class="clusters-quantity-text">კომპანია</p>
+              </div>
+            </li>
+            <li class="clusters-box">
+              <p class="clusters-text">ადამიანების რაოდენობა კლასტერში</p>
+              <div class="d-flex align-items-center clusters-quantity">
+                <p class="mr-3">{{ statisticData.persons }}</p>
+                <p class="clusters-quantity-text">ადამიანი</p>
+              </div>
+            </li>
+          </ul>
+        </div>
+        <div class="col-auto results-modal-second-section">
+          <p class="proposed-text">შემოთავაზებული ფასები</p>
+          <div class="providers-list">
+            <div v-if="providerExist" class="d-flex">
+              <div class="providers-first-list-image-background">
+                <img class="provider-list-image"
+                     :src="`https://drive.google.com/uc?export=view&id=${providersFirstListItem.provider.provider_logo_url}`"
+                     alt="">
+              </div>
+              <p class="provider-first-title">{{ providersFirstListItem.provider.name }}</p>
+              <p class="provider-first-item-price">{{ Math.round(providersFirstListItem.price_per_month) }} &#8382;</p>
+            </div>
+            <div class="active-offer-container">
+              <p v-if="providerExist" class="best-offer-text">&bull; საუკეთესო შეთავაზება</p>
+              <p v-if="providerExist && !isSmScreen" class="last-update">ბოლოს განახლდა <br/> {{ getFormattedDate }}</p>
+              <p v-if="providerExist && isSmScreen" class="last-update">ბოლოს განახლდა {{ getFormattedDate }}</p>
+            </div>
+            <span class="best-offer-stroke"/>
+            <div class="provider-list-second-section">
+              <div class="providers-list-item" v-for="(item) in otherProviders" :key="item.uuid">
+                <div v-if="item && item.provider" class="d-flex">
+                  <div class="providers-list-image-background">
+                    <img class="provider-list-image"
+                         :src="`https://drive.google.com/uc?export=view&id=${item.provider.provider_logo_url}`" alt="">
+                  </div>
+                  <p class="provider-title">{{ item.provider.name }}</p>
+                  <p class="provider-item-price">{{ Math.round(item.price_per_month) }} &#8382;</p>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -110,7 +124,7 @@ export default {
       return monthLastDay - currentDay;
     },
     isSmallScreen() {
-      return this.windowWidth <= 1330
+      return this.windowWidth <= 780
     },
     isSmScreen() {
       return this.windowWidth <= 380
@@ -217,56 +231,72 @@ export default {
   color: #FFFFFF;
 }
 
-.header-one {
+.result-modal-container {
   position: absolute;
-  height: 26px;
   left: 164px;
   top: 158px;
+  height: calc(100% - 158px);
+  width: calc(100% - 270px);
+}
+
+.headers {
+  display: flex;
+  height: 26px;
+  color: #D7CAFD;
   font-family: Helvetica, sans-serif;
   font-style: normal;
+}
+
+.header-one {
   font-weight: bold;
   font-size: 24px;
   line-height: 28px;
-  color: #D7CAFD;
 }
 
 .header-two {
-  position: absolute;
-  height: 26px;
-  left: 475px;
-  top: 163px;
-  font-family: Helvetica, sans-serif;
-  font-style: normal;
   font-weight: normal;
   font-size: 18px;
   line-height: 21px;
-  color: #D7CAFD;
+  margin-left: 10px;
 }
 
 .month-calculation-box {
-  position: absolute;
   width: 791px;
   height: 372px;
-  left: 138px;
-  top: 220px;
   background: #231A53;
   opacity: 0.8;
   box-shadow: 0 8px 12px rgba(0, 0, 0, 0.04);
   border-radius: 50px;
+  margin: 36px 0 0 -36px;
 }
 
-.day-box {
+.calculation-box-container {
   position: absolute;
-  top: 224px;
-  left: 157px;
+  top: 0;
+  left: -10px;
+  display: flex;
+}
+
+//.time-background {
+//  position: absolute;
+//  border: 16px solid #0AE29F;
+//  border-radius: 50%;
+//  border-top: 16px solid #3498db;
+//  width: 150px;
+//  height: 150px;
+//}
+
+.day-box {
+  margin-top: 37px;
+  margin-left: -25px;
 }
 
 .time-calculation-container {
   position: absolute;
   width: 53px;
   height: 134px;
-  left: 156px;
-  top: 122px;
+  left: 126px;
+  top: 156px;
 }
 
 .left-text {
@@ -309,14 +339,12 @@ export default {
 }
 
 .day-box-section-two {
-  position: absolute;
-  top: 271px;
-  left: 577px;
+  margin-top: 78px;
+  margin-left: 55px;
 }
 
 .box-description {
-  position: absolute;
-  width: 311px;
+  max-width: 311px;
   height: 104px;
   font-family: Montserrat, sans-serif;
   font-style: normal;
@@ -324,31 +352,28 @@ export default {
   font-size: 16px;
   line-height: 160%;
   color: #D7C9FE;
+  padding: 0;
 }
 
 .modal-contact-button {
   position: absolute;
-  margin: 225px 0 0 0;
+  margin: 121px 0 0 0;
 }
 
 .cluster-in-number {
-  position: absolute;
   width: 214px;
   height: 26px;
-  left: 174.15px;
-  top: 650px;
   font-family: Helvetica, sans-serif;
   font-style: normal;
   font-weight: bold;
   font-size: 14px;
   line-height: 16px;
   color: #D7CAFD;
+  margin-top: 58px;
 }
 
 .clusters {
-  position: absolute;
-  left: 138px;
-  top: 684px;
+  margin-left: -36px;
 }
 
 .clusters-box {
@@ -394,44 +419,33 @@ export default {
 }
 
 .proposed-text {
-  position: absolute;
   width: 303px;
   height: 25.43px;
-  left: 981px;
-  top: 195.1px;
   font-family: Helvetica, sans-serif;
   font-style: normal;
   font-weight: bold;
   font-size: 14px;
   line-height: 16px;
   color: #D7CAFD;
+  margin-top: 5px;
+}
+
+.results-modal-second-section {
+  height: 730px;
+  overflow: hidden;
 }
 
 .providers-list {
-  position: absolute;
-  top: 235px;
-  left: 960px;
   display: block !important;
-  height: 685px;
   width: 340px;
-  overflow-x: hidden;
-  overflow-y: auto;
-}
-
-.provider-list-second-section {
-  position: absolute;
-  top: 136px;
-  left: 8px;
 }
 
 .providers-first-list-image-background {
-  position: absolute;
+  margin-top: 37px;
   width: 65px;
   height: 65px;
   background: #191142;
   border-radius: 50%;
-  left: 5px;
-  top: 28px;
 }
 
 .providers-list-image-background {
@@ -443,7 +457,6 @@ export default {
 }
 
 .provider-list-image {
-  position: absolute;
   width: 37.14px;
   height: 37.14px;
   margin: 13.93px;
@@ -462,7 +475,7 @@ export default {
   line-height: 20px;
   color: #EAE2FF;
   padding: 0;
-  margin: 50px 0 0 80px;
+  margin: 60px 0 0 15px;
 }
 
 .provider-title {
@@ -491,7 +504,7 @@ export default {
   line-height: 29px;
   text-align: right;
   color: #0AE29F;
-  margin: 45px 0 0 249px;
+  margin: 53px 0 0 249px;
 }
 
 .provider-item-price {
@@ -508,8 +521,12 @@ export default {
   margin: 75px 0 0 240px;
 }
 
+.active-offer-container {
+  margin: 39px 0 0 25px;
+  display: flex;
+}
+
 .best-offer-text {
-  position: absolute;
   width: 172px;
   height: 28px;
   font-family: Helvetica, sans-serif;
@@ -518,11 +535,10 @@ export default {
   font-size: 12px;
   line-height: 14px;
   color: #D7CAFD;
-  margin: 45px 0 0 25px;
+  margin: 0;
 }
 
 .last-update {
-  position: absolute;
   width: 122px;
   height: 36px;
   font-family: Helvetica, sans-serif;
@@ -532,7 +548,7 @@ export default {
   line-height: 150%;
   text-align: right;
   color: #D7CAFD;
-  margin: 43px 0 0 185px;
+  margin: 0;
 }
 
 .best-offer-stroke {
@@ -540,10 +556,10 @@ export default {
   width: 342px;
   height: 0;
   border: 1px solid #100640;
-  margin: 165px 0 0 0;
+  margin: 22px 0 0 0;
 }
 
-@media all and (max-width: 1330px) {
+/*@media all and (max-width: 1330px) {
   .modal-first-layer {
     display: none;
   }
@@ -910,5 +926,5 @@ export default {
   .provider-item-price {
     margin: 75px 0 0 190px;
   }
-}
+}*/
 </style>
