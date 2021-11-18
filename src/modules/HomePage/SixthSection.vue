@@ -2,17 +2,19 @@
   <div v-if="data.length" class="main-page-sixth-section">
     <span class="feedback-stroke"/>
     <p class="feedback-title">შეფასება</p>
-    <div v-if="activeItem" class="carousel-list">
-      <img class="carousel-logo" :src="activeItem.image_url" alt="">
-      <span class="carousel-stroke"/>
-      <object class="carousel-top-quote" data="/assets/top_quote.svg" type="image/svg+xml"/>
+    <div class="feedback-container">
+      <div v-if="activeItem">
+        <img class="carousel-logo" :src="`${computeBaseUrl}${activeItem.image_url}`" alt="">
+        <span class="carousel-stroke"/>
+        <object class="carousel-top-quote" data="/assets/top_quote.svg" type="image/svg+xml"/>
+        <p class="feedback-text">{{ activeItem.feedback_text }}</p>
+        <p class="feedback-author">- {{ activeItem.user_full_name }}</p>
+      </div>
       <object class="carousel-bottom-quote" data="/assets/bottom_quote.svg" type="image/svg+xml"/>
-      <p class="feedback-text">{{ activeItem.feedback_text }}</p>
-      <p class="feedback-author">- {{ activeItem.user_full_name }}</p>
-    </div>
-    <img v-if="showNextItem" class="carousel-next-item-logo" :src="nextItem.image_url" alt="">
-    <div v-if="data.length > 1" class="carousel-next-slider" @click="onCarouselNextClick">
-      <img class="carousel-next-button" src="/assets/next_button.svg" alt=""/>
+      <img v-if="showNextItem" class="carousel-next-item-logo" :src="`assets/tweeter_logo.png`" alt="">
+      <div v-if="data.length > 1" class="carousel-next-slider" @click="onCarouselNextClick">
+        <img class="carousel-next-button" src="/assets/next_button.svg" alt=""/>
+      </div>
     </div>
     <div v-if="!isSmallScreen" class="d-flex align-items-center justify-content-center carousel-dot">
       <div class="carousel-dot-item" v-for="item in data" :key="item.uuid">
@@ -115,13 +117,6 @@ export default {
   padding: 140px 0 0 116px;
 }
 
-@media all and (max-width: 480px) {
-  .main-page-sixth-section {
-    height: 902px;
-    padding: 72px 0 0 27px;
-  }
-}
-
 .feedback-stroke {
   width: 2px;
   height: 17px;
@@ -142,16 +137,10 @@ export default {
   margin: -28px 0 0 13px;
 }
 
-@media all and (max-width: 480px) {
-  .feedback-title {
-    width: 373px;
-    height: 37px;
-    font-size: 20px;
-    line-height: 176.4%;
-  }
-}
-
-.carousel-list {
+.feedback-container {
+  position: absolute;
+  width: 100%;
+  height: 77%;
   margin: 24px 20px 0 192px;
 }
 
@@ -173,12 +162,13 @@ export default {
   top: 348px;
   right: 25px;
   border-radius: 50%;
+  mix-blend-mode: luminosity;
 }
 
 .carousel-stroke {
   position: absolute;
   width: 0;
-  height: 351px;
+  height: 55%;
   border: 1px solid #DEE2E6;
   margin: 109px 0 0 56px;
 }
@@ -188,26 +178,23 @@ export default {
 }
 
 .carousel-bottom-quote {
-  position: absolute;
-  margin-left: 493px;
-  margin-top: 380px;
+  margin-left: 875px;
+  margin-top: -69px;
 }
 
 .feedback-text {
-  position: absolute;
   max-width: 592px;
-  height: 134px;
+  min-height: 134px;
   font-family: Helvetica, sans-serif;
   font-style: normal;
   font-weight: normal;
   font-size: 24px;
   line-height: 170%;
   color: #212529;
-  margin: 0 0 0 237px
+  margin: -60px 0 0 237px
 }
 
 .feedback-author {
-  position: absolute;
   width: 279px;
   height: 59px;
   font-family: Montserrat, sans-serif;
@@ -216,32 +203,73 @@ export default {
   font-size: 18px;
   line-height: 166%;
   color: #212529;
-  margin: 149px 0 0 237px
+  margin: 20px 0 0 237px
 }
 
 .carousel-next-slider {
   position: absolute;
-  width: 308px;
-  height: 495px;
-  margin-top: 150px;
-  top: 0;
-  right: -93px;
-  background: linear-gradient(180deg, #FFFFFF 0%, rgba(255, 255, 255, 0.5) 100%);
-  cursor: pointer;
+  width: 50px;
+  height: 39.5px;
+  top: 100px;
+  right: 100px;
 }
 
 .carousel-next-button {
-  position: absolute;
   width: 50px;
   height: 39.5px;
-  left: 124px;
-  top: 315px;
+}
+
+.carousel-dot-item {
+  margin-right: 16px;
+}
+
+.carousel-dot {
+  position: absolute;
+  bottom: 50px;
+  left: 50%;
+}
+
+@media all and (max-width: 1340px) {
+  .main-page-sixth-section {
+    padding: 70px 0 0 58px;
+  }
+
+  .feedback-container {
+    margin: 0 0 0 13px;
+  }
+
+  .carousel-next-item-logo {
+    top: 100px;
+    right: 75px;
+  }
+
+  .carousel-next-slider {
+    right: 0;
+  }
+
+  .carousel-dot {
+    left: 40%;
+    bottom: 100px;
+  }
 }
 
 @media all and (max-width: 480px) {
-  .carousel-list {
+  .main-page-sixth-section {
+    height: 902px;
+    padding: 72px 0 0 27px;
+  }
+
+  .feedback-title {
+    width: 373px;
+    height: 37px;
+    font-size: 20px;
+    line-height: 176.4%;
+  }
+
+  .feedback-container {
     margin: 104px 0 0 13px;
   }
+
   .carousel-logo {
     margin: 0;
   }
@@ -287,13 +315,5 @@ export default {
     left: unset;
     top: 315px;
   }
-}
-
-.carousel-dot-item {
-  margin-right: 16px;
-}
-
-.carousel-dot {
-  margin-top: 356px;
 }
 </style>
