@@ -8,7 +8,7 @@
       <div class="d-flex align-items-center" :class="{'active-insurance-button': isLife}">
         <b-button class="insurance-option-button" :class="{'active-button-background': isLife}" size="sm"
                   @click="onSelectButtonClick('life')">
-          <span :class="getActiveLifeClass">სიცოცხლის</span>
+          <span :class="getActiveLifeClass">ავტომობილის</span>
         </b-button>
       </div>
       <div class="d-flex align-items-center last-insurance-btn" :class="{'active-insurance-button': isHealth}">
@@ -294,7 +294,7 @@ export default {
 @media all and (max-width: 480px) {
   .insurance-button-text {
     height: 22px;
-    font-size: 16px;
+    font-size: 14px;
     color: #FFFFFF;
     margin: 0 10px;
   }
@@ -302,7 +302,9 @@ export default {
 
 @media all and (max-width: 320px) {
   .insurance-button-text {
-    font-size: 14px;
+    font-size: 13px;
+    margin: 0 5px;
+    height: 17px;
   }
 }
 
@@ -323,15 +325,15 @@ export default {
 
 @media all and (max-width: 480px) {
   .insurance-active-text {
-    height: 22px;
-    font-size: 16px;
+    height: 17px;
+    font-size: 14px;
   }
 }
 
 
 @media all and (max-width: 320px) {
   .insurance-active-text {
-    font-size: 14px;
+    font-size: 13px;
   }
 }
 
