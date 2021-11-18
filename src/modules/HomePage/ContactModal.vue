@@ -9,11 +9,7 @@
     </div>
     <span class="contact-stroke"/>
     <p class="contact-title">დაგვიკავშირდი</p>
-    <p class="contact-description">
-      Cluster is made to optimize your expenses,
-      whether you are a physical entity or running a business of any size.
-      Paying less in stuff and services
-    </p>
+    <p class="contact-description">დაგვიკავშირდი შენთვის მოსახერხებელი გზით ნებისმიერ დროს.</p>
     <b-button v-if="isSmallScreen" class="call-button" :href="`tel:${phoneNumber}`">
       <span class="call-text">დარეკვა</span>
     </b-button>
