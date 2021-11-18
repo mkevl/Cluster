@@ -46,7 +46,7 @@ export default {
   data() {
     return {
       activeBox: {
-        request: false,
+        request: true,
         response: false,
       },
       windowWidth: window.innerWidth,
@@ -67,12 +67,14 @@ export default {
     onMouseOver(type) {
       if (type === 'request') {
         this.activeBox.request = true
+        this.activeBox.response = false
       } else {
+        this.activeBox.request = false
         this.activeBox.response = true
       }
     },
     onMouseLeave() {
-      this.activeBox.request = false
+      this.activeBox.request = true
       this.activeBox.response = false
     },
   },
