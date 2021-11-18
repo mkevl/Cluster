@@ -12,8 +12,8 @@
     </div>
     <div class="result-modal-container">
       <div class="headers">
-        <p class="header-one mb-0">ჯანმრთელობის დაზღვევა</p>
-        <p class="header-two mb-0">- გაუმჯობესებული პაკეტი</p>
+        <p class="header-one mb-0">{{ selectedItem.title }} დაზღვევა</p>
+        <p class="header-two mb-0">- {{ selectedItem.packageName }} პაკეტი</p>
       </div>
       <div :class="{'row': !isSmallScreen}">
         <div :class="{'col-auto': !isSmallScreen}">
@@ -29,9 +29,11 @@
             </div>
             <div class="day-box-section-two">
               <p class="box-description">
-                Cluster is made to optimize your expenses,
-                whether you are a physical entity or running a business of any size.
-                Paying less in stuff and services
+                {{ selectedItem.text }}
+                <br/>
+                იხილეთ პარტნიორი სადაზღვევო კომპანიების
+                <a class="text-decoration-none" :href="selectedItem.link">შეთავაზებები</a>
+                და ჩაამატეთ არასასურველი კომპანიები თქვენს პერსონალურ შავ სიაში.
               </p>
               <contact-button class="modal-contact-button"/>
             </div>
@@ -56,8 +58,8 @@
         </div>
         <div class="results-modal-second-section" :class="{'col-auto': !isSmallScreen}">
           <p class="proposed-text">შემოთავაზებული ფასები</p>
-          <div class="providers-list">
-            <div v-if="providerExist" class="d-flex">
+          <div v-if="providerExist" class="providers-list">
+            <div class="d-flex">
               <div class="providers-first-list-image-background">
                 <img class="provider-list-image"
                      :src="`https://drive.google.com/uc?export=view&id=${providersFirstListItem.provider.provider_logo_url}`"
@@ -67,10 +69,10 @@
               <p class="provider-first-item-price">{{ Math.round(providersFirstListItem.price_per_month) }} &#8382;</p>
             </div>
             <div class="active-offer-container">
-              <p v-if="providerExist" class="best-offer-text">&bull; საუკეთესო შეთავაზება</p>
-              <p v-if="providerExist && !isSmScreen" class="last-update">ბოლოს განახლდა <br/> {{ getFormattedDate }}</p>
+              <p class="best-offer-text">&bull; საუკეთესო შეთავაზება</p>
+              <p v-if="!isSmScreen" class="last-update">ბოლოს განახლდა <br/> {{ getFormattedDate }}</p>
             </div>
-            <p v-if="providerExist && isSmScreen" class="last-update">ბოლოს განახლდა {{ getFormattedDate }}</p>
+            <p v-if="isSmScreen" class="last-update">ბოლოს განახლდა {{ getFormattedDate }}</p>
             <span class="best-offer-stroke"/>
             <div class="provider-list-second-section">
               <div class="providers-list-item" v-for="(item) in otherProviders" :key="item.uuid">
@@ -110,7 +112,8 @@ export default {
   computed: {
     ...mapState({
       packageData: state => state.results.modal.packageData,
-      statisticData: state => state.results.modal.statisticData
+      statisticData: state => state.results.modal.statisticData,
+      selectedItem: state => state.results.modal.selectedItem,
     }),
     providersFirstListItem() {
       return this.packageData[0];
@@ -258,11 +261,12 @@ export default {
   font-size: 18px;
   line-height: 21px;
   margin-left: 10px;
+  margin-top: 5px;
 }
 
 .month-calculation-box {
   width: 791px;
-  height: 372px;
+  min-height: 372px;
   background: #231A53;
   opacity: 0.8;
   box-shadow: 0 8px 12px rgba(0, 0, 0, 0.04);
@@ -345,7 +349,7 @@ export default {
 
 .box-description {
   max-width: 311px;
-  height: 104px;
+  min-height: 104px;
   font-family: Montserrat, sans-serif;
   font-style: normal;
   font-weight: 500;
@@ -356,8 +360,7 @@ export default {
 }
 
 .modal-contact-button {
-  position: absolute;
-  margin: 121px 0 0 0;
+  margin: 20px 0 0 0;
 }
 
 .cluster-in-number {
@@ -598,10 +601,6 @@ export default {
     top: 129px;
   }
 
-  .modal-contact-button {
-    margin-top: 58px;
-  }
-
   .clusters-box {
     width: 289px;
   }
@@ -758,12 +757,8 @@ export default {
 
   .box-description {
     width: 220px;
-    height: 124px;
+    min-height: 124px;
     font-size: 14px;
-  }
-
-  .modal-contact-button {
-    margin-top: 61px;
   }
 
   .best-offer-stroke {

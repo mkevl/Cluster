@@ -54,6 +54,7 @@ export default {
   },
   [SET_SELECTED_VALUES](state, data) {
     state.defaultValues = {...data}
+    state.results.modal.selectedItem = state.results.modal.data.find(d => d.type === data.insurance && d.package === data.package)
   },
   [SET_FAQ_DATA](state, data) {
     if (data) {
