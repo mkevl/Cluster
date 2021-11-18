@@ -69,8 +69,8 @@
             <div class="active-offer-container">
               <p v-if="providerExist" class="best-offer-text">&bull; საუკეთესო შეთავაზება</p>
               <p v-if="providerExist && !isSmScreen" class="last-update">ბოლოს განახლდა <br/> {{ getFormattedDate }}</p>
-              <p v-if="providerExist && isSmScreen" class="last-update">ბოლოს განახლდა {{ getFormattedDate }}</p>
             </div>
+            <p v-if="providerExist && isSmScreen" class="last-update">ბოლოს განახლდა {{ getFormattedDate }}</p>
             <span class="best-offer-stroke"/>
             <div class="provider-list-second-section">
               <div class="providers-list-item" v-for="(item) in otherProviders" :key="item.uuid">
@@ -589,13 +589,13 @@ export default {
   }
 
   .time-background {
-    width: 87%;
+    width: 95%;
     height: 300px;
   }
 
   .time-calculation-container {
-    left: 75px;
-    top: 132px;
+    left: 96px;
+    top: 129px;
   }
 
   .modal-contact-button {
@@ -734,76 +734,12 @@ export default {
     top: 143px;
   }
 
-  //
-  //.time-calculation-container {
-  //  top: 119px;
-  //  left: 138px;
-  //}
-  //
-  //.day-box-section-two {
-  //  top: 610px;
-  //  left: 42px;
-  //}
-  //
-  //.modal-contact-button {
-  //  margin-top: 165px;
-  //}
-  //
-  //.cluster-in-number {
-  //  display: none;
-  //}
-  //
-  //.clusters {
-  //  left: 20px;
-  //  top: 968px;
-  //  display: block !important;
-  //  width: calc(100% - 20px);
-  //}
-  //
-  //.clusters-box {
-  //  width: 90%;
-  //  height: 207px;
-  //  margin-right: unset;
-  //  margin-bottom: 57px;
-  //}
-  //
-  //.clusters-text {
-  //  margin: 36px 0 0 20px;
-  //  width: 299px;
-  //  height: 26px;
-  //}
-  //
-  //.clusters-quantity {
-  //  width: 275.34px;
-  //  height: 65px;
-  //  margin: 114px 0 0 20.42px;
-  //}
-  //
-  //.proposed-text {
-  //  top: 1559px;
-  //  left: 42px;
-  //}
-  //
-  //.providers-list {
-  //  height: 500px;
-  //  left: 30px;
-  //  top: 1622px;
-  //}
-  //
-  //.provider-list-second-section {
-  //  left: 0;
-  //}
-  //
-  //.providers-first-list-image-background {
-  //  left: 0;
-  //}
-  //
-  //.best-offer-stroke {
-  //  width: 325px;
-  //}
+  .results-modal-second-section {
+    height: 630px;
+  }
 }
 
-/*@media all and (max-width: 320px) {
+@media all and (max-width: 480px) {
   .header-one {
     font-size: 16px;
   }
@@ -812,16 +748,12 @@ export default {
     font-size: 14px;
   }
 
-  .month-calculation-box {
-    width: 90%;
+  .result-modal-container {
     height: 683px;
-    left: 20px;
-    top: 211px;
   }
 
-  .time-calculation-container {
-    top: 119px;
-    left: 98px;
+  .calculation-box-container {
+    top: 25px;
   }
 
   .box-description {
@@ -830,24 +762,39 @@ export default {
     font-size: 14px;
   }
 
+  .modal-contact-button {
+    margin-top: 61px;
+  }
+
+  .best-offer-stroke {
+    width: 95%;
+  }
+}
+
+@media all and (max-width: 360px) {
+  .time-calculation-container {
+    left: 98px;
+  }
+
+  .day-box {
+    margin-left: -17px;
+  }
+
+  .time-background {
+    width: 97%;
+  }
+
   .day-box-section-two {
-    top: 610px;
-    left: 42px;
+    left: 20px
+  }
+
+  .box-description {
+    width: 200px;
   }
 
   .modal-contact-button {
-    margin-top: 165px;
-  }
-
-  .cluster-in-number {
-    display: none;
-  }
-
-  .clusters-box {
-    width: 90%;
-    height: 207px;
-    margin-right: unset;
-    margin-bottom: 57px;
+    margin-left: -8px;
+    width: 93%;
   }
 
   .clusters-text {
@@ -865,14 +812,12 @@ export default {
 
   .providers-list {
     height: 500px;
-    left: 15px;
-    top: 1622px;
     width: calc(100% - 20px);
   }
 
   .provider-first-title {
+    margin: 20px 0 0 10px;
     font-size: 14px;
-    margin-left: 60px;
     max-width: 150px;
     min-height: 26px;
     height: unset;
@@ -909,8 +854,6 @@ export default {
   }
 
   .last-update {
-    margin-top: 70px;
-    left: -170px;
     width: 173px;
   }
 
@@ -919,16 +862,15 @@ export default {
   }
 
   .best-offer-stroke {
-    margin-top: 175px;
-    width: 70%;
+    width: 95%;
   }
 
   .provider-first-item-price {
-    margin: 45px 0 0 190px;
+    margin: 20px 0 0 170px;
   }
 
   .provider-item-price {
-    margin: 75px 0 0 190px;
+    margin: 75px 0 0 170px;
   }
-}*/
+}
 </style>
