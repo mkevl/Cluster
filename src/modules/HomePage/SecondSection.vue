@@ -256,6 +256,16 @@ export default {
   top: 431px;
 }
 
+@media all and (max-width: 1280px) {
+  .main-page-second-section {
+    padding-left: 30px;
+  }
+
+  .cluster-title {
+    width: calc(100% - 40px);
+  }
+}
+
 @media all and (max-width: 992px) {
   .main-page-second-section {
     padding: 110px 0 0 24px;
@@ -273,6 +283,7 @@ export default {
   .cluster-list {
     overflow-x: auto;
     overflow-y: hidden;
+    width: calc(100% - 8px);
 
     > li {
       margin-right: 34px;

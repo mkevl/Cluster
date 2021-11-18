@@ -44,7 +44,7 @@ export default {
   },
   [SET_PROVIDERS](state, data) {
     if (data) {
-      state.providers = [...data]
+      state.providers = [...data.filter(d => !['55e9d198-6076-4243-bc75-cbceafb10a48'].includes(d.uuid))]
     }
   },
   [SET_FEEDBACK_DATA](state, data) {

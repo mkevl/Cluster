@@ -242,7 +242,7 @@ export default {
   }
 }
 
-@media all and (max-width: 320px) {
+@media all and (max-width: 360px) {
   .insurance-option-button {
     padding: 10px 9px;
   }
@@ -267,7 +267,7 @@ export default {
   }
 }
 
-@media all and (max-width: 320px) {
+@media all and (max-width: 360px) {
   .active-insurance-button {
     padding: 0 5px;
   }
@@ -300,7 +300,7 @@ export default {
   }
 }
 
-@media all and (max-width: 320px) {
+@media all and (max-width: 360px) {
   .insurance-button-text {
     font-size: 13px;
     margin: 0 5px;
@@ -331,7 +331,7 @@ export default {
 }
 
 
-@media all and (max-width: 320px) {
+@media all and (max-width: 360px) {
   .insurance-active-text {
     font-size: 13px;
   }
@@ -396,7 +396,7 @@ export default {
   }
 }
 
-@media all and (max-width: 320px) {
+@media all and (max-width: 360px) {
   .radio-button-item {
     margin-right: 0;
   }
@@ -423,7 +423,7 @@ export default {
   }
 }
 
-@media all and (max-width: 320px) {
+@media all and (max-width: 360px) {
   .active-radio-button {
     font-size: 14px !important;
   }

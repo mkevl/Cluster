@@ -98,6 +98,8 @@ export default {
     await this.getAllProvider()
     this.localProviders = _.cloneDeep(this.providers)
 
+    this.activeProvider = this.localProviders.find(p => p.uuid === 'c26eb228-cb9f-4e7b-8ea7-c5c9b0c5d834' )
+
     this.loading = false
     window.addEventListener('resize', () => {
       this.windowWidth = window.innerWidth
