@@ -59,7 +59,8 @@
         <span class="best-offer-stroke"/>
       </div>
       <p v-if="providerExist" class="best-offer-text">&bull; საუკეთესო შეთავაზება</p>
-      <p v-if="providerExist" class="last-update">ბოლოს განახლდა <br/> {{ getFormattedDate }}</p>
+      <p v-if="providerExist && !isSmScreen" class="last-update">ბოლოს განახლდა <br/> {{ getFormattedDate }}</p>
+      <p v-if="providerExist && isSmScreen" class="last-update">ბოლოს განახლდა {{ getFormattedDate }}</p>
       <div class="provider-list-second-section">
         <div class="providers-list-item" v-for="(item) in otherProviders" :key="item.uuid">
           <div v-if="item && item.provider" class="d-flex">
@@ -109,7 +110,10 @@ export default {
       return monthLastDay - currentDay;
     },
     isSmallScreen() {
-      return this.windowWidth <= 480
+      return this.windowWidth <= 1330
+    },
+    isSmScreen() {
+      return this.windowWidth <= 380
     },
     computeBaseUrl() {
       const len = this.baseUrl.length
@@ -186,30 +190,6 @@ export default {
   border-radius: 100px 100px 0 0;
 }
 
-@media all and (max-width: 480px) {
-  .modal-first-layer {
-    display: none;
-  }
-
-  .modal-second-layer {
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 2171px;
-    border-radius: unset;
-    overflow-y: hidden;
-  }
-
-  .modal-third-layer {
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 2171px;
-    border-radius: unset;
-    overflow-y: hidden;
-  }
-}
-
 .home-icon {
   position: absolute;
   top: 26px;
@@ -263,18 +243,6 @@ export default {
   color: #D7CAFD;
 }
 
-@media all and (max-width: 480px) {
-  .header-one {
-    left: 39px;
-    top: 91px;
-  }
-
-  .header-two {
-    left: 42px;
-    top: 133px;
-  }
-}
-
 .month-calculation-box {
   position: absolute;
   width: 791px;
@@ -285,15 +253,6 @@ export default {
   opacity: 0.8;
   box-shadow: 0 8px 12px rgba(0, 0, 0, 0.04);
   border-radius: 50px;
-}
-
-@media all and (max-width: 480px) {
-  .month-calculation-box {
-    width: 90%;
-    height: 683px;
-    left: 20px;
-    top: 211px;
-  }
 }
 
 .day-box {
@@ -349,23 +308,6 @@ export default {
   color: #0AE29F;
 }
 
-@media all and (max-width: 480px) {
-  .day-box {
-    left: 25px;
-    top: 236px;
-  }
-
-  .time-background {
-    width: 97%;
-    height: 364.89px;
-  }
-
-  .time-calculation-container {
-    top: 119px;
-    left: 138px;
-  }
-}
-
 .day-box-section-two {
   position: absolute;
   top: 271px;
@@ -389,17 +331,6 @@ export default {
   margin: 225px 0 0 0;
 }
 
-@media all and (max-width: 480px) {
-  .day-box-section-two {
-    top: 610px;
-    left: 42px;
-  }
-
-  .modal-contact-button {
-    margin-top: 165px;
-  }
-}
-
 .cluster-in-number {
   position: absolute;
   width: 214px;
@@ -412,12 +343,6 @@ export default {
   font-size: 14px;
   line-height: 16px;
   color: #D7CAFD;
-}
-
-@media all and (max-width: 480px) {
-  .cluster-in-number {
-    display: none;
-  }
 }
 
 .clusters {
@@ -434,22 +359,6 @@ export default {
   box-shadow: 0 8px 12px rgba(0, 0, 0, 0.04);
   border-radius: 50px;
   margin-right: 37.96px;
-}
-
-@media all and (max-width: 480px) {
-  .clusters {
-    left: 20px;
-    top: 968px;
-    display: block !important;
-    width: 100%;
-  }
-
-  .clusters-box {
-    width: 90%;
-    height: 207px;
-    margin-right: unset;
-    margin-bottom: 57px;
-  }
 }
 
 .clusters-text {
@@ -484,20 +393,6 @@ export default {
   font-weight: 400;
 }
 
-@media all and (max-width: 480px) {
-  .clusters-text {
-    margin: 36px 0 0 20px;
-    width: 299px;
-    height: 26px;
-  }
-
-  .clusters-quantity {
-    width: 275.34px;
-    height: 65px;
-    margin: 114px 0 0 20.42px;
-  }
-}
-
 .proposed-text {
   position: absolute;
   width: 303px;
@@ -510,13 +405,6 @@ export default {
   font-size: 14px;
   line-height: 16px;
   color: #D7CAFD;
-}
-
-@media all and (max-width: 480px) {
-  .proposed-text {
-    top: 1559px;
-    left: 42px;
-  }
 }
 
 .providers-list {
@@ -552,22 +440,6 @@ export default {
   background: #191142;
   border-radius: 50%;
   margin-top: 50px;
-}
-
-@media all and (max-width: 480px) {
-  .providers-list {
-    height: 500px;
-    left: 30px;
-    top: 1622px;
-  }
-
-  .provider-list-second-section {
-    left: 0;
-  }
-
-  .providers-first-list-image-background {
-    left: 0;
-  }
 }
 
 .provider-list-image {
@@ -671,9 +543,372 @@ export default {
   margin: 165px 0 0 0;
 }
 
-@media all and (max-width: 480px) {
+@media all and (max-width: 1330px) {
+  .modal-first-layer {
+    display: none;
+  }
+
+  .modal-second-layer {
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 1900px;
+    border-radius: unset;
+    overflow-y: hidden;
+  }
+
+  .modal-third-layer {
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 1900px;
+    border-radius: unset;
+    overflow-y: hidden;
+  }
+
+  .header-one {
+    left: 39px;
+    top: 91px;
+  }
+
+  .header-two {
+    left: 345px;
+    top: 91px;
+  }
+
+  .month-calculation-box {
+    width: 90%;
+    left: 20px;
+    top: 170px;
+  }
+
+  .day-box {
+    left: 25px;
+    top: 170px;
+  }
+
+  .day-box-section-two {
+    top: 240px;
+  }
+
+  .modal-contact-button {
+    margin-top: 165px;
+  }
+
+  .cluster-in-number {
+    display: none;
+  }
+
+  .clusters {
+    left: 20px;
+    top: 588px;
+    display: block !important;
+    width: calc(100% - 20px);
+  }
+
+  .clusters-box {
+    width: 90%;
+    height: 207px;
+    margin-right: unset;
+    margin-bottom: 57px;
+  }
+
+  .clusters-text {
+    margin: 36px 0 0 20px;
+    width: 299px;
+    height: 26px;
+  }
+
+  .clusters-quantity {
+    width: 275.34px;
+    height: 65px;
+    margin: 114px 0 0 20.42px;
+  }
+
+  .proposed-text {
+    top: 1190px;
+    left: 42px;
+  }
+
+  .providers-list {
+    height: 500px;
+    left: 30px;
+    top: 1253px;
+  }
+
+  .provider-list-second-section {
+    left: 0;
+  }
+
+  .providers-first-list-image-background {
+    left: 0;
+  }
+
   .best-offer-stroke {
     width: 325px;
+  }
+}
+
+@media all and (max-width: 992px) {
+  .time-background {
+    width: 97%;
+    height: 364.89px;
+  }
+
+  .time-calculation-container {
+    top: 119px;
+    left: 138px;
+  }
+
+  .day-box-section-two {
+    left: 410px;
+  }
+}
+
+@media all and (max-width: 780px) {
+  .modal-first-layer {
+    display: none;
+  }
+
+  .modal-second-layer {
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 2171px;
+    border-radius: unset;
+    overflow-y: hidden;
+  }
+
+  .modal-third-layer {
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 2171px;
+    border-radius: unset;
+    overflow-y: hidden;
+  }
+
+  .header-one {
+    left: 39px;
+    top: 91px;
+  }
+
+  .header-two {
+    left: 42px;
+    top: 133px;
+  }
+
+  .month-calculation-box {
+    width: 90%;
+    height: 683px;
+    left: 20px;
+    top: 211px;
+  }
+
+  .day-box {
+    left: 25px;
+    top: 236px;
+  }
+
+  .time-background {
+    width: 97%;
+    height: 364.89px;
+  }
+
+  .time-calculation-container {
+    top: 119px;
+    left: 138px;
+  }
+
+  .day-box-section-two {
+    top: 610px;
+    left: 42px;
+  }
+
+  .modal-contact-button {
+    margin-top: 165px;
+  }
+
+  .cluster-in-number {
+    display: none;
+  }
+
+  .clusters {
+    left: 20px;
+    top: 968px;
+    display: block !important;
+    width: calc(100% - 20px);
+  }
+
+  .clusters-box {
+    width: 90%;
+    height: 207px;
+    margin-right: unset;
+    margin-bottom: 57px;
+  }
+
+  .clusters-text {
+    margin: 36px 0 0 20px;
+    width: 299px;
+    height: 26px;
+  }
+
+  .clusters-quantity {
+    width: 275.34px;
+    height: 65px;
+    margin: 114px 0 0 20.42px;
+  }
+
+  .proposed-text {
+    top: 1559px;
+    left: 42px;
+  }
+
+  .providers-list {
+    height: 500px;
+    left: 30px;
+    top: 1622px;
+  }
+
+  .provider-list-second-section {
+    left: 0;
+  }
+
+  .providers-first-list-image-background {
+    left: 0;
+  }
+
+  .best-offer-stroke {
+    width: 325px;
+  }
+}
+
+@media all and (max-width: 320px) {
+  .header-one {
+    font-size: 16px;
+  }
+
+  .header-two {
+    font-size: 14px;
+  }
+
+  .month-calculation-box {
+    width: 90%;
+    height: 683px;
+    left: 20px;
+    top: 211px;
+  }
+
+  .time-calculation-container {
+    top: 119px;
+    left: 98px;
+  }
+
+  .box-description {
+    width: 220px;
+    height: 124px;
+    font-size: 14px;
+  }
+
+  .day-box-section-two {
+    top: 610px;
+    left: 42px;
+  }
+
+  .modal-contact-button {
+    margin-top: 165px;
+  }
+
+  .cluster-in-number {
+    display: none;
+  }
+
+  .clusters-box {
+    width: 90%;
+    height: 207px;
+    margin-right: unset;
+    margin-bottom: 57px;
+  }
+
+  .clusters-text {
+    width: unset;
+    font-size: 11.5px;
+  }
+
+  .clusters-quantity {
+    width: unset;
+  }
+
+  .proposed-text {
+    width: unset;
+  }
+
+  .providers-list {
+    height: 500px;
+    left: 15px;
+    top: 1622px;
+    width: calc(100% - 20px);
+  }
+
+  .provider-first-title {
+    font-size: 14px;
+    margin-left: 60px;
+    max-width: 150px;
+    min-height: 26px;
+    height: unset;
+  }
+
+  .provider-title {
+    font-size: 14px;
+    margin-left: 10px;
+    max-width: 150px;
+    min-height: 26px;
+    height: unset;
+  }
+
+  .providers-first-list-image-background {
+    width: 50px;
+    height: 50px;
+    margin-top: 10px;
+  }
+
+  .providers-list-image-background {
+    width: 50px;
+    height: 50px;
+    margin-top: 60px;
+  }
+
+  .provider-list-image {
+    width: 30px;
+    height: 30px;
+    margin: 10px;
+  }
+
+  .provider-list-second-section {
+    left: 0;
+  }
+
+  .last-update {
+    margin-top: 70px;
+    left: -170px;
+    width: 173px;
+  }
+
+  .providers-first-list-image-background {
+    left: 0;
+  }
+
+  .best-offer-stroke {
+    margin-top: 175px;
+    width: 70%;
+  }
+
+  .provider-first-item-price {
+    margin: 45px 0 0 190px;
+  }
+
+  .provider-item-price {
+    margin: 75px 0 0 190px;
   }
 }
 </style>
