@@ -118,7 +118,7 @@ export default {
   display: flex;
   align-items: stretch;
   justify-content: space-between;
-  width: 100%;
+  width: calc(100% - 116px);
   margin: 0;
   padding: 0;
 
