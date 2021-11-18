@@ -1,6 +1,6 @@
 <template>
   <div v-if="isResultsModal || isContactModal">
-    <results-modal v-if="isResultsModal" :base-url="baseUrl"/>
+    <results-modal v-if="isResultsModal && !isContactModal" :base-url="baseUrl"/>
     <contact-modal v-if="isContactModal" :phone-number="phoneNumber" :email="email" :google-form="googleForm"/>
   </div>
   <div v-else class="main-page">
