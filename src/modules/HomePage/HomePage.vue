@@ -44,7 +44,7 @@ export default {
     return {
       phoneNumber: '+995557386688',
       email: 'holla@klaster.ge',
-      googleForm: 'https://docs.google.com/forms/d/e/1FAIpQLSeQE58YvHe0S1XRwTFxRz8Hfq6GkKWs4XCP90xqafjV0VGtmA/formrestricted',
+      googleForm: 'https://docs.google.com/forms/d/e/1FAIpQLSeQE58YvHe0S1XRwTFxRz8Hfq6GkKWs4XCP90xqafjV0VGtmA/viewform',
       baseUrl: process.env.VUE_APP_API_HOST,
     }
   },

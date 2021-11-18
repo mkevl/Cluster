@@ -17,7 +17,7 @@
     <b-button v-if="isSmallScreen" class="call-button" :href="`tel:${phoneNumber}`">
       <span class="call-text">დარეკვა</span>
     </b-button>
-    <b-button class="google-form-button" :href="googleForm">
+    <b-button class="google-form-button" :href="googleForm" target='_blank'>
       <span class="google-form-text">ფორმა</span>
     </b-button>
     <b-button class="mail-button" :href="`mailto:${email}`">
