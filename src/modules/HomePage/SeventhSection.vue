@@ -147,8 +147,7 @@ export default {
 
 .active-question-description {
   height: auto;
-  width: auto;
-  max-width: 545px;
+  width: calc(100% - 100px);
   font-family: Helvetica, sans-serif;
   font-style: normal;
   font-weight: normal;
@@ -214,6 +213,18 @@ export default {
   left: 45%;
 }
 
+@media all and (max-width: 1300px) {
+  .active-question-description {
+    width: calc(100% - 80px);
+  }
+}
+
+@media all and (max-width: 1180px) {
+  .active-question-description {
+    width: 100%;
+  }
+}
+
 @media all and (max-width: 992px) {
   .main-page-seventh-section {
     min-height: 1270px;
@@ -253,6 +264,7 @@ export default {
   }
 
   .active-question-description {
+    width: calc(100% - 60px);
     font-size: 16px;
   }
 
