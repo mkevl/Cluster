@@ -219,6 +219,10 @@ export default {
     min-height: 1270px;
   }
 
+  .faq-container {
+    width: 100%;
+  }
+
   .faq-title {
     position: relative;
     width: 372px;
@@ -241,7 +245,7 @@ export default {
   }
 
   .faq-list-item {
-    min-width: 334px;
+    width: 100%;
   }
 
   .faq-list-question {
@@ -278,24 +282,15 @@ export default {
 }
 
 @media all and (max-width: 480px) {
-  .faq-list-item {
-    width: 85%;
-  }
-
   .copyright-title {
     left: 20%;
   }
 }
 
-@media all and (max-width: 320px) {
+@media all and (max-width: 360px) {
   .faq-title {
     font-size: 18px;
     margin: 0 0 0 25px;
-  }
-
-  .faq-list-item {
-    min-width: 100px;
-    width: 255px;
   }
 
   .faq-list-question {

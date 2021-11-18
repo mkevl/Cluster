@@ -286,7 +286,7 @@ export default {
   }
 }
 
-@media all and (max-width: 320px) {
+@media all and (max-width: 360px) {
   .main-page-fifth-section {
     height: 1350px;
   }
