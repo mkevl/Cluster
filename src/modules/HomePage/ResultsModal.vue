@@ -15,8 +15,8 @@
         <p class="header-one mb-0">ჯანმრთელობის დაზღვევა</p>
         <p class="header-two mb-0">- გაუმჯობესებული პაკეტი</p>
       </div>
-      <div class="row">
-        <div class="col-auto">
+      <div :class="{'row': !isSmallScreen}">
+        <div :class="{'col-auto': !isSmallScreen}">
           <div class="month-calculation-box"/>
           <div class="calculation-box-container">
             <div class="day-box">
@@ -54,7 +54,7 @@
             </li>
           </ul>
         </div>
-        <div class="col-auto results-modal-second-section">
+        <div class="results-modal-second-section" :class="{'col-auto': !isSmallScreen}">
           <p class="proposed-text">შემოთავაზებული ფასები</p>
           <div class="providers-list">
             <div v-if="providerExist" class="d-flex">
@@ -559,7 +559,60 @@ export default {
   margin: 22px 0 0 0;
 }
 
-/*@media all and (max-width: 1330px) {
+@media all and (max-width: 1450px) {
+  .month-calculation-box {
+    width: 691px;
+  }
+
+  .time-background {
+    width: 90%;
+    height: 355px;
+  }
+
+  .time-calculation-container {
+    left: 108px;
+  }
+
+  .day-box-section-two {
+    margin-left: 0;
+  }
+
+  .clusters-box {
+    width: 325px;
+  }
+}
+
+@media all and (max-width: 1350px) {
+  .month-calculation-box {
+    width: 608px;
+    height: 316px;
+  }
+
+  .time-background {
+    width: 87%;
+    height: 300px;
+  }
+
+  .time-calculation-container {
+    left: 75px;
+    top: 132px;
+  }
+
+  .modal-contact-button {
+    margin-top: 58px;
+  }
+
+  .clusters-box {
+    width: 289px;
+  }
+
+  .clusters-text {
+    width: unset;
+    font-size: 13px;
+  }
+}
+
+@media all and (max-width: 1270px) {
   .modal-first-layer {
     display: none;
   }
@@ -568,7 +621,7 @@ export default {
     left: 0;
     top: 0;
     width: 100%;
-    height: 1900px;
+    height: 1050px;
     border-radius: unset;
     overflow-y: hidden;
   }
@@ -577,229 +630,180 @@ export default {
     left: 0;
     top: 0;
     width: 100%;
-    height: 1900px;
+    height: 1050px;
     border-radius: unset;
     overflow-y: hidden;
   }
 
-  .header-one {
+  .result-modal-container {
     left: 39px;
     top: 91px;
+    width: calc(100% - 56px);
   }
 
-  .header-two {
-    left: 345px;
-    top: 91px;
-  }
 
   .month-calculation-box {
-    width: 90%;
-    left: 20px;
-    top: 170px;
-  }
-
-  .day-box {
-    left: 25px;
-    top: 170px;
-  }
-
-  .day-box-section-two {
-    top: 240px;
-  }
-
-  .modal-contact-button {
-    margin-top: 165px;
-  }
-
-  .cluster-in-number {
-    display: none;
+    margin-left: -15px;
   }
 
   .clusters {
-    left: 20px;
-    top: 588px;
+    margin-left: -15px;
+  }
+}
+
+@media all and (max-width: 1070px) {
+  .modal-second-layer {
+    height: 1500px;
+  }
+
+  .modal-third-layer {
+    height: 1500px;
+  }
+
+  .header-two {
+    position: absolute;
+    top: 37px;
+  }
+
+  .month-calculation-box {
+    height: 683px;
+    width: 340px;
+    margin-top: 50px;
+  }
+
+  .results-modal-second-section {
+    margin-left: 100px;
+    height: 1300px;
+  }
+
+  .day-box {
+    margin-left: 15px;
+  }
+
+  .time-background {
+    width: 92%;
+  }
+
+  .time-calculation-container {
+    left: 128px;
+  }
+
+  .day-box-section-two {
+    position: absolute;
+    top: 290px;
+    left: 42px;
+  }
+
+  .clusters {
     display: block !important;
-    width: calc(100% - 20px);
+    margin-left: -15px;
   }
 
   .clusters-box {
-    width: 90%;
+    width: 100%;
     height: 207px;
     margin-right: unset;
     margin-bottom: 57px;
   }
-
-  .clusters-text {
-    margin: 36px 0 0 20px;
-    width: 299px;
-    height: 26px;
-  }
-
-  .clusters-quantity {
-    width: 275.34px;
-    height: 65px;
-    margin: 114px 0 0 20.42px;
-  }
-
-  .proposed-text {
-    top: 1190px;
-    left: 42px;
-  }
-
-  .providers-list {
-    height: 500px;
-    left: 30px;
-    top: 1253px;
-  }
-
-  .provider-list-second-section {
-    left: 0;
-  }
-
-  .providers-first-list-image-background {
-    left: 0;
-  }
-
-  .best-offer-stroke {
-    width: 325px;
-  }
 }
 
-@media all and (max-width: 992px) {
-  .time-background {
-    width: 97%;
-    height: 364.89px;
-  }
-
-  .time-calculation-container {
-    top: 119px;
-    left: 138px;
-  }
-
-  .day-box-section-two {
-    left: 410px;
+@media all and (max-width: 870px) {
+  .results-modal-second-section {
+    margin-left: unset;
   }
 }
 
 @media all and (max-width: 780px) {
-  .modal-first-layer {
-    display: none;
-  }
-
   .modal-second-layer {
-    left: 0;
-    top: 0;
-    width: 100%;
     height: 2171px;
-    border-radius: unset;
-    overflow-y: hidden;
   }
 
   .modal-third-layer {
-    left: 0;
-    top: 0;
-    width: 100%;
     height: 2171px;
-    border-radius: unset;
-    overflow-y: hidden;
-  }
-
-  .header-one {
-    left: 39px;
-    top: 91px;
-  }
-
-  .header-two {
-    left: 42px;
-    top: 133px;
   }
 
   .month-calculation-box {
-    width: 90%;
-    height: 683px;
-    left: 20px;
-    top: 211px;
+    width: 100%;
   }
 
   .day-box {
-    left: 25px;
-    top: 236px;
-  }
-
-  .time-background {
-    width: 97%;
-    height: 364.89px;
+    margin-top: 57px;
   }
 
   .time-calculation-container {
-    top: 119px;
-    left: 138px;
+    top: 143px;
   }
 
-  .day-box-section-two {
-    top: 610px;
-    left: 42px;
-  }
-
-  .modal-contact-button {
-    margin-top: 165px;
-  }
-
-  .cluster-in-number {
-    display: none;
-  }
-
-  .clusters {
-    left: 20px;
-    top: 968px;
-    display: block !important;
-    width: calc(100% - 20px);
-  }
-
-  .clusters-box {
-    width: 90%;
-    height: 207px;
-    margin-right: unset;
-    margin-bottom: 57px;
-  }
-
-  .clusters-text {
-    margin: 36px 0 0 20px;
-    width: 299px;
-    height: 26px;
-  }
-
-  .clusters-quantity {
-    width: 275.34px;
-    height: 65px;
-    margin: 114px 0 0 20.42px;
-  }
-
-  .proposed-text {
-    top: 1559px;
-    left: 42px;
-  }
-
-  .providers-list {
-    height: 500px;
-    left: 30px;
-    top: 1622px;
-  }
-
-  .provider-list-second-section {
-    left: 0;
-  }
-
-  .providers-first-list-image-background {
-    left: 0;
-  }
-
-  .best-offer-stroke {
-    width: 325px;
-  }
+  //
+  //.time-calculation-container {
+  //  top: 119px;
+  //  left: 138px;
+  //}
+  //
+  //.day-box-section-two {
+  //  top: 610px;
+  //  left: 42px;
+  //}
+  //
+  //.modal-contact-button {
+  //  margin-top: 165px;
+  //}
+  //
+  //.cluster-in-number {
+  //  display: none;
+  //}
+  //
+  //.clusters {
+  //  left: 20px;
+  //  top: 968px;
+  //  display: block !important;
+  //  width: calc(100% - 20px);
+  //}
+  //
+  //.clusters-box {
+  //  width: 90%;
+  //  height: 207px;
+  //  margin-right: unset;
+  //  margin-bottom: 57px;
+  //}
+  //
+  //.clusters-text {
+  //  margin: 36px 0 0 20px;
+  //  width: 299px;
+  //  height: 26px;
+  //}
+  //
+  //.clusters-quantity {
+  //  width: 275.34px;
+  //  height: 65px;
+  //  margin: 114px 0 0 20.42px;
+  //}
+  //
+  //.proposed-text {
+  //  top: 1559px;
+  //  left: 42px;
+  //}
+  //
+  //.providers-list {
+  //  height: 500px;
+  //  left: 30px;
+  //  top: 1622px;
+  //}
+  //
+  //.provider-list-second-section {
+  //  left: 0;
+  //}
+  //
+  //.providers-first-list-image-background {
+  //  left: 0;
+  //}
+  //
+  //.best-offer-stroke {
+  //  width: 325px;
+  //}
 }
 
-@media all and (max-width: 320px) {
+/*@media all and (max-width: 320px) {
   .header-one {
     font-size: 16px;
   }
