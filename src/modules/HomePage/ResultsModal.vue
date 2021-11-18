@@ -783,7 +783,7 @@ export default {
   }
 }
 
-@media all and (max-width: 320px) {
+@media all and (max-width: 360px) {
   .header-one {
     font-size: 16px;
   }
@@ -909,6 +909,18 @@ export default {
 
   .provider-item-price {
     margin: 75px 0 0 190px;
+  }
+}
+
+@media all and (max-width: 350px) {
+  .time-calculation-container {
+    left: 131px;
+  }
+}
+
+@media all and (max-width: 320px) {
+  .time-calculation-container {
+    left: 98px;
   }
 }
 </style>

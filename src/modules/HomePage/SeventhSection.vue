@@ -1,8 +1,8 @@
 <template>
   <div class="main-page-seventh-section">
     <p class="faq-title">ხშირად დასმული კითხვები</p>
-    <div class="row">
-      <div class="col-lg-6 col-md-12">
+    <div class="row faq-container">
+      <div class="col-lg-8 col-md-12">
         <ul class="faq-list">
           <li class="" v-for="(item, index) in faqData" :key="index">
             <div class="faq-list-item d-flex justify-content-between" @click="toggleFAQ(item)">
@@ -14,7 +14,7 @@
           </li>
         </ul>
       </div>
-      <div class="col-lg-6 col-md-12">
+      <div class="col-lg-4 col-md-12">
         <div class="contact-container">
           <p class="contact-title">დაგვიკავშირდი</p>
           <div class="d-flex contact-info-container">
@@ -102,6 +102,10 @@ export default {
   margin: 120px 0 0 114px;
 }
 
+.faq-container {
+  width: calc(100% - 100px);
+}
+
 .faq-list {
   margin-top: 246px;
   margin-left: 117px;
@@ -155,7 +159,7 @@ export default {
 }
 
 .contact-container {
-  margin: 128px 0 0 280px;
+  margin: 128px 0 0 100px;
 }
 
 .contact-title {
