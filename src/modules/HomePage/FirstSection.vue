@@ -156,6 +156,18 @@ export default {
   }
 }
 
+@media all and (max-width: 360px) {
+  .main-title {
+    font-size: 36px;
+  }
+}
+
+@media all and (max-width: 320px) {
+  .main-title {
+    font-size: 34px;
+  }
+}
+
 .main-description {
   height: 32px;
   font-family: Helvetica, sans-serif;
