@@ -66,7 +66,10 @@
                      alt="">
               </div>
               <p class="provider-first-title">{{ providersFirstListItem.provider.name }}</p>
-              <p class="provider-first-item-price">{{ Math.round(providersFirstListItem.price_per_month) }} &#8382;</p>
+              <p v-if="providersFirstListItem.price_per_month" class="provider-first-item-price">
+                {{ Math.round(providersFirstListItem.price_per_month) }} &#8382;
+              </p>
+              <p class="provider-first-item-price" v-else>N/A</p>
             </div>
             <div class="active-offer-container">
               <p class="best-offer-text">&bull; საუკეთესო შეთავაზება</p>
@@ -82,7 +85,10 @@
                          :src="`https://drive.google.com/uc?export=view&id=${item.provider.provider_logo_url}`" alt="">
                   </div>
                   <p class="provider-title">{{ item.provider.name }}</p>
-                  <p class="provider-item-price">{{ Math.round(item.price_per_month) }} &#8382;</p>
+                  <p v-if="item.price_per_month" class="provider-item-price">
+                    {{ Math.round(item.price_per_month) }} &#8382;
+                  </p>
+                  <p class="provider-item-price" v-else>N/A</p>
                 </div>
               </div>
             </div>
