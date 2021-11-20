@@ -10,7 +10,7 @@
         <ul class="providers-list" ref="list-scroll" :style="getProviderScrollStyle">
           <li v-for="(item, index) in localProviders" :key="index" class="providers-list-item"
               :class="{'active-provider-item': activeProvider.uuid === item.uuid}" @click="setActiveProvider(item)">
-            <img class="provider-image" :src="`https://drive.google.com/uc?export=view&id=${item.provider_image_url}`"
+            <img class="provider-image" :src="`${computeBaseUrl}${item.provider_image_url}`"
                  alt="">
 
           </li>
@@ -19,8 +19,8 @@
              @click="scrollDown()">
       </div>
       <div v-if="Object.keys(activeProvider).length" class="col-lg-6 col-sm-12 provider-info">
-<!--        <img class="provider-logo"-->
-<!--             :src="`https://drive.google.com/uc?export=view&id=${activeProvider.provider_logo_url}`" alt=""/>-->
+        <!--        <img class="provider-logo"-->
+        <!--             :src="`${computedBaseUrl}${activeProvider.provider_logo_url}`" alt=""/>-->
         <h1 class="provider-info-title">{{ activeProvider.name }}</h1>
         <p class="provider-info-description">{{ activeProvider.description }}</p>
         <div class="contact-container">
@@ -67,11 +67,12 @@ export default {
       return this.windowWidth <= 992 || this.isScrolled ? {} : {paddingTop: '33px'}
     },
     computeBaseUrl() {
-      const len = this.baseUrl.length
+      return 'https://drive.google.com/uc?export=view&id='
+      /*const len = this.baseUrl.length
       if (this.baseUrl[len - 1] === '/') {
         return this.baseUrl.substring(0, this.baseUrl.length - 1);
       }
-      return this.baseUrl
+      return this.baseUrl*/
     },
   },
   methods: {
@@ -98,7 +99,7 @@ export default {
     await this.getAllProvider()
     this.localProviders = _.cloneDeep(this.providers)
 
-    this.activeProvider = this.localProviders.find(p => p.uuid === 'c26eb228-cb9f-4e7b-8ea7-c5c9b0c5d834' )
+    this.activeProvider = this.localProviders.find(p => p.uuid === 'c26eb228-cb9f-4e7b-8ea7-c5c9b0c5d834')
 
     this.loading = false
     window.addEventListener('resize', () => {

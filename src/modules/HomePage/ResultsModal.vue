@@ -62,8 +62,7 @@
             <div class="d-flex">
               <div class="providers-first-list-image-background">
                 <img class="provider-list-image"
-                     :src="`https://drive.google.com/uc?export=view&id=${providersFirstListItem.provider.provider_logo_url}`"
-                     alt="">
+                     :src="`${computeBaseUrl}${providersFirstListItem.provider.provider_logo_url}`" alt="">
               </div>
               <p class="provider-first-title">{{ providersFirstListItem.provider.name }}</p>
               <p v-if="priceExist(providersFirstListItem.price_per_month)" class="provider-first-item-price">
@@ -81,8 +80,8 @@
               <div class="providers-list-item" v-for="(item) in otherProviders" :key="item.uuid">
                 <div v-if="item && item.provider" class="d-flex">
                   <div class="providers-list-image-background">
-                    <img class="provider-list-image"
-                         :src="`https://drive.google.com/uc?export=view&id=${item.provider.provider_logo_url}`" alt="">
+                    <img class="provider-list-image" :src="`${computeBaseUrl}${item.provider.provider_logo_url}`"
+                         alt="">
                   </div>
                   <p class="provider-title">{{ item.provider.name }}</p>
                   <p v-if="priceExist(item.price_per_month)" class="provider-item-price">
@@ -139,11 +138,12 @@ export default {
       return this.windowWidth <= 380
     },
     computeBaseUrl() {
-      const len = this.baseUrl.length
+      return 'https://drive.google.com/uc?export=view&id='
+      /*const len = this.baseUrl.length
       if (this.baseUrl[len - 1] === '/') {
         return this.baseUrl.substring(0, this.baseUrl.length - 1);
       }
-      return this.baseUrl
+      return this.baseUrl*/
     },
     getFormattedDate() {
       const date = new Date(this.providersFirstListItem.price_last_updated_at)
