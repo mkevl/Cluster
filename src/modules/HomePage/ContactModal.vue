@@ -3,7 +3,7 @@
     <div class="first-layer"/>
     <div class="second-layer"/>
     <div class="third-layer"/>
-    <div class="close-modal" :class="{'d-flex': !isSmallScreen}" @click="hideContactModal">
+    <div class="close-modal" :class="{'d-flex': !isSmallScreen}" @click="hideModal">
       <img src="/assets/close_button.png" alt="">
       <span v-if="!isSmallScreen" class="ml-2">დახურვა</span>
     </div>
@@ -28,7 +28,7 @@
 <script>
 import {createNamespacedHelpers} from "vuex";
 
-const {mapActions} = createNamespacedHelpers('results');
+const {mapState, mapActions} = createNamespacedHelpers('results');
 export default {
   name: "ContactModal",
   props: {
@@ -42,12 +42,19 @@ export default {
     }
   },
   computed: {
+    ...mapState({
+      scrollYPosition: state => state.scrollYPosition,
+    }),
     isSmallScreen() {
       return this.windowWidth <= 480
     },
   },
   methods: {
     ...mapActions(['hideContactModal']),
+    async hideModal() {
+      await this.hideContactModal()
+      window.scroll(0, this.scrollYPosition)
+    },
   },
   mounted() {
     window.addEventListener('resize', () => {

@@ -56,8 +56,10 @@ export default {
   },
   methods: {
     ...mapActions(['showResultsModal']),
-    onResultsCLick(selectedValues) {
-      this.showResultsModal(selectedValues);
+    async onResultsCLick(selectedValues) {
+      const oldScrollPosition = window.scrollY;
+      await this.showResultsModal({data: selectedValues, param: oldScrollPosition});
+      window.scroll(0, 0);
     },
   },
 }

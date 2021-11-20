@@ -4,6 +4,7 @@ import {
   SET_FAQ_DATA,
   SET_FEEDBACK_DATA,
   SET_PROVIDERS,
+  SET_SCROLL_POSITION,
   SET_SELECTED_VALUES,
   SHOW_CONTACT_MODAL,
   SHOW_RESULTS_MODAL
@@ -67,5 +68,8 @@ export default {
     if (data) {
       state.faqData = [...data]
     }
+  },
+  [SET_SCROLL_POSITION](state, param) {
+    state.scrollYPosition = param
   }
 }

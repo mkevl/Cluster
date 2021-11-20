@@ -72,6 +72,7 @@ const STATE = {
   providers: [],
   feedbackData: [],
   faqData: [],
+  scrollYPosition: 0,
 };
 
 export default STATE;

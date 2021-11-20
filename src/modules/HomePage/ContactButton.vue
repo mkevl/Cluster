@@ -20,7 +20,9 @@ export default {
   methods: {
     ...mapActions(['showContactModal']),
     async onConnectClick() {
-      await this.showContactModal();
+      const oldScrollPosition = window.scrollY;
+      window.scroll(0, 0);
+      await this.showContactModal(oldScrollPosition);
     },
   },
 }

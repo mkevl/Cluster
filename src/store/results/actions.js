@@ -4,6 +4,7 @@ import {
   SET_FAQ_DATA,
   SET_FEEDBACK_DATA,
   SET_PROVIDERS,
+  SET_SCROLL_POSITION,
   SET_SELECTED_VALUES,
   SHOW_CONTACT_MODAL,
   SHOW_RESULTS_MODAL
@@ -34,7 +35,8 @@ export async function getFaqData({commit}) {
   return body
 }
 
-export async function showResultsModal({commit}, data) {
+export async function showResultsModal({commit}, {data, param}) {
+  commit(SET_SCROLL_POSITION, param)
   commit(SET_SELECTED_VALUES, data)
   const packageData = await httpService.get(`/v1/insurance/packages?insurance_type=${data.insurance}&package_type=${data.package}`)
   const statisticData = await httpService.get(`/v1/customers/stats?insurance_type=${data.insurance}&package_type=${data.package}`)
@@ -52,7 +54,8 @@ export async function hideResultsModal({commit}) {
   commit(HIDE_RESULTS_MODAL)
 }
 
-export async function showContactModal({commit}) {
+export async function showContactModal({commit}, param) {
+  commit(SET_SCROLL_POSITION, param)
   commit(SHOW_CONTACT_MODAL)
 }
 

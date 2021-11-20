@@ -3,10 +3,10 @@
     <div class="modal-first-layer"/>
     <div class="modal-second-layer"/>
     <div class="modal-third-layer"/>
-    <div v-if="isSmallScreen" class="home-icon" @click="hideResultsModal">
+    <div v-if="isSmallScreen" class="home-icon" @click="hideModal">
       <img src="assets/icons/home_icon.svg" alt="">
     </div>
-    <div v-else class="d-flex close-modal" @click="hideResultsModal">
+    <div v-else class="d-flex close-modal" @click="hideModal">
       <img src="/assets/close_button.png" alt="">
       <span class="ml-2">დახურვა</span>
     </div>
@@ -119,6 +119,7 @@ export default {
       packageData: state => state.results.modal.packageData,
       statisticData: state => state.results.modal.statisticData,
       selectedItem: state => state.results.modal.selectedItem,
+      scrollYPosition: state => state.scrollYPosition,
     }),
     providersFirstListItem() {
       return this.packageData[0];
@@ -156,6 +157,10 @@ export default {
   },
   methods: {
     ...mapActions(['hideResultsModal']),
+    async hideModal() {
+      await this.hideResultsModal()
+      window.scroll(0, this.scrollYPosition)
+    },
     priceExist(price) {
       if (!price) {
         return false
