@@ -14,6 +14,13 @@ export default {
     state.results.modal.show = true
     if (data.packageData.length) {
       state.results.modal.packageData = [...data.packageData.sort((a, b) => {
+        if (!a.price_per_month || (a.price_per_month && !parseInt(a.price_per_month))) {
+          return 1;
+        }
+        if (!b.price_per_month || (b.price_per_month && !parseInt(b.price_per_month))) {
+          return -1;
+        }
+
         if (a.price_per_month < b.price_per_month) {
           return -1
         }
