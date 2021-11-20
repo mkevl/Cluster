@@ -9,7 +9,7 @@
     <third-section :base-url="baseUrl"/>
     <fourth-section :phone-number="phoneNumber" :email="email"/>
     <fifth-section/>
-<!--    <sixth-section :base-url="baseUrl"/>-->
+    <sixth-section :base-url="baseUrl"/>
     <seventh-section :phone-number="phoneNumber" :email="email"/>
   </div>
 </template>
@@ -35,7 +35,7 @@ export default {
     ThirdSection,
     FourthSection,
     FifthSection,
-    // SixthSection,
+    SixthSection,
     SeventhSection,
     ContactModal,
     ResultsModal,

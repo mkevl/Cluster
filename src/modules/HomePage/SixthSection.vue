@@ -11,7 +11,7 @@
         <p class="feedback-author">- {{ activeItem.user_full_name }}</p>
       </div>
       <object class="carousel-bottom-quote" data="/assets/bottom_quote.svg" type="image/svg+xml"/>
-      <img v-if="showNextItem" class="carousel-next-item-logo" :src="`assets/tweeter_logo.png`" alt="">
+      <img v-if="showNextItem" class="carousel-next-item-logo" :src="`${computeBaseUrl}${nextItem.image_url}`" alt="">
       <div v-if="data.length > 1" class="carousel-next-slider" @click="onCarouselNextClick">
         <img class="carousel-next-button" src="/assets/next_button.svg" alt=""/>
       </div>
@@ -66,14 +66,15 @@ export default {
       return this.data.find(item => item.isNextItem)
     },
     isSmallScreen() {
-      return this.windowWidth <= 480;
+      return this.windowWidth <= 960;
     },
     computeBaseUrl() {
-      const len = this.baseUrl.length
+      return 'https://drive.google.com/uc?export=view&id='
+      /*const len = this.baseUrl.length
       if (this.baseUrl[len - 1] === '/') {
         return this.baseUrl.substring(0, this.baseUrl.length - 1);
       }
-      return this.baseUrl
+      return this.baseUrl*/
     },
   },
   methods: {
@@ -138,10 +139,9 @@ export default {
 }
 
 .feedback-container {
-  position: absolute;
   width: 100%;
   height: 77%;
-  margin: 24px 20px 0 192px;
+  margin: 24px 20px 0 120px;
 }
 
 .carousel-list-item-container {
@@ -159,16 +159,16 @@ export default {
   position: absolute;
   width: 86px;
   height: 86px;
-  top: 348px;
+  top: 342px;
   right: 25px;
   border-radius: 50%;
-  mix-blend-mode: luminosity;
+  opacity: 0.5;
 }
 
 .carousel-stroke {
   position: absolute;
   width: 0;
-  height: 55%;
+  height: 50%;
   border: 1px solid #DEE2E6;
   margin: 109px 0 0 56px;
 }
@@ -178,12 +178,15 @@ export default {
 }
 
 .carousel-bottom-quote {
-  margin-left: 875px;
-  margin-top: -69px;
+  position: absolute;
+  right: 275px;
+  margin-top: -30px;
+  width: 87px;
+  height: 69px;
 }
 
 .feedback-text {
-  max-width: 592px;
+  width: calc(100% - 680px);
   min-height: 134px;
   font-family: Helvetica, sans-serif;
   font-style: normal;
@@ -207,11 +210,12 @@ export default {
 }
 
 .carousel-next-slider {
+  cursor: pointer;
   position: absolute;
   width: 50px;
   height: 39.5px;
-  top: 100px;
-  right: 100px;
+  top: 470px;
+  right: 40px;
 }
 
 .carousel-next-button {
@@ -225,35 +229,71 @@ export default {
 
 .carousel-dot {
   position: absolute;
-  bottom: 50px;
+  bottom: 75px;
   left: 50%;
 }
 
-@media all and (max-width: 1340px) {
+@media all and (max-width: 1770px) {
+  .feedback-text {
+    width: calc(100% - 560px);
+  }
+
+  .carousel-bottom-quote {
+    right: 210px;
+  }
+}
+
+@media all and (max-width: 1590px) {
+  .main-page-sixth-section {
+    height: 1024px;
+  }
+}
+
+@media all and (max-width: 1400px) {
+  .main-page-sixth-section {
+    height: 1148px;
+  }
+
+  .carousel-stroke {
+    height: 650px;
+  }
+}
+
+@media all and (max-width: 1250px) {
+  .feedback-container {
+    margin-left: 0;
+  }
+
+  .feedback-text {
+    width: calc(100% - 400px);
+  }
+
+  .carousel-stroke {
+    height: 50%;
+  }
+
+  .carousel-bottom-quote {
+    right: 155px;
+  }
+
+}
+
+
+@media all and (max-width: 1100px) {
   .main-page-sixth-section {
     padding: 70px 0 0 58px;
   }
 
-  .feedback-container {
-    margin: 0 0 0 13px;
-  }
-
   .carousel-next-item-logo {
-    top: 100px;
-    right: 75px;
+    top: 277px;
   }
 
   .carousel-next-slider {
-    right: 0;
-  }
-
-  .carousel-dot {
-    left: 40%;
-    bottom: 100px;
+    top: 412px;
   }
 }
 
-@media all and (max-width: 480px) {
+@media all and (max-width: 960px) {
   .main-page-sixth-section {
     height: 902px;
     padding: 72px 0 0 27px;
@@ -279,41 +319,103 @@ export default {
   }
 
   .feedback-text {
-    max-width: 334px;
-    max-height: 134px;
+    width: calc(100% - 135px);
     font-size: 20px;
     line-height: 200%;
-    margin: 68px 0 0 0;
+    margin: 90px 0 0 0;
   }
 
   .feedback-author {
-    margin: 281px 0 0 4px;
+    margin-left: 4px;
   }
 
   .carousel-top-quote {
     position: absolute;
     margin-top: 100px;
-    margin-left: -145px;
+    margin-left: -123px;
   }
 
   .carousel-bottom-quote {
-    margin-top: 400px;
-    margin-left: 175px;
+    right: 95px;
   }
 
   .carousel-next-slider {
-    margin-top: 150px;
-    width: 0;
-    height: 0;
-    background: transparent;
+    right: 30px;
+  }
+}
+
+@media all and (max-width: 720px) {
+  .main-page-sixth-section {
+    height: 1024px;
+  }
+
+  .feedback-text {
+    width: calc(100% - 125px);
+  }
+}
+
+@media all and (max-width: 600px) {
+  .main-page-sixth-section {
+    height: 1100px;
+  }
+}
+
+@media all and (max-width: 490px) {
+  .feedback-container {
+    margin-top: 80px;
+  }
+
+  .feedback-text {
+    font-size: 18px;
+    width: calc(100% - 75px);
+  }
+
+  .feedback-author {
+    font-size: 14px;
+  }
+
+  .carousel-bottom-quote {
+    right: 35px;
+  }
+
+  .carousel-next-slider {
+    width: 40px;
+    height: 30.5px;
+    right: 15px;
   }
 
   .carousel-next-button {
-    width: 15px;
-    height: 25px;
-    right: 110px;
-    left: unset;
-    top: 315px;
+    width: 40px;
+    height: 30.5px;
+  }
+}
+
+@media all and (max-width: 360px) {
+  .main-page-sixth-section {
+    height: 964px;
+  }
+
+  .feedback-container {
+    margin-top: 80px;
+  }
+
+  .feedback-text {
+    font-size: 14px;
+    width: calc(100% - 45px);
+    margin-top: 60px;
+    margin-left: -15px;
+  }
+
+  .feedback-author {
+    font-size: 13px;
+  }
+
+  .carousel-top-quote {
+    width: 50px;
+  }
+
+  .carousel-bottom-quote {
+    width: 50px;
   }
 }
 </style>
