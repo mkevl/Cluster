@@ -74,7 +74,7 @@
               <p class="best-offer-text">&bull; საუკეთესო შეთავაზება</p>
               <p v-if="!isSmScreen" class="last-update">ბოლოს განახლდა <br/> {{ getFormattedDate }}</p>
             </div>
-            <p v-if="isSmScreen" class="last-update">ბოლოს განახლდა {{ getFormattedDate }}</p>
+            <p v-if="isSmScreen && providerExist" class="last-update">ბოლოს განახლდა {{ getFormattedDate }}</p>
             <span v-if="providerExist" class="best-offer-stroke"/>
             <div class="provider-list-second-section">
               <div class="providers-list-item" v-for="(item) in otherProviders" :key="item.uuid">
@@ -709,7 +709,7 @@ export default {
 
   .day-box-section-two {
     position: absolute;
-    top: 290px;
+    top: 260px;
     left: 42px;
   }
 
