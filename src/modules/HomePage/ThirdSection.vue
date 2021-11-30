@@ -154,7 +154,7 @@ export default {
   padding: 0 0 0 16px;
   margin: 0;
   width: 100%;
-  max-height: 700px;
+  max-height: 670px;
   overflow: hidden;
   align-items: center;
 }
