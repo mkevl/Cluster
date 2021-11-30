@@ -221,12 +221,13 @@ export default {
   }
 }
 
-@media all and (max-width: 320px) {
+@media all and (max-width: 370px) {
   .main-page-fourth-section {
     height: 958px;
   }
 
   .more-information {
+    width: calc(100% - 25px);
     left: 25px;
     height: 796px;
   }
@@ -251,6 +252,30 @@ export default {
 
   .info-contact-button {
     margin-left: 25px;
+  }
+}
+
+@media all and (max-width: 320px) {
+  .more-information {
+    width: calc(100% - 15px);
+    left: 20px;
+  }
+
+  .info {
+    margin-left: 15px;
+  }
+
+  .info-description {
+    font-size: 14px;
+    margin-left: 15px;
+  }
+
+  .more-info-icons {
+    margin-left: 15px;
+  }
+
+  .info-contact-button {
+    margin-left: 15px;
   }
 }
 </style>
