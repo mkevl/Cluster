@@ -86,7 +86,7 @@ export default {
       })
     },
     scrollDown() {
-      this.$refs["list-scroll"].scrollTop += 150
+      this.$refs["list-scroll"].scrollTop += 85
       this.isScrolled = !!this.$refs["list-scroll"].scrollTop
     },
     scrollUp() {
