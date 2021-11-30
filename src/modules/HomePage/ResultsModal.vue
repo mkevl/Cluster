@@ -136,7 +136,11 @@ export default {
     getDays() {
       const date = new Date(), y = date.getFullYear(), m = date.getMonth(), currentDay = date.getDate();
       const monthLastDay = new Date(y, m + 1, 0).getDate();
-      return monthLastDay - currentDay;
+      const lastDate = 25
+      if (currentDay > lastDate - 1) {
+        return lastDate + (monthLastDay - currentDay);
+      }
+      return lastDate - currentDay;
     },
     isSmallScreen() {
       return this.windowWidth <= 780
@@ -628,7 +632,7 @@ export default {
   }
 
   .time-calculation-container {
-    left: 96px;
+    left: 90px;
     top: 129px;
   }
 
