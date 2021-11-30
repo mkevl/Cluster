@@ -1,7 +1,7 @@
 <template>
   <div class="main-page-third-section">
     <span class="provider-stroke"/>
-    <p class="provider-title">პარტნიორი სადაზღვეო კომპანიები</p>
+    <p class="provider-title">სადაზღვეო კომპანიები</p>
     <div class="row" v-if="localProviders.length">
       <div class="col-lg-6 col-sm-12 provider-container">
         <!--<img v-if="isScrolled" class="provider-top-scroll" src="/assets/scroll_vector.svg" alt=""
@@ -93,7 +93,7 @@ export default {
   async mounted() {
     await this.getAllProvider()
     this.localProviders = _.cloneDeep(this.providers)
-    this.activeProvider = this.localProviders.find(p => p.uuid === 'c26eb228-cb9f-4e7b-8ea7-c5c9b0c5d834')
+    this.activeProvider = this.localProviders.find(p => p.is_active)
 
     window.addEventListener('resize', () => {
       this.windowWidth = window.innerWidth

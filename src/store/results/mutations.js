@@ -52,7 +52,7 @@ export default {
   },
   [SET_PROVIDERS](state, data) {
     if (data) {
-      state.providers = [...data.filter(d => !['78092344-08a5-4542-b2d1-13429b95fcef'].includes(d.uuid))]
+      state.providers = [...data.filter(d => !['78092344-08a5-4542-b2d1-13429b95fcef', '55e9d198-6076-4243-bc75-cbceafb10a48'].includes(d.uuid))]
     }
   },
   [SET_FEEDBACK_DATA](state, data) {
