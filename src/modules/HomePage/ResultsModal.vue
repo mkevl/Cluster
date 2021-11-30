@@ -58,8 +58,8 @@
         </div>
         <div class="results-modal-second-section" :class="{'col-auto': !isSmallScreen}">
           <p class="proposed-text">შემოთავაზებული ფასები</p>
-          <div v-if="providerExist" class="providers-list">
-            <div class="d-flex">
+          <div class="providers-list">
+            <div class="d-flex" v-if="providerExist">
               <div class="providers-first-list-image-background">
                 <img class="provider-list-image"
                      :src="`${computeBaseUrl}${providersFirstListItem.provider.provider_logo_url}`" alt="">
@@ -70,12 +70,12 @@
               </p>
               <p class="provider-first-item-price" v-else>N/A</p>
             </div>
-            <div class="active-offer-container">
+            <div v-if="providerExist" class="active-offer-container">
               <p class="best-offer-text">&bull; საუკეთესო შეთავაზება</p>
               <p v-if="!isSmScreen" class="last-update">ბოლოს განახლდა <br/> {{ getFormattedDate }}</p>
             </div>
             <p v-if="isSmScreen" class="last-update">ბოლოს განახლდა {{ getFormattedDate }}</p>
-            <span class="best-offer-stroke"/>
+            <span v-if="providerExist" class="best-offer-stroke"/>
             <div class="provider-list-second-section">
               <div class="providers-list-item" v-for="(item) in otherProviders" :key="item.uuid">
                 <div v-if="item && item.provider" class="d-flex">
@@ -122,10 +122,10 @@ export default {
       scrollYPosition: state => state.scrollYPosition,
     }),
     providersFirstListItem() {
-      return this.packageData[0];
+      return this.priceExists ? this.packageData[0] : [];
     },
     otherProviders() {
-      return this.packageData.slice(1)
+      return this.priceExists ? this.packageData.slice(1) : this.packageData
     },
     getDays() {
       const date = new Date(), y = date.getFullYear(), m = date.getMonth(), currentDay = date.getDate();
@@ -153,6 +153,9 @@ export default {
     },
     providerExist() {
       return this.providersFirstListItem && this.providersFirstListItem.provider
+    },
+    priceExists() {
+      return this.packageData[0] && this.packageData[0].price_per_month
     },
   },
   methods: {
