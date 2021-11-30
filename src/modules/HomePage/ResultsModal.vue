@@ -1,5 +1,6 @@
 <template>
   <div class="results-modal">
+    <spinner :show="loading" :spinner-style="spinnerStyle"/>
     <div class="modal-first-layer"/>
     <div class="modal-second-layer"/>
     <div class="modal-third-layer"/>
@@ -101,6 +102,7 @@
 <script>
 import {createNamespacedHelpers} from "vuex";
 import ContactButton from "./ContactButton";
+import Spinner from "../../core/components/spinner";
 
 const {mapState, mapActions} = createNamespacedHelpers('results');
 export default {
@@ -108,10 +110,14 @@ export default {
   props: {
     baseUrl: String,
   },
-  components: {ContactButton},
+  components: {Spinner, ContactButton},
   data() {
     return {
+      loading: false,
       windowWidth: window.innerWidth,
+      spinnerStyle: {
+        backgroundColor: '#1E1647'
+      },
     }
   },
   computed: {
@@ -172,6 +178,11 @@ export default {
     }
   },
   mounted() {
+    this.loading = true
+
+    setTimeout(() => {
+      this.loading = false
+    }, 200)
     window.addEventListener('resize', () => {
       this.windowWidth = window.innerWidth
     })

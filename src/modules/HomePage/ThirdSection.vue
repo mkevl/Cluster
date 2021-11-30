@@ -1,5 +1,6 @@
 <template>
   <div class="main-page-third-section">
+    <spinner :show="loading"/>
     <span class="provider-stroke"/>
     <p class="provider-title">სადაზღვეო კომპანიები</p>
     <div class="row" v-if="localProviders.length">
@@ -40,6 +41,7 @@
 <script>
 import _ from "lodash";
 import {createNamespacedHelpers} from "vuex";
+import Spinner from "../../core/components/spinner";
 
 const {mapState, mapActions} = createNamespacedHelpers('results');
 export default {
@@ -47,9 +49,10 @@ export default {
   props: {
     baseUrl: String
   },
-  components: {},
+  components: {Spinner},
   data() {
     return {
+      loading: false,
       activeProvider: {},
       windowWidth: window.innerWidth,
       isScrolled: false,
@@ -91,9 +94,11 @@ export default {
     }
   },
   async mounted() {
+    this.loading = true;
     await this.getAllProvider()
     this.localProviders = _.cloneDeep(this.providers)
     this.activeProvider = this.localProviders.find(p => p.is_active)
+    this.loading = false;
 
     window.addEventListener('resize', () => {
       this.windowWidth = window.innerWidth
