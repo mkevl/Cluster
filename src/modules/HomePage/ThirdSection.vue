@@ -14,7 +14,7 @@
 
           </li>
         </ul>
-        <img v-if="providers.length >= 5" class="provider-scroll" src="/assets/scroll_vector.svg" alt=""
+        <img v-if="providers.length > 5" class="provider-scroll" src="/assets/scroll_vector.svg" alt=""
              @click="scrollDown()">
       </div>
       <div v-if="Object.keys(activeProvider).length" class="col-lg-6 col-sm-12 provider-info">
