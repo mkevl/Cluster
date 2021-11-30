@@ -474,7 +474,7 @@ export default {
 .providers-list-image-background {
   width: 65px;
   height: 65px;
-  background: #191142;
+  //background: #191142;
   border-radius: 50%;
   margin-top: 50px;
 }
