@@ -25,7 +25,10 @@
           <contact-button class="info-contact-button"/>
         </div>
         <div class="col-lg-6 col-md-12 p-0">
-          <img class="info-video" :src="getVideoImg" alt="">
+          <iframe class="info-video" src="https://www.youtube.com/embed/km35300V-RY" title="YouTube video player"
+                  frameborder="0" allowfullscreen
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture">
+          </iframe>
         </div>
       </div>
     </div>
@@ -72,7 +75,7 @@ export default {
 
 .more-information {
   position: absolute;
-  width: 100%;
+  width: calc(100% - 93px);
   height: 631px;
   left: 93px;
   top: 196.5px;
@@ -147,7 +150,9 @@ export default {
   margin-top: 155px;
   right: 0;
   width: 100%;
-  height: 651px;
+  height: 384px;
+  border-top-left-radius: 40px;
+  border-bottom-left-radius: 40px;
 }
 
 @media all and (max-width: 992px) {
@@ -157,6 +162,7 @@ export default {
 
   .more-information {
     height: 887px;
+    width: calc(100% - 40px);
     left: 40px;
     top: 88px;
     background: linear-gradient(139.74deg, #2C1D7A 5.01%, #1E1647 77.08%);
@@ -196,7 +202,6 @@ export default {
 
   .info-video {
     margin-top: 45px;
-    margin-left: -39px;
   }
 }
 
@@ -246,10 +251,6 @@ export default {
 
   .info-contact-button {
     margin-left: 25px;
-  }
-
-  .info-video {
-    margin-left: -25px;
   }
 }
 </style>
