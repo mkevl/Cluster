@@ -221,7 +221,7 @@ export default {
   }
 }
 
-@media all and (max-width: 370px) {
+@media all and (max-width: 375px) {
   .main-page-fourth-section {
     height: 958px;
   }
