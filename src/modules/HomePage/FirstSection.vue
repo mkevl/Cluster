@@ -13,7 +13,7 @@
       </div>
       <div class="d-flex align-items-center last-insurance-btn" :class="{'active-insurance-button': isHealth}">
         <b-button class="insurance-option-button" :class="{'active-button-background': isHealth}" size="sm"
-                  @click="onSelectButtonClick('health')">
+                  @click="onSelectButtonClick('health')" disabled>
           <span :class="getActiveHealthClass">ჯანმრთელობის</span>
         </b-button>
       </div>
