@@ -12,9 +12,12 @@
         </b-button>
       </div>
       <div class="d-flex align-items-center last-insurance-btn" :class="{'active-insurance-button': isHealth}">
-        <b-button class="insurance-option-button" :class="{'active-button-background': isHealth}" size="sm"
+        <b-button class="insurance-health-option-button" :class="{'active-button-background': isHealth}" size="sm"
                   @click="onSelectButtonClick('health')" disabled>
-          <span :class="getActiveHealthClass">ჯანმრთელობის</span>
+          <div class="d-flex align-items-center">
+            <i class="fas fa-lock disabled-icon"/>
+            <span :class="getActiveHealthClass">ჯანმრთელობის</span>
+          </div>
         </b-button>
       </div>
     </div>
@@ -240,7 +243,20 @@ export default {
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  padding: 11px 36px;
+  padding: 11px 34px;
+  background: rgba(30, 22, 71, 0.16);
+  backdrop-filter: blur(4px);
+  border-radius: 50px;
+  border: unset;
+}
+
+.insurance-health-option-button {
+  height: 50px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 11px 24px;
   background: rgba(30, 22, 71, 0.16);
   backdrop-filter: blur(4px);
   border-radius: 50px;
@@ -252,15 +268,29 @@ export default {
     padding: 10px 24px;
     height: 42px;
   }
+
+  .insurance-health-option-button {
+    padding: 10px 18px;
+    height: 42px;
+  }
 }
 
 @media all and (max-width: 360px) {
   .insurance-option-button {
     padding: 10px 9px;
   }
+
+  .insurance-health-option-button {
+    padding: 10px 9px;
+  }
 }
 
 .insurance-option-button:focus {
+  background: rgba(30, 22, 71, 0.3) !important;
+  box-shadow: unset !important;
+}
+
+.insurance-health-option-button:focus {
   background: rgba(30, 22, 71, 0.3) !important;
   box-shadow: unset !important;
 }
@@ -290,7 +320,6 @@ export default {
 }
 
 .insurance-button-text {
-  height: 28px;
   font-family: Helvetica, sans-serif;
   font-style: normal;
   font-weight: normal;
@@ -303,20 +332,29 @@ export default {
   flex-grow: 0;
 }
 
+.disabled-icon {
+  font-size: 16px;
+  margin-right: 6px;
+}
+
 @media all and (max-width: 480px) {
   .insurance-button-text {
-    height: 22px;
     font-size: 14px;
     color: #FFFFFF;
-    margin: 0 10px;
+    margin: 0 8px;
+  }
+
+  .disabled-icon {
+    font-size: 12px;
+    margin-right: unset;
+    margin-left: 4px;
   }
 }
 
-@media all and (max-width: 360px) {
+@media all and (max-width: 340px) {
   .insurance-button-text {
-    font-size: 13px;
-    margin: 0 5px;
-    height: 17px;
+    font-size: 12px;
+    margin: 0 4px;
   }
 }
 
